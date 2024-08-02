@@ -22,30 +22,38 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Time will tell">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Michael-Jay">
-<meta property="og:url" content="http://example.com/page/2/index.html">
+  <meta name="description" content="常规：数据库三大范式 1NF : 表中字段的数据不可再拆分。(原子性) 2NF : 在满足第一范式的情况下，遵循唯一性，消除部分依赖。即，表中任意一个主键或任意一组联合主键，可以确定除该主键外的所有的非主键值。(一个表只能描述一件事情) 3NF : 在满足第二范式的情况下，消除传递依赖。即，在任一主键都可以确定所有非主键字段值的情况下，不能存在某非主键字段 A 可以获取 某非主键字段 B。  主键">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL">
+<meta property="og:url" content="http://example.com/2024/08/02/MySQL%E7%AF%87/index.html">
 <meta property="og:site_name" content="Michael-Jay">
-<meta property="og:description" content="Time will tell">
+<meta property="og:description" content="常规：数据库三大范式 1NF : 表中字段的数据不可再拆分。(原子性) 2NF : 在满足第一范式的情况下，遵循唯一性，消除部分依赖。即，表中任意一个主键或任意一组联合主键，可以确定除该主键外的所有的非主键值。(一个表只能描述一件事情) 3NF : 在满足第二范式的情况下，消除传递依赖。即，在任一主键都可以确定所有非主键字段值的情况下，不能存在某非主键字段 A 可以获取 某非主键字段 B。  主键">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2024/08/02/MySQL%E7%AF%87/1.png">
+<meta property="og:image" content="http://example.com/2024/08/02/MySQL%E7%AF%87/2.png">
+<meta property="og:image" content="http://example.com/2024/08/02/MySQL%E7%AF%87/3.png">
+<meta property="og:image" content="http://example.com/2024/08/02/MySQL%E7%AF%87/4.png">
+<meta property="og:image" content="http://example.com/2024/08/02/MySQL%E7%AF%87/5.png">
+<meta property="article:published_time" content="2024-08-02T09:22:20.437Z">
+<meta property="article:modified_time" content="2024-08-02T09:27:30.439Z">
 <meta property="article:author" content="吴华杰">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2024/08/02/MySQL%E7%AF%87/1.png">
 
-<link rel="canonical" href="http://example.com/page/2/">
+<link rel="canonical" href="http://example.com/2024/08/02/MySQL%E7%AF%87/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>Michael-Jay</title>
+  <title>MySQL | Michael-Jay</title>
   
 
 
@@ -149,9 +157,10 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
-      
+
+    
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
@@ -167,10 +176,9 @@
       <meta itemprop="name" content="Michael-Jay">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/08/02/MySQL%E7%AF%87/" class="post-title-link" itemprop="url">MySQL</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          MySQL
+        </h1>
 
         <div class="post-meta">
 			
@@ -194,6 +202,13 @@
             </span>
 
           
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
 
         </div>
       </header>
@@ -204,7 +219,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="常规："><a href="#常规：" class="headerlink" title="常规："></a>常规：</h1><h2 id="数据库三大范式"><a href="#数据库三大范式" class="headerlink" title="数据库三大范式"></a>数据库三大范式</h2><ul>
+        <h1 id="常规："><a href="#常规：" class="headerlink" title="常规："></a>常规：</h1><h2 id="数据库三大范式"><a href="#数据库三大范式" class="headerlink" title="数据库三大范式"></a>数据库三大范式</h2><ul>
 <li><strong>1NF</strong> : 表中字段的数据不可再拆分。(原子性)</li>
 <li><strong>2NF</strong> : 在满足第一范式的情况下，遵循唯一性，消除部分依赖。即，表中任意一个主键或任意一组联合主键，可以确定除该主键外的所有的非主键值。(一个表只能描述一件事情)</li>
 <li><strong>3NF</strong> : 在满足第二范式的情况下，消除传递依赖。即，在任一主键都可以确定所有非主键字段值的情况下，不能存在某非主键字段 A 可以获取 某非主键字段 B。</li>
@@ -485,7 +500,6 @@
 
 
 
-      
     </div>
 
     
@@ -493,20 +507,35 @@
     
 	
 	 
+       <div>
+		 <div>
+    
+        <div style="text-align:center;color: #00BFFF;font-size:18px;"><br>-------------------- 本文结束 <i class="fas fa-heart"></i> 感谢您的阅读！ -------------------</div>
+    
+</div>
+	   </div>
+     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/08/02/%E9%9B%86%E5%90%88%E7%AF%87/" rel="prev" title="Java集合">
+      <i class="fa fa-chevron-left"></i> Java集合
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
       </footer>
+    
   </article>
   
   
   
   
-
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
-  </nav>
 
 
 
@@ -558,6 +587,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B8%B8%E8%A7%84%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">常规：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%89%E5%A4%A7%E8%8C%83%E5%BC%8F"><span class="nav-number">1.1.</span> <span class="nav-text">数据库三大范式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E9%94%AE%E5%92%8C%E5%A4%96%E9%94%AE%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">1.2.</span> <span class="nav-text">主键和外键的区别？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CHAR-%E5%92%8C-VARCHAR-%E7%9A%84%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">1.3.</span> <span class="nav-text">CHAR 和 VARCHAR 的区别是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DECIMAL-%E5%92%8C-FLOAT-DOUBLE-%E7%9A%84%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">1.4.</span> <span class="nav-text">DECIMAL 和 FLOAT&#x2F;DOUBLE 的区别是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NULL-%E5%92%8C-%E2%80%98-%E2%80%98-%E7%9A%84%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">1.5.</span> <span class="nav-text">NULL 和 ‘ ‘ 的区别是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Boolean-%E7%B1%BB%E5%9E%8B%E5%A6%82%E4%BD%95%E8%A1%A8%E7%A4%BA%EF%BC%9F"><span class="nav-number">1.6.</span> <span class="nav-text">Boolean 类型如何表示？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL-%E5%9F%BA%E7%A1%80%E6%9E%B6%E6%9E%84%E5%8F%8A%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B-%E2%AD%90%E6%89%A7%E8%A1%8C%E4%B8%80%E6%9D%A1select%E8%AF%AD%E5%8F%A5%E6%9C%9F%E9%97%B4%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88"><span class="nav-number">1.7.</span> <span class="nav-text">MySQL 基础架构及执行过程(⭐执行一条select语句期间发生了什么)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL-%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8EMyISAM-%E5%92%8C-InnoDB-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F%EF%BC%88%E2%AD%90%EF%BC%89"><span class="nav-number">1.8.</span> <span class="nav-text">MySQL 存储引擎MyISAM 和 InnoDB 有什么区别？（⭐）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1%E7%9A%84%E5%9B%9B%E5%A4%A7%E7%89%B9%E6%80%A7%EF%BC%88%E2%AD%90%EF%BC%89"><span class="nav-number">1.9.</span> <span class="nav-text">事务的四大特性（⭐）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%EF%BC%88%E2%AD%90%EF%BC%89"><span class="nav-number">1.10.</span> <span class="nav-text">MySQL事务隔离级别（⭐）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E9%87%8D%E5%A4%8D%E8%AF%BB%E5%8F%88%E6%98%AF%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E5%B9%BB%E8%AF%BB%E9%97%AE%E9%A2%98%E7%9A%84%EF%BC%9F"><span class="nav-number">1.10.1.</span> <span class="nav-text">可重复读又是如何解决幻读问题的？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E9%87%8A%E4%B8%80%E4%B8%8B-undo-log%E3%80%81redo-log-%E5%92%8C-bin-log"><span class="nav-number">1.11.</span> <span class="nav-text">解释一下 undo log、redo log 和 bin log</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1%E4%B8%AD%E7%9A%84%E9%9A%94%E7%A6%BB%E6%80%A7%E6%98%AF%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E7%9A%84%E5%91%A2%EF%BC%9F%EF%BC%88%E2%AD%90%EF%BC%89"><span class="nav-number">1.12.</span> <span class="nav-text">事务中的隔离性是如何保证的呢？（⭐）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5%E5%8E%9F%E7%90%86%EF%BC%88%E2%AD%90%EF%BC%89"><span class="nav-number">1.13.</span> <span class="nav-text">MySQL主从同步原理（⭐）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#drop%E3%80%81delete%E4%B8%8Etruncate%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.14.</span> <span class="nav-text">drop、delete与truncate的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E8%A7%86%E5%9B%BE%EF%BC%9F"><span class="nav-number">1.15.</span> <span class="nav-text">什么是视图？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL%E7%9A%84%E8%A1%A8%E7%BA%A7%E9%94%81%E5%92%8C%E8%A1%8C%E7%BA%A7%E9%94%81%EF%BC%88%E2%AD%90%EF%BC%89"><span class="nav-number">1.16.</span> <span class="nav-text">MySQL的表级锁和行级锁（⭐）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E7%9B%B8%E5%85%B3%EF%BC%9A"><span class="nav-number">2.</span> <span class="nav-text">索引相关：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E7%9A%84%E5%BA%95%E5%B1%82%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E9%80%89%E5%9E%8B%EF%BC%88%E2%AD%90%EF%BC%89"><span class="nav-number">2.1.</span> <span class="nav-text">索引的底层数据结构选型（⭐）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL%E4%B8%AD%EF%BC%8C%E5%A6%82%E4%BD%95%E5%AE%9A%E4%BD%8D%E6%85%A2%E6%9F%A5%E8%AF%A2"><span class="nav-number">2.2.</span> <span class="nav-text">MySQL中，如何定位慢查询?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%82%A3%E8%BF%99%E4%B8%AASQL%E8%AF%AD%E5%8F%A5%E6%89%A7%E8%A1%8C%E5%BE%88%E6%85%A2-%E5%A6%82%E4%BD%95%E5%88%86%E6%9E%90%E5%91%A2%EF%BC%9F"><span class="nav-number">2.3.</span> <span class="nav-text">那这个SQL语句执行很慢, 如何分析呢？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E8%81%9A%E7%B0%87%E7%B4%A2%E5%BC%95%E4%BB%80%E4%B9%88%E6%98%AF%E9%9D%9E%E8%81%9A%E7%B0%87%E7%B4%A2%E5%BC%95-%EF%BC%88%E2%AD%90%EF%BC%89"><span class="nav-number">2.4.</span> <span class="nav-text">什么是聚簇索引什么是非聚簇索引 ?（⭐）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%9B%9E%E8%A1%A8%E6%9F%A5%E8%AF%A2-%EF%BC%88%E2%AD%90%EF%BC%89"><span class="nav-number">2.5.</span> <span class="nav-text">什么是回表查询?（⭐）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E8%A6%86%E7%9B%96%E7%B4%A2%E5%BC%95-%EF%BC%88%E2%AD%90%EF%BC%89"><span class="nav-number">2.6.</span> <span class="nav-text">什么是覆盖索引?（⭐）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MYSQL%E8%B6%85%E5%A4%A7%E5%88%86%E9%A1%B5%E6%80%8E%E4%B9%88%E5%A4%84%E7%90%86"><span class="nav-number">2.7.</span> <span class="nav-text">MYSQL超大分页怎么处理 ?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E5%88%9B%E5%BB%BA%E5%8E%9F%E5%88%99%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F%EF%BC%88%E2%AD%90%EF%BC%89"><span class="nav-number">2.8.</span> <span class="nav-text">索引创建原则有哪些？（⭐）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%83%85%E5%86%B5%E4%B8%8B%E7%B4%A2%E5%BC%95%E4%BC%9A%E5%A4%B1%E6%95%88-%EF%BC%88%E2%AD%90%EF%BC%89"><span class="nav-number">2.9.</span> <span class="nav-text">什么情况下索引会失效 ?（⭐）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B0%88%E4%B8%80%E8%B0%88%E4%BD%A0%E5%AF%B9sql%E7%9A%84%E4%BC%98%E5%8C%96%E7%9A%84%E7%BB%8F%E9%AA%8C"><span class="nav-number">2.10.</span> <span class="nav-text">谈一谈你对sql的优化的经验</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%8E%E4%B9%88%E7%BB%99%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%AD%97%E6%AE%B5%E5%8A%A0%E7%B4%A2%E5%BC%95%EF%BC%9F"><span class="nav-number">2.11.</span> <span class="nav-text">怎么给字符串字段加索引？</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
