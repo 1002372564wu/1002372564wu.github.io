@@ -250,6 +250,265 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/08/02/%E9%9B%86%E5%90%88%E7%AF%87/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/jay.jpg">
+      <meta itemprop="name" content="吴华杰">
+      <meta itemprop="description" content="Time will tell">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Michael-Jay">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/08/02/%E9%9B%86%E5%90%88%E7%AF%87/" class="post-title-link" itemprop="url">未命名</a>
+        </h2>
+
+        <div class="post-meta">
+			
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-08-02 16:47:53 / 修改时间：16:47:42" itemprop="dateCreated datePublished" datetime="2024-08-02T16:47:53+08:00">2024-08-02</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>集合总体框架图：  <img src="https://cdn.nlark.com/yuque/0/2024/png/40419809/1712240464280-b649af01-b58c-40ff-98af-165803adef31.png#averageHue=%23fdfdfd&clientId=u8a46f47a-6956-4&from=paste&id=u40f1b518&originHeight=914&originWidth=1774&originalType=url&ratio=1.25&rotation=0&showTitle=false&status=done&style=none&taskId=u757891df-c646-4b0b-9ce4-e6d3e004d99&title="></p>
+<h1 id="一、单列集合汇总"><a href="#一、单列集合汇总" class="headerlink" title="一、单列集合汇总"></a>一、单列集合汇总</h1><h2 id="1、List-Set-Queue-Map-的区别"><a href="#1、List-Set-Queue-Map-的区别" class="headerlink" title="1、List, Set, Queue, Map 的区别"></a>1、List, Set, Queue, Map 的区别</h2><ul>
+<li>List：底层基于object[]数组，存储的元素有序、可重复。</li>
+<li>Set：底层基于HashMap实现，存储的元素无序，不可重复。</li>
+<li>Queue：单端队列，存储的元素有序、可重复。</li>
+<li>Map：使用键值对（key-value）存储，key 是无序的、不可重复的。</li>
+</ul>
+<h2 id="2、HashSet、LinkedHashSet-和-TreeSet-的异同"><a href="#2、HashSet、LinkedHashSet-和-TreeSet-的异同" class="headerlink" title="2、HashSet、LinkedHashSet 和 TreeSet 的异同"></a>2、HashSet、LinkedHashSet 和 TreeSet 的异同</h2><p><strong>三者都是Set 接口的实现类，都能保证元素唯一，并且都不是线程安全的。</strong><br>三者主要区别在于底层实现的数据结构不同：</p>
+<ul>
+<li>HashSet底层基于哈希表，元素无序，不可重复。</li>
+<li>LinkedHashSet底层基于链表和哈希表，元素具有唯一性和有序性(元素顺序满足FIFO)</li>
+<li>TreeSet底层基于红黑树，支持对元素自定义排序规则。</li>
+</ul>
+<h2 id="3、ArrayList-和-Array（数组）的区别？"><a href="#3、ArrayList-和-Array（数组）的区别？" class="headerlink" title="3、ArrayList 和 Array（数组）的区别？"></a>3、ArrayList 和 Array（数组）的区别？</h2><ul>
+<li>Array的大小固定；ArrayList可以动态扩容。</li>
+<li>ArrayList允许使用泛型确保类型安全；Array不行。</li>
+<li>ArrayList具备基本的增删改查操作；Array只能下标进行查询，没有动态增删改元素的能力。</li>
+<li>Array既可以存储基本数据类型也可以存储对象；ArrayList只能存储对象，对于基本数据类型，需要将其转化为对应的包装类。</li>
+</ul>
+<h2 id="4、ArrayList-与-LinkedList-区别-（⭐）"><a href="#4、ArrayList-与-LinkedList-区别-（⭐）" class="headerlink" title="4、ArrayList 与 LinkedList 区别?（⭐）"></a>4、ArrayList 与 LinkedList 区别?（⭐）</h2><ul>
+<li><strong>底层数据结构</strong>：ArrayList底层使用object[]数组，LinkedList底层使用双向链表。</li>
+<li><strong>是否支持快速随机访问</strong>：ArrayList支持，LinkedList不支持。</li>
+<li><strong>插入和删除是否受元素位置的影响</strong>：<ul>
+<li>ArrayList添加元素时默认添加至列表尾部，此时时间复杂度为O(1)；但如果在指定位置添加和删除元素时，时间复杂度为O(n)。</li>
+<li>LinkedList在头尾插入和删除时时间复杂度为O(1)；但如果在指定位置插入删除元素时间复杂度为O(n)。</li>
+</ul>
+</li>
+</ul>
+<h2 id="5、ArrayList底层及扩容机制（⭐）"><a href="#5、ArrayList底层及扩容机制（⭐）" class="headerlink" title="5、ArrayList底层及扩容机制（⭐）"></a>5、ArrayList底层及扩容机制（⭐）</h2><p><strong>ArrayList三个构造函数：</strong></p>
+<ul>
+<li>ArrayList() 默认创建长度为0的数组。</li>
+<li>ArrayList(int initialCapacity) 创建指定容量的数组。</li>
+<li>ArrayList(Collection&lt;? extends E&gt; c) 使用集合c的大小作为数组容量。</li>
+</ul>
+<p><strong>ArrayList底层实现：</strong></p>
+<ul>
+<li><strong>底层数据结构：</strong>	<ul>
+<li>底层采用动态数组object[]实现。</li>
+</ul>
+</li>
+<li><strong>初始容量：</strong><ul>
+<li>ArrayList初始容量为0，第一次添加数据时扩容为10。</li>
+</ul>
+</li>
+<li><strong>扩容逻辑：</strong><ul>
+<li>首先会创建一个新的数组，长度为原始数组的1.5倍(使用位运算)，然后使用Arrays.copy方法将老数组的元素copy到新数组中，再将需要添加的新元素添加到新数组中。<blockquote>
+<p>int newCapacity &#x3D; oldCapacity + (oldCapacity &gt;&gt; 1);</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="6、Comparable-和-Comparator-的区别"><a href="#6、Comparable-和-Comparator-的区别" class="headerlink" title="6、Comparable 和 Comparator 的区别"></a>6、Comparable 和 Comparator 的区别</h2><pre><code>  Comparable和Comparator都是接口，都可以用来进行比较、排序，可以将Comparable理解为“内部比较器”，Comparator理解为“外部比较器”。
+</code></pre>
+<ul>
+<li><strong>实现方式：</strong><ul>
+<li>Comparable可以直接在需要进行排序的实体类中实现，重写compateTo方法即可。</li>
+<li>Comparator需要另外创建一个实现Comparator接口的实现类来作为“比较器”，并在排序时将比较器作为参数传入。</li>
+</ul>
+</li>
+<li><strong>各自的优缺点：</strong><ul>
+<li>Comparable 实现比较简单，但是需要修改源代码。</li>
+<li>Comparator需要新建比较器类，较为复杂，但是不需要修改源代码，并且新建的比较器类可以供多个对象排序使用。</li>
+</ul>
+</li>
+</ul>
+<p>具体参考这篇文章<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45559536/article/details/106091870">https://blog.csdn.net/qq_45559536&#x2F;article&#x2F;details&#x2F;106091870</a></p>
+<h2 id="7、ArrayList-list-new-ArrayList-10-中的list扩容几次"><a href="#7、ArrayList-list-new-ArrayList-10-中的list扩容几次" class="headerlink" title="7、ArrayList list&#x3D;new ArrayList(10) 中的list扩容几次"></a>7、ArrayList list&#x3D;new ArrayList(10) 中的list扩容几次</h2><p><strong>该语句声明和实例了一个 ArrayList，指定了容量为 10，未进行扩容。</strong></p>
+<h2 id="8、如何实现数组和List之间的转换"><a href="#8、如何实现数组和List之间的转换" class="headerlink" title="8、如何实现数组和List之间的转换"></a>8、如何实现数组和List之间的转换</h2><ul>
+<li>数组转List：使用Arrays工具类的asList方法。</li>
+<li>List转数组：使用List的toArray方法。</li>
+</ul>
+<p>数组转List后，如果修改了数组内容，list受影响吗？</p>
+<ul>
+<li><strong>受影响，因为它的底层使用的Arrays类中的一个内部类ArrayList来构造的集合，在这个集合的构造器中，会传入数组对象的引用。</strong></li>
+</ul>
+<p>List转数组后，如果修改了List内容，数组受影响吗？</p>
+<ul>
+<li><strong>不受影响，调用toArray方法之后，底层会进行数组的拷贝，和原来List的元素就没关系了。</strong></li>
+</ul>
+<h1 id="二、双列集合汇总"><a href="#二、双列集合汇总" class="headerlink" title="二、双列集合汇总"></a>二、双列集合汇总</h1><h2 id="1、HashMap底层原理（⭐）"><a href="#1、HashMap底层原理（⭐）" class="headerlink" title="1、HashMap底层原理（⭐）"></a>1、HashMap底层原理（⭐）</h2><p>   关键点：<strong>①底层数据结构 ②工作方式</strong><br>        HashMap是一个集合了查询效率和增删效率的容器，内部存的都是一个个键值对，可以通过访问键值对其进行访问和修改。</p>
+<ul>
+<li>在jdk1.8以前：<ul>
+<li>HashMap底层采用<strong>数组+链表</strong>的结构。</li>
+<li>添加数据时，会计算key值对应的哈希值，以定位key存放的位置，然后判断该位置的key是否相同，相同则直接覆盖；不相同即发生哈希冲突，会采用头插法将元素插入链表中。</li>
+</ul>
+</li>
+<li>从jdk1.8之后：<ul>
+<li>HashMap底层采用**<strong>红黑树</strong>的结构，发生哈希冲突时采用尾插法将元素插入链表中，并且当链表长度大于阈值(默认为8)时，数组长度大于64时，会将链表改为红黑树进行存储。</li>
+<li>红黑树是一种<strong>自平衡二叉搜索树</strong>，其查找和插入操作的时间复杂度均为 O(log n)。<blockquote>
+<p><strong>红黑树相比avl树，在检索的时候效率会略微差一点点，但对于插入和删除操作效率会提高很多。因为红黑树不像avl树一样追求绝对的平衡，它允许一些局部的不完全平衡，减少了很多调平衡的操作。相当于牺牲了一点点查询的性能，大大提高了插入和删除的性能。</strong></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="2、HashMap-中-hash-值的作用？"><a href="#2、HashMap-中-hash-值的作用？" class="headerlink" title="2、HashMap 中 hash 值的作用？"></a>2、HashMap 中 hash 值的作用？</h2><pre><code> **HashMap 中的 hash 值是由hash函数产生的，所有键值对存放的位置都是由 hash值和(length-1) 与运算得到的(length必须为2的幂次方，此时与运算等价于对length-1取模)。因此，简单来说hash值就是用来定位某键值对在HashMap中存放的位置的。**
+</code></pre>
+<h2 id="3、HashMap-中的数组长度为什么必须是-2-的幂次方？"><a href="#3、HashMap-中的数组长度为什么必须是-2-的幂次方？" class="headerlink" title="3、HashMap 中的数组长度为什么必须是 2 的幂次方？"></a>3、HashMap 中的数组长度为什么必须是 2 的幂次方？</h2><p> <strong>length</strong>为2的幂次方可以确保**(length-1)<strong>的二进制低位都是1，此时</strong>hash&amp;(length-1) **等价于 <strong>hash%(length-1)</strong> ，并且位运算的效率较高。</p>
+<h2 id="4、JDK-1-7中HashMap-为什么会形成死循环？"><a href="#4、JDK-1-7中HashMap-为什么会形成死循环？" class="headerlink" title="4、JDK 1.7中HashMap 为什么会形成死循环？"></a>4、JDK 1.7中HashMap 为什么会形成死循环？</h2><p>JDK 1.7中在链表中添加元素的方式是<strong>头插法</strong>，<strong>当两个线程同时对HashMap进行扩容操作时，可能会形成环形链表，产生死循环</strong>。JDK 1.7中采用了<strong>尾插法</strong>来避免链表导致，从而避免产生环形链表。<br>        具体来说：HashMap扩容时，会将旧HashMap的数据移植到 扩容的新HashMap中，而由于链表的插入方式是头插法，a-&gt;b-&gt;c 会变成 c-&gt;b-&gt;a ，旧线程仍然认为a节点后面是b，而b节点后面已经是a了，这里就会产生死循环。</p>
+<h2 id="5、HashMap和Hashtable的区别"><a href="#5、HashMap和Hashtable的区别" class="headerlink" title="5、HashMap和Hashtable的区别"></a>5、HashMap和Hashtable的区别</h2><ul>
+<li><p><strong>线程安全与效率：</strong></p>
+<ul>
+<li>HashMap线程不安全，但效率相对较高。</li>
+<li>Hashtable线程安全，效率相对较低。</li>
+</ul>
+</li>
+<li><p><strong>对 Null 的支持：</strong></p>
+<ul>
+<li>HashMap可以存储null值，键只能存一个(对应的key为0)，值可以存多个。</li>
+<li>Hashtable不可以存储null键和null值。</li>
+</ul>
+</li>
+<li><p><strong>初始容量大小和每次扩容大小：</strong></p>
+<ul>
+<li><strong>不指定容量：</strong><ul>
+<li>HashMap默认初始化大小为 16，之后每次扩充，容量变为原来的 2 倍。</li>
+<li>Hashtable默认的初始大小为 11，之后每次扩充，容量变为原来的 2n+1。</li>
+</ul>
+</li>
+<li><strong>指定容量：</strong><ul>
+<li>HashMap会将指定容量扩充为 2 的幂次方大小，即HashMap总是使用 2 的幂作为哈希表的大小。</li>
+<li>Hashtable直接使用指定的容量。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>扩容方式不同：</strong>当容量不足时要进行resize方法，而resize有两个步骤：</p>
+<ul>
+<li>①扩容：两者扩容大小不一样。</li>
+<li>②rehash：两者都会重新计算hash值，而两者计算hash的值的方式也不同。(如下代码)<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//hashMap计算hash值</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="title function_">hash</span><span class="params">(Object key)</span> &#123;</span><br><span class="line">        <span class="type">int</span> h;</span><br><span class="line">        <span class="keyword">return</span> (key == <span class="literal">null</span>) ? <span class="number">0</span> : (h = key.hashCode()) ^ (h &gt;&gt;&gt; <span class="number">16</span>);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">//而hashtable直接使用hashcode值作为最终的hash值</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><strong>底层数据结构：</strong></p>
+<ul>
+<li>JDK1.8 以后的 HashMap在解决哈希冲突时有了较大的变化，当链表长度大于阈值（默认为 8）时 ，将链表转化为红黑树以减少搜索时间。</li>
+<li>Hashtable只使用链表解决哈希冲突。</li>
+</ul>
+</li>
+</ul>
+<h2 id="6、HashSet-如何检查重复"><a href="#6、HashSet-如何检查重复" class="headerlink" title="6、HashSet 如何检查重复"></a>6、HashSet 如何检查重复</h2><p> <strong>当我们将对象加入HashSet时，HashSet会计算该对象的hashcode值，并与HashSet中其他对象作比较：若没有hashcode相同的对象，则该对象不重复，允许加入；若有hashcode相同的对象，还需要使用equals()方法检查两对象是否真的相同，如果相同则不允许加入该对象。</strong><br>ps：<strong>hashcode是某个对象的哈希值，相同对象的hashcode值一定相同，不同对象的hashcode值也有可能相同(即哈希冲突)。</strong></p>
+<h2 id="7、HashMap-为什么线程不安全？"><a href="#7、HashMap-为什么线程不安全？" class="headerlink" title="7、HashMap 为什么线程不安全？"></a>7、HashMap 为什么线程不安全？</h2><p>jdk1.8之前HashMap存在<strong>死循环</strong>和<strong>数据丢失</strong>的问题。而数据丢失是所有版本都存在的问题，主要是<strong>由于并发情况下多线程同时进行put操作，并发生了哈希冲突，此时线程A在判断完哈希冲突之后阻塞了，线程B将数据插入，然后线程B苏醒之后就会将线程A的数据覆盖掉。</strong></p>
+<h2 id="8、HashMap-常见的遍历方式"><a href="#8、HashMap-常见的遍历方式" class="headerlink" title="8、HashMap 常见的遍历方式?"></a>8、HashMap 常见的遍历方式?</h2><p>主要有四种遍历方式：</p>
+<ul>
+<li><p>使用迭代器（Iterator）的方式进行遍历。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//使用迭代器（Iterator）EntrySet 的方式进行遍历.</span></span><br><span class="line">Iterator&lt;Map.Entry&lt;Integer, String&gt;&gt; iterator = map.entrySet().iterator();</span><br><span class="line"><span class="keyword">while</span>(iterator.hasNext())&#123;</span><br><span class="line">    Map.Entry&lt;Integer, String&gt; entry = iterator.next();</span><br><span class="line">    System.out.println(entry.getKey());</span><br><span class="line">    System.out.println(entry.getValue());</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">//使用迭代器（Iterator）KeySet 的方式进行遍历；</span></span><br><span class="line">Iterator&lt;Integer&gt; iterator1 = map.keySet().iterator();</span><br><span class="line"><span class="keyword">while</span> (iterator1.hasNext())&#123;</span><br><span class="line">    <span class="type">Integer</span> <span class="variable">next</span> <span class="operator">=</span> iterator1.next();</span><br><span class="line">    System.out.println(next);</span><br><span class="line">    System.out.println(map.get(next));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用 For Each的方式进行遍历。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//使用 For Each EntrySet 的方式进行遍历；</span></span><br><span class="line"><span class="keyword">for</span>(Map.Entry&lt;Integer,String&gt; entry : map.entrySet())&#123;</span><br><span class="line">    System.out.println(entry.getKey());</span><br><span class="line">    System.out.println(entry.getValue());</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">//使用 For Each KeySet 的方式进行遍历；</span></span><br><span class="line"><span class="keyword">for</span>(Integer key:map.keySet())&#123;</span><br><span class="line">    System.out.println(key);</span><br><span class="line">    System.out.println(map.get(key));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用 Lambda 表达式的方式进行遍历。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">map.forEach((key,value)-&gt;&#123;</span><br><span class="line">    System.out.println(key);</span><br><span class="line">    System.out.println(value);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用Streams API 的方式进行遍历。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">map.entrySet().stream().forEach((entry)-&gt;&#123;</span><br><span class="line">    System.out.println(entry.getKey());</span><br><span class="line">    System.out.println(entry.getValue());</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>从性能上来说，<strong>迭代器是遍历是最快的，使用entryset比使用keyset要快</strong>。</p>
+</li>
+</ul>
+<h2 id="9、ConcurrentHashMap-和-Hashtable-的区别（⭐）"><a href="#9、ConcurrentHashMap-和-Hashtable-的区别（⭐）" class="headerlink" title="9、ConcurrentHashMap 和 Hashtable 的区别（⭐）"></a>9、ConcurrentHashMap 和 Hashtable 的区别（⭐）</h2><p><strong>实现线程安全的方式不一样：</strong></p>
+<ul>
+<li>Hashtable几乎在所有添加、删除等方法都加了<strong>synchronized同步锁</strong>，相当于给哈希表加了一个大锁，<strong>多线程访问的时候，大量线程会被阻塞，效率低下</strong>。</li>
+<li>jdk1.8之前的ConcurrentHashMap采用的是<strong>分段锁</strong>的思想，将哈希数组切割成若干个<strong>segment</strong>，每个<strong>segment</strong>包含n个键值对。 每一个segment都进行加锁，不同的segment不会有锁竞争，因此比Hashtable效率要高。</li>
+<li>jdk1.8之后的ConcurrentHashMap锁粒度更细，没有采用分段锁的策略，而是<strong>在元素的节点上采用 CAS + synchronized 操作来保证并发的安全性</strong>，仅在链表或红黑树的首节点进行加锁，只要hash值不冲突，就不会产生并发，大大提高了效率。</li>
+</ul>
+<h2 id="10、JDK-1-7-和-JDK-1-8-的-ConcurrentHashMap-实现有何不同？"><a href="#10、JDK-1-7-和-JDK-1-8-的-ConcurrentHashMap-实现有何不同？" class="headerlink" title="10、JDK 1.7 和 JDK 1.8 的 ConcurrentHashMap 实现有何不同？"></a>10、JDK 1.7 和 JDK 1.8 的 ConcurrentHashMap 实现有何不同？</h2><ul>
+<li><strong>线程安全实现方式</strong>：JDK 1.7采用分段锁，JDK 1.8锁粒度更细，对每个链表或红黑树的头节点加锁。</li>
+<li><strong>Hash 碰撞解决方法</strong>：JDK 1.7采用拉链法(头插法)，JDK 1.8采用拉链法(尾插法)+红黑树。</li>
+<li><strong>并发度</strong>：JDK 1.7 最大并发度是 Segment 的个数，默认是 16。JDK 1.8 最大并发度是 Node 数组的大小，并发度更大。</li>
+</ul>
+<h2 id="11、HashMap的put的具体流程。"><a href="#11、HashMap的put的具体流程。" class="headerlink" title="11、HashMap的put的具体流程。"></a>11、HashMap的put的具体流程。</h2><ul>
+<li>判断键值对数组是否为空，是的话就执行resize()方法进行扩容。</li>
+<li>根据键值key计算hash值得到数组索引。</li>
+<li>判断索引位置是否为空，是的话直接新建节点进行添加；不为空的话，判断索引位置的首个元素是否和key一样，一样就直接覆盖，不一样则：<ul>
+<li>判断索引位置是否为treenode，即判断是否是红黑树，如果是红黑树，直接在树中插入键值对。</li>
+<li>遍历链表，如果链表长度大于8就转成红黑树，在树中执行插入操作；如果不是大于8，就在链表中执行插入；在遍历过程中判断key是否存在，存在就直接覆盖对应的value值。</li>
+</ul>
+</li>
+<li>最后插入成功后，判断存在的键值对数量是否超过阈值，超过了需要进行扩容。</li>
+</ul>
+<h2 id="12、HashMap的扩容机制"><a href="#12、HashMap的扩容机制" class="headerlink" title="12、HashMap的扩容机制"></a>12、HashMap的扩容机制</h2><ul>
+<li>在初始化或元素达到阈值时，需要调用resize函数进行扩容，第一次数组长度初始化为16，扩容阈值为12(数组长度*0.75)，每次扩容扩大为原来的两倍。</li>
+<li>扩容之后会创建一个新数组，遍历老数组，将元素移到新数组中：<ul>
+<li>当前节点没有哈希冲突，直接对新数组的长度做模运算，插入当前节点。</li>
+<li>如果是红黑树，直接走红黑树的添加逻辑。</li>
+<li>如果是链表，需要遍历链表，(可能需要拆分链表)，链表元素的位置要么停留在原始位置，要么移动到原始位置+增加的数组大小这个位置上。</li>
+</ul>
+</li>
+</ul>
+<h2 id="13、hashMap的寻址算法"><a href="#13、hashMap的寻址算法" class="headerlink" title="13、hashMap的寻址算法"></a>13、hashMap的寻址算法</h2><ul>
+<li>先计算对象的<strong>哈希值</strong>，再进行<strong>二次哈希</strong>，即将哈希值右移16位再进行<strong>异或运算</strong>，可以<strong>使哈希分布更加均匀</strong>。</li>
+<li>最后使用与运算**( (capacity-1)  &amp; hash))**得到对象的索引。</li>
+</ul>
+<h2 id="14、LinkedHashMap-使用场景"><a href="#14、LinkedHashMap-使用场景" class="headerlink" title="14、LinkedHashMap 使用场景"></a>14、LinkedHashMap 使用场景</h2><p>HashMap有一个问题，就是<strong>迭代HashMap的顺序并不是HashMap放置的顺序</strong>，也就是无序。HashMap的这一缺点往往会带来困扰，因为有些场景，我们期待一个有序的Map。<br>LinkedHashMap 继承自 HashMap，实现了 Map 接口。<strong>它在HashMap的基础上维护了一个双向链表，并且按照插入顺序或者访问顺序来迭代元素。既保证了HashMap的快速访问性能，又提供了顺序访问的能力，因此在某些场景下非常有用。</strong><br>比如我实习期间有一个功能接口是要返回一个 {key &#x3D; 日期，value &#x3D; 发电量} 的 map 给前端，这些键值对是按照时间顺序添加进去的，我们希望它们在 map 中也是按照我们添加的顺序存放，所以这个场景下可以使用 **LinkedHashMap **来存。</p>
+<h1 id="三、其他"><a href="#三、其他" class="headerlink" title="三、其他"></a>三、其他</h1><h2 id="1、为什么数组的索引从0开始？"><a href="#1、为什么数组的索引从0开始？" class="headerlink" title="1、为什么数组的索引从0开始？"></a>1、为什么数组的索引从0开始？</h2><ul>
+<li>数组在根据索引获取元素时，会使用寻址公式：<strong>数组首地址 + 索引 * 存储数据的类型大小</strong></li>
+<li>如果索引从1开始算的话，寻址公式就变为：<strong>数组首地址 + （索引-1） * 存储数据的类型大小</strong>，底层多运算了一次减法操作，性能会降低。</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+	
+	 
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2024/08/02/%E5%9F%BA%E7%A1%80%E7%AF%87/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -276,7 +535,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2024-08-02 16:36:50 / 修改时间：16:43:40" itemprop="dateCreated datePublished" datetime="2024-08-02T16:36:50+08:00">2024-08-02</time>
+              <time title="创建时间：2024-08-02 16:36:50 / 修改时间：16:51:23" itemprop="dateCreated datePublished" datetime="2024-08-02T16:36:50+08:00">2024-08-02</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -299,7 +558,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="1、java语言有哪些优点和缺点"><a href="#1、java语言有哪些优点和缺点" class="headerlink" title="1、java语言有哪些优点和缺点?"></a>1、java语言有哪些优点和缺点?</h1><h3 id="优点："><a href="#优点：" class="headerlink" title="优点："></a>优点：</h3><ul>
+          <h1 id="java语言有哪些优点和缺点"><a href="#java语言有哪些优点和缺点" class="headerlink" title="java语言有哪些优点和缺点?"></a>java语言有哪些优点和缺点?</h1><h3 id="优点："><a href="#优点：" class="headerlink" title="优点："></a>优点：</h3><ul>
 <li>面向对象（封装，继承，多态）</li>
 <li>平台无关性（ Java 虚拟机实现平台无关性）</li>
 <li>支持多线程</li>
@@ -312,13 +571,13 @@
 <li>不支持底层操作：Java使用虚拟机来实现，无法和操作系统的底层打交道了。</li>
 <li>启动时间慢：由于Java程序需要先启动虚拟机，再执行程序，启动时间相对较慢。</li>
 </ul>
-<h1 id="2、JVM-、-JDK-和-JRE的关系"><a href="#2、JVM-、-JDK-和-JRE的关系" class="headerlink" title="2、JVM 、 JDK 和 JRE的关系"></a>2、JVM 、 JDK 和 JRE的关系</h1><ul>
+<h1 id="JVM-、-JDK-和-JRE的关系"><a href="#JVM-、-JDK-和-JRE的关系" class="headerlink" title="JVM 、 JDK 和 JRE的关系"></a>JVM 、 JDK 和 JRE的关系</h1><ul>
 <li><strong>JDK（Java Development Kit）</strong>：是 Java 开发工具包，是整个 Java 的核心，它包含了JRE，同时还包含了 javac(编译 java 源码的编译器)、jconsole（基于 JMX 的可视化监控⼯具）、javap（反编译工具）等等。</li>
 <li><strong>JRE（ Java Runtime Environment）</strong>：是 Java 的运行环境，包含 JVM 及 Java 核心类库。</li>
 <li><strong>JVM（Java Virtual Machine）</strong>：Java 虚拟机，是整个 Java 实现跨平台的最核心的部分。所有 Java 程序会首先被编译为 .class 的类文件，这种类文件可以在虚拟机上执行。</li>
 </ul>
 <p><img src="/2024/08/02/%E5%9F%BA%E7%A1%80%E7%AF%87/1.png"></p>
-<h1 id="3、为什么说-Java-语言“编译与解释并存”？"><a href="#3、为什么说-Java-语言“编译与解释并存”？" class="headerlink" title="3、为什么说 Java 语言“编译与解释并存”？"></a>3、为什么说 Java 语言“编译与解释并存”？</h1><p>高级编程语言按照程序的执行方式分为两种：</p>
+<h1 id="为什么说-Java-语言“编译与解释并存”？"><a href="#为什么说-Java-语言“编译与解释并存”？" class="headerlink" title="为什么说 Java 语言“编译与解释并存”？"></a>为什么说 Java 语言“编译与解释并存”？</h1><p>高级编程语言按照程序的执行方式分为两种：</p>
 <ul>
 <li><p><strong>编译型语言</strong>：通过编译器将源代码一次性翻译成可被该平台执行的机器码。一般编译语言的执行速度比较快，开发效率比较低。常见的编译性语言有 C、C++、Go、Rust 等等。</p>
 </li>
@@ -326,26 +585,26 @@
 <p>  Java 语言既具有编译型语言的特征，又有解释型语言的特征。因为 Java 程序要经过先编译，后解释两个步骤，由 Java 编写的程序需要先经过编译步骤，生成字节码（.class 文件），这种字节码必须由 Java 解释器来解释执行。</p>
 </li>
 </ul>
-<h1 id="4、Java和c-的区别"><a href="#4、Java和c-的区别" class="headerlink" title="4、Java和c++的区别"></a>4、Java和c++的区别</h1><ul>
+<h1 id="Java和c-的区别"><a href="#Java和c-的区别" class="headerlink" title="Java和c++的区别"></a>Java和c++的区别</h1><ul>
 <li>Java 不提供指针直接访问内存，程序内存更加安全。</li>
 <li>Java 的类单继承的，C++ 支持多重继承；虽然 Java 类不支持多继承，但接口支持多继承。</li>
 <li>Java 有自动内存管理垃圾回收机制(GC)，不需要程序员手动释放无用内存。</li>
 <li>C++支持方法重载和操作符重载，但是 Java 只支持方法重载（操作符重载增加了复杂性，这与 Java 最初的设计思想不符）。</li>
 <li>……</li>
 </ul>
-<h1 id="5、基本数据类型"><a href="#5、基本数据类型" class="headerlink" title="5、基本数据类型"></a>5、基本数据类型</h1><h2 id="5-1、java的8种基本数据类型："><a href="#5-1、java的8种基本数据类型：" class="headerlink" title="5.1、java的8种基本数据类型："></a>5.1、java的8种基本数据类型：</h2><p><img src="/2024/08/02/%E5%9F%BA%E7%A1%80%E7%AF%87/2.png"></p>
-<h2 id="5-2、基本类型和包装类型的区别："><a href="#5-2、基本类型和包装类型的区别：" class="headerlink" title="5.2、基本类型和包装类型的区别："></a>5.2、基本类型和包装类型的区别：</h2><ul>
+<h1 id="基本数据类型"><a href="#基本数据类型" class="headerlink" title="基本数据类型"></a>基本数据类型</h1><h2 id="java的8种基本数据类型："><a href="#java的8种基本数据类型：" class="headerlink" title="java的8种基本数据类型："></a>java的8种基本数据类型：</h2><p><img src="/2024/08/02/%E5%9F%BA%E7%A1%80%E7%AF%87/2.png"></p>
+<h2 id="基本类型和包装类型的区别："><a href="#基本类型和包装类型的区别：" class="headerlink" title="基本类型和包装类型的区别："></a>基本类型和包装类型的区别：</h2><ul>
 <li><strong>用途</strong>：基本类型一般用来定义一些局部变量和常量，在其他地方比如方法参数、对象属性中一般使用包装类型，并且包装类型可用于泛型，而基本类型不可以。</li>
 <li><strong>存储方式</strong>：基本数据类型的局部变量存放在 Java 虚拟机栈中的局部变量表中，基本数据类型的成员变量存放在 Java 虚拟机的堆中。包装类型属于对象类型，放在堆中。</li>
 <li><strong>占用空间</strong>：相比于包装类型， 基本数据类型占用的空间比较小。</li>
 <li><strong>比较方式</strong>：对于基本数据类型来说，&#x3D;&#x3D; 比较的是值。对于包装数据类型来说，&#x3D;&#x3D; 比较的是对象的内存地址。整型包装类对象之间值的比较，需要使用 equals() 方法。</li>
 </ul>
-<h2 id="5-3、包装类型的缓存机制："><a href="#5-3、包装类型的缓存机制：" class="headerlink" title="5.3、包装类型的缓存机制："></a>5.3、包装类型的缓存机制：</h2><pre><code>**Byte**,**Short**,**Integer**,**Long** 这 4 种包装类默认创建了数值 [-128，127] 的相应类型的缓存数据，Character 创建了数值在 [0,127] 范围的缓存数据，Boolean 直接返回 True 或 False，两种浮点数类型的包装类 Float,Double 没有实现缓存机制。
+<h2 id="包装类型的缓存机制："><a href="#包装类型的缓存机制：" class="headerlink" title="包装类型的缓存机制："></a>包装类型的缓存机制：</h2><pre><code>**Byte**,**Short**,**Integer**,**Long** 这 4 种包装类默认创建了数值 [-128，127] 的相应类型的缓存数据，Character 创建了数值在 [0,127] 范围的缓存数据，Boolean 直接返回 True 或 False，两种浮点数类型的包装类 Float,Double 没有实现缓存机制。
 </code></pre>
 <p>看如下代码：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Integer</span> <span class="variable">i1</span> <span class="operator">=</span> <span class="number">40</span>;</span><br><span class="line"><span class="type">Integer</span> <span class="variable">i2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Integer</span>(<span class="number">40</span>);</span><br><span class="line">System.out.println(i1==i2);</span><br></pre></td></tr></table></figure>
 <p>上述代码应输出false。首先第一行代码会发生自动装箱，因此变量<strong>i1</strong>使用的是缓存中的对象，而<strong>i2</strong>会新new一个对象出来，故两者不相等。<br>如果想比较包装类对象之间值，需要使用equals。</p>
-<h2 id="5-4、自动装箱和自动拆箱："><a href="#5-4、自动装箱和自动拆箱：" class="headerlink" title="5.4、自动装箱和自动拆箱："></a>5.4、自动装箱和自动拆箱：</h2><ul>
+<h2 id="自动装箱和自动拆箱："><a href="#自动装箱和自动拆箱：" class="headerlink" title="自动装箱和自动拆箱："></a>自动装箱和自动拆箱：</h2><ul>
 <li><strong>自动装箱</strong>：将基本类型用它们对应的引用类型包装起来；</li>
 <li><strong>自动拆箱</strong>：将包装类型转换为基本数据类型；</li>
 </ul>
@@ -353,9 +612,9 @@
 <blockquote>
 <p>Integer i &#x3D; 10 等价于 Integer i &#x3D; Integer.valueOf(10)<br>int n &#x3D; i 等价于 int n &#x3D; i.intValue();</p>
 </blockquote>
-<h2 id="5-5、浮点数运算的精度丢失问题及解决办法："><a href="#5-5、浮点数运算的精度丢失问题及解决办法：" class="headerlink" title="5.5、浮点数运算的精度丢失问题及解决办法："></a>5.5、浮点数运算的精度丢失问题及解决办法：</h2><p>由于底层保存浮点数的机制，会出现小数的精度发生损失的情况，可以使用 BigDecimal 对浮点数的运算，不会造成精度丢失。如：</p>
+<h2 id="浮点数运算的精度丢失问题及解决办法："><a href="#浮点数运算的精度丢失问题及解决办法：" class="headerlink" title="浮点数运算的精度丢失问题及解决办法："></a>浮点数运算的精度丢失问题及解决办法：</h2><p>由于底层保存浮点数的机制，会出现小数的精度发生损失的情况，可以使用 BigDecimal 对浮点数的运算，不会造成精度丢失。如：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">BigDecimal</span> <span class="variable">a</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BigDecimal</span>(<span class="string">&quot;1.0&quot;</span>);</span><br><span class="line"><span class="type">BigDecimal</span> <span class="variable">b</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BigDecimal</span>(<span class="string">&quot;0.9&quot;</span>);</span><br><span class="line"><span class="type">BigDecimal</span> <span class="variable">c</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BigDecimal</span>(<span class="string">&quot;0.8&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="type">BigDecimal</span> <span class="variable">x</span> <span class="operator">=</span> a.subtract(b);</span><br><span class="line"><span class="type">BigDecimal</span> <span class="variable">y</span> <span class="operator">=</span> b.subtract(c);</span><br><span class="line"></span><br><span class="line">System.out.println(x); / <span class="number">0.1</span> /</span><br><span class="line">System.out.println(y); / <span class="number">0.1</span> /</span><br><span class="line">System.out.println(Objects.equals(x, y)); / <span class="literal">true</span> /</span><br></pre></td></tr></table></figure>
-<h1 id="6、变量"><a href="#6、变量" class="headerlink" title="6、变量"></a>6、变量</h1><h2 id="6-1、成员变量与局部变量的区别？"><a href="#6-1、成员变量与局部变量的区别？" class="headerlink" title="6.1、成员变量与局部变量的区别？"></a>6.1、成员变量与局部变量的区别？</h2><p><strong>语法形式：</strong></p>
+<h1 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h1><h2 id="成员变量与局部变量的区别？"><a href="#成员变量与局部变量的区别？" class="headerlink" title="成员变量与局部变量的区别？"></a>成员变量与局部变量的区别？</h2><p><strong>语法形式：</strong></p>
 <ul>
 <li>成员变量属于类，而局部变量是方法中定义的变量或参数；</li>
 <li>成员变量可以被 public,private,static 等修饰符所修饰，而局部变量不能被访问控制修饰符及 static 所修饰；</li>
@@ -366,34 +625,34 @@
 <li>如果成员变量是使用 static 修饰的，那么这个成员变量是属于类的，如果没有使用 static 修饰，这个成员变量是属于类实例的。</li>
 <li>而对象存在于堆内存，局部变量则存在于栈内存。</li>
 </ul>
-<h2 id="6-2、静态变量有什么作用？"><a href="#6-2、静态变量有什么作用？" class="headerlink" title="6.2、静态变量有什么作用？"></a>6.2、静态变量有什么作用？</h2><p>静态变量也就是被 static 关键字修饰的变量。它可以被类的所有实例共享，无论一个类创建了多少个对象，它们都共享同一份静态变量。也就是说，静态变量只会被分配一次内存，即使创建了多个对象，这样可以节省内存。<br>通常情况下，静态变量会被 final 关键字修饰成为常量。</p>
-<h2 id="6-3、字符型常量和字符串常量的区别"><a href="#6-3、字符型常量和字符串常量的区别" class="headerlink" title="6.3、字符型常量和字符串常量的区别?"></a>6.3、字符型常量和字符串常量的区别?</h2><ul>
+<h2 id="静态变量有什么作用？"><a href="#静态变量有什么作用？" class="headerlink" title="静态变量有什么作用？"></a>静态变量有什么作用？</h2><p>静态变量也就是被 static 关键字修饰的变量。它可以被类的所有实例共享，无论一个类创建了多少个对象，它们都共享同一份静态变量。也就是说，静态变量只会被分配一次内存，即使创建了多个对象，这样可以节省内存。<br>通常情况下，静态变量会被 final 关键字修饰成为常量。</p>
+<h2 id="字符型常量和字符串常量的区别"><a href="#字符型常量和字符串常量的区别" class="headerlink" title="字符型常量和字符串常量的区别?"></a>字符型常量和字符串常量的区别?</h2><ul>
 <li>形式 : 字符常量是单引号引起的一个字符，字符串常量是双引号引起的 0 个或若干个字符。</li>
 <li>含义 : 字符常量相当于一个整型值( ASCII 值),可以参加表达式运算; 字符串常量代表一个地址值(该字符串在内存中存放位置)。</li>
 <li>占内存大小：字符常量占 2 个字节; 字符串常量占若干个字节。</li>
 </ul>
-<h1 id="7、方法"><a href="#7、方法" class="headerlink" title="7、方法"></a>7、方法</h1><h2 id="7-1、静态方法和实例方法的区别："><a href="#7-1、静态方法和实例方法的区别：" class="headerlink" title="7.1、静态方法和实例方法的区别："></a>7.1、静态方法和实例方法的区别：</h2><ul>
+<h1 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h1><h2 id="静态方法和实例方法的区别："><a href="#静态方法和实例方法的区别：" class="headerlink" title="静态方法和实例方法的区别："></a>静态方法和实例方法的区别：</h2><ul>
 <li><strong>调用方式</strong>：在外部调用静态方法时，可以使用 类名.方法名 的方式，也可以使用 对象.方法名 的方式，而实例方法只有后面这种方式。也就是说，调用静态方法可以无需创建对象 。</li>
 <li><strong>访问限制</strong>：静态方法在访问本类的成员时，只允许访问静态成员（即静态成员变量和静态方法），不允许访问实例成员（即实例成员变量和实例方法），而实例方法不存在这个限制。</li>
 </ul>
-<h2 id="7-2、静态方法为什么不能调用非静态成员"><a href="#7-2、静态方法为什么不能调用非静态成员" class="headerlink" title="7.2、静态方法为什么不能调用非静态成员?"></a>7.2、静态方法为什么不能调用非静态成员?</h2><ul>
+<h2 id="静态方法为什么不能调用非静态成员"><a href="#静态方法为什么不能调用非静态成员" class="headerlink" title="静态方法为什么不能调用非静态成员?"></a>静态方法为什么不能调用非静态成员?</h2><ul>
 <li>静态方法是属于类的，在类加载的时候就会分配内存，可以通过类名直接访问。而非静态成员属于实例对象，只有在对象实例化之后才存在，需要通过类的实例对象去访问。</li>
 <li>在类的非静态成员不存在的时候静态方法就已经存在了，此时调用在内存中还不存在的非静态成员，属于非法操作。</li>
 </ul>
-<h2 id="7-3、重载和重写的区别："><a href="#7-3、重载和重写的区别：" class="headerlink" title="7.3、重载和重写的区别："></a>7.3、重载和重写的区别：</h2><ul>
+<h2 id="重载和重写的区别："><a href="#重载和重写的区别：" class="headerlink" title="重载和重写的区别："></a>重载和重写的区别：</h2><ul>
 <li><strong>重载</strong>：同一个类中多个同名方法根据不同的传参来执行不同的逻辑处理。</li>
 <li><strong>重写</strong>：子类对父类方法的重新改造，外部样子不能改变，内部实现逻辑可以改变。</li>
 </ul>
-<h1 id="8、面向对象基础"><a href="#8、面向对象基础" class="headerlink" title="8、面向对象基础"></a>8、面向对象基础</h1><h2 id="8-1、面向对象和面向过程的区别："><a href="#8-1、面向对象和面向过程的区别：" class="headerlink" title="8.1、面向对象和面向过程的区别："></a>8.1、面向对象和面向过程的区别：</h2><ul>
+<h1 id="面向对象基础"><a href="#面向对象基础" class="headerlink" title="面向对象基础"></a>面向对象基础</h1><h2 id="面向对象和面向过程的区别："><a href="#面向对象和面向过程的区别：" class="headerlink" title="面向对象和面向过程的区别："></a>面向对象和面向过程的区别：</h2><ul>
 <li><strong>面向过程</strong>：把解决问题的过程拆成一个个方法，通过一个个方法的执行解决问题。</li>
 <li><strong>面向对象</strong>：是一种“万物皆对象”的编程思想，任何物体都可以归为一类事物，而每一个个体都是一类事物的实例，通过调用对象的方法来解决问题。</li>
 </ul>
-<h2 id="8-2、创建一个对象用什么运算符-对象实体与对象引用有何不同"><a href="#8-2、创建一个对象用什么运算符-对象实体与对象引用有何不同" class="headerlink" title="8.2、创建一个对象用什么运算符?对象实体与对象引用有何不同?"></a>8.2、创建一个对象用什么运算符?对象实体与对象引用有何不同?</h2><p>用new 运算符，new 创建对象实例，对象实例在堆内存中；对象引用指向对象实例，存放在栈内存中。</p>
+<h2 id="创建一个对象用什么运算符-对象实体与对象引用有何不同"><a href="#创建一个对象用什么运算符-对象实体与对象引用有何不同" class="headerlink" title="创建一个对象用什么运算符?对象实体与对象引用有何不同?"></a>创建一个对象用什么运算符?对象实体与对象引用有何不同?</h2><p>用new 运算符，new 创建对象实例，对象实例在堆内存中；对象引用指向对象实例，存放在栈内存中。</p>
 <ul>
 <li>一个对象引用可以指向 0 个或 1 个对象（一根绳子可以不系气球，也可以系一个气球）；</li>
 <li>一个对象可以有 n 个引用指向它（可以用 n 条绳子系住一个气球）。</li>
 </ul>
-<h2 id="8-3、对象的相等和引用相等的区别："><a href="#8-3、对象的相等和引用相等的区别：" class="headerlink" title="8.3、对象的相等和引用相等的区别："></a>8.3、对象的相等和引用相等的区别：</h2><ul>
+<h2 id="对象的相等和引用相等的区别："><a href="#对象的相等和引用相等的区别：" class="headerlink" title="对象的相等和引用相等的区别："></a>对象的相等和引用相等的区别：</h2><ul>
 <li>对象相等一般比较的是内存中存放的内容是否相等。</li>
 <li>引用相等一般比较的是指向的内存地址是否相等。</li>
 </ul>
@@ -403,13 +662,13 @@
 <blockquote>
 <p><strong>结果分析：</strong>由于&#x3D;&#x3D;比较的是引用相等，str2字符串会重新new一个string对象，因此引用和str1不同；str3会优先去字符串常量池寻找有无“hello”这个字符串，有的话就直接引用它，所以str3和str1引用相等。而最后两个比较的是字符串内容是否相等，故str1、str2、str3都相等。 </p>
 </blockquote>
-<h2 id="8-4、构造函数是什么？能否被override？类没有声明构造方法，程序还能正确执行吗"><a href="#8-4、构造函数是什么？能否被override？类没有声明构造方法，程序还能正确执行吗" class="headerlink" title="8.4、构造函数是什么？能否被override？类没有声明构造方法，程序还能正确执行吗?"></a>8.4、构造函数是什么？能否被override？类没有声明构造方法，程序还能正确执行吗?</h2><p>构造方法是一种特殊的方法，主要作用是完成对象的初始化工作。构造函数可以被重载(overload)，但不能被重写(override)。<br>当一个类没有声明构造方法，程序也是可以正常执行的。 当没有显式声明构造方式时，类会默认声明一个无参构造函数。但<strong>如果我们自己添加了类的构造方法（无论是否有参），Java 就不会添加默认的无参构造方法了。</strong></p>
-<h2 id="8-5、面向对象三大特征"><a href="#8-5、面向对象三大特征" class="headerlink" title="8.5、面向对象三大特征"></a>8.5、面向对象三大特征</h2><ul>
+<h2 id="构造函数是什么？能否被override？类没有声明构造方法，程序还能正确执行吗"><a href="#构造函数是什么？能否被override？类没有声明构造方法，程序还能正确执行吗" class="headerlink" title="构造函数是什么？能否被override？类没有声明构造方法，程序还能正确执行吗?"></a>构造函数是什么？能否被override？类没有声明构造方法，程序还能正确执行吗?</h2><p>构造方法是一种特殊的方法，主要作用是完成对象的初始化工作。构造函数可以被重载(overload)，但不能被重写(override)。<br>当一个类没有声明构造方法，程序也是可以正常执行的。 当没有显式声明构造方式时，类会默认声明一个无参构造函数。但<strong>如果我们自己添加了类的构造方法（无论是否有参），Java 就不会添加默认的无参构造方法了。</strong></p>
+<h2 id="面向对象三大特征"><a href="#面向对象三大特征" class="headerlink" title="面向对象三大特征"></a>面向对象三大特征</h2><ul>
 <li><strong>封装</strong>：把数据和操作数据的方法封装起来，对数据的访问只能通过已定义的接口。<br>可以类比平常生活的开车，汽车的底层结构被封装起来，我们无需关心底层，只需要会踩油门、转动方向盘开车即可。</li>
 <li><strong>继承</strong>：继承是从已有类得到继承信息创建新类的过程。提供继承信息的类被称为父类，得到继承信息的被称为子类。<br>父类中的私有属性和方法子类是无法访问，只是拥有。</li>
 <li><strong>多态</strong>：一个对象具有多种状态，具体表现为父类的引用指向子类的实例。<br>多态存在的3个必要条件: 要有继承关系 、要有方法的重写、父类引用指向子类对象。</li>
 </ul>
-<h2 id="8-6、接口和抽象类有什么共同点和区别？"><a href="#8-6、接口和抽象类有什么共同点和区别？" class="headerlink" title="8.6、接口和抽象类有什么共同点和区别？"></a>8.6、接口和抽象类有什么共同点和区别？</h2><p><strong>抽象类</strong>和普通类类似，只是无法实例化，存在的意义就是让其他类继承的。抽象类可以包含抽象方法和非抽象方法，其中抽象方法没有具体的实现，而非抽象方法有具体的实现代码。<br><strong>接口</strong>是一种定义了一组方法签名的集合，这些方法默认都是公共的抽象方法，不包含具体的实现代码，比抽象类更加抽象。<br><strong>共同点：</strong></p>
+<h2 id="接口和抽象类有什么共同点和区别？"><a href="#接口和抽象类有什么共同点和区别？" class="headerlink" title="接口和抽象类有什么共同点和区别？"></a>接口和抽象类有什么共同点和区别？</h2><p><strong>抽象类</strong>和普通类类似，只是无法实例化，存在的意义就是让其他类继承的。抽象类可以包含抽象方法和非抽象方法，其中抽象方法没有具体的实现，而非抽象方法有具体的实现代码。<br><strong>接口</strong>是一种定义了一组方法签名的集合，这些方法默认都是公共的抽象方法，不包含具体的实现代码，比抽象类更加抽象。<br><strong>共同点：</strong></p>
 <ul>
 <li>都不能被实例化。（存在的意义就是被继承或实现）</li>
 <li>都包含抽象方法。（抽象类也可以没有抽象方法，只要有abstract关键字修饰，但是没意义）</li>
@@ -420,40 +679,40 @@
 <li>抽象类中可以定义构造函数，接口不能定义构造函数；</li>
 <li>一个类只能继承一个类，但是可以实现多个接口。</li>
 </ul>
-<h2 id="8-7、深拷贝和浅拷贝的区别？什么是引用拷贝？"><a href="#8-7、深拷贝和浅拷贝的区别？什么是引用拷贝？" class="headerlink" title="8.7、深拷贝和浅拷贝的区别？什么是引用拷贝？"></a>8.7、深拷贝和浅拷贝的区别？什么是引用拷贝？</h2><ul>
+<h2 id="深拷贝和浅拷贝的区别？什么是引用拷贝？"><a href="#深拷贝和浅拷贝的区别？什么是引用拷贝？" class="headerlink" title="深拷贝和浅拷贝的区别？什么是引用拷贝？"></a>深拷贝和浅拷贝的区别？什么是引用拷贝？</h2><ul>
 <li><strong>浅拷贝：</strong>只复制指向某个对象的指针，而不复制对象本身，新旧对象还是共享同一块内存。</li>
 <li><strong>深拷贝：</strong>会创造一个一模一样的对象，新旧对象不共享内存，修改新对象不会影响到原对象。</li>
 </ul>
-<h1 id="9、Object类"><a href="#9、Object类" class="headerlink" title="9、Object类"></a>9、Object类</h1><h2 id="9-1、Object-类的常见方法有哪些？"><a href="#9-1、Object-类的常见方法有哪些？" class="headerlink" title="9.1、Object 类的常见方法有哪些？"></a>9.1、Object 类的常见方法有哪些？</h2><p>Object 类是一个特殊的类，是所有类的父类。它主要提供了以下 11 个方法：</p>
+<h1 id="Object类"><a href="#Object类" class="headerlink" title="Object类"></a>Object类</h1><h2 id="Object-类的常见方法有哪些？"><a href="#Object-类的常见方法有哪些？" class="headerlink" title="Object 类的常见方法有哪些？"></a>Object 类的常见方法有哪些？</h2><p>Object 类是一个特殊的类，是所有类的父类。它主要提供了以下 11 个方法：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">● native 方法，用于返回当前运行时对象的 Class 对象，使用了 final 关键字修饰，故不允许子类重写。</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">native</span> Class&lt;?&gt; getClass()</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">● native 方法，用于返回对象的哈希码，主要使用在哈希表中，比如 JDK 中的HashMap。</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">native</span> <span class="type">int</span> <span class="title function_">hashCode</span><span class="params">()</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">● 用于比较 2 个对象的内存地址是否相等，String 类对该方法进行了重写以用于比较字符串的值是否相等。</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">equals</span><span class="params">(Object obj)</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">● native 方法，用于创建并返回当前对象的一份拷贝。</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">protected</span> <span class="keyword">native</span> Object <span class="title function_">clone</span><span class="params">()</span> <span class="keyword">throws</span> CloneNotSupportedException</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">● 返回类的名字实例的哈希码的 16 进制的字符串。建议 Object 所有的子类都重写这个方法。</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">● native 方法，并且不能重写。唤醒一个在此对象监视器上等待的线程(监视器相当于就是锁的概念)。如果有多个线程在等待只会任意唤醒一个。</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">native</span> <span class="keyword">void</span> <span class="title function_">notify</span><span class="params">()</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">● native 方法，并且不能重写。跟 notify 一样，唯一的区别就是会唤醒在此对象监视器上等待的所有线程，而不是一个线程。</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">native</span> <span class="keyword">void</span> <span class="title function_">notifyAll</span><span class="params">()</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">● native方法，并且不能重写。暂停线程的执行。注意：sleep 方法没有释放锁，而 wait 方法释放了锁 ，timeout 是等待时间。</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">native</span> <span class="keyword">void</span> <span class="title function_">wait</span><span class="params">(<span class="type">long</span> timeout)</span> <span class="keyword">throws</span> InterruptedException</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">● 多了 nanos 参数，这个参数表示额外时间（以纳秒为单位，范围是 0-999999）。 所以超时的时间还需要加上 nanos 纳秒。。</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title function_">wait</span><span class="params">(<span class="type">long</span> timeout, <span class="type">int</span> nanos)</span> <span class="keyword">throws</span> InterruptedException</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">● 跟之前的2个wait方法一样，只不过该方法一直等待，没有超时时间这个概念</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title function_">wait</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">● 实例被垃圾回收器回收的时候触发的操作</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">finalize</span><span class="params">()</span> <span class="keyword">throws</span> Throwable &#123; &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h2 id="9-2、-和-equals-的区别："><a href="#9-2、-和-equals-的区别：" class="headerlink" title="9.2、&#x3D;&#x3D; 和 equals() 的区别："></a>9.2、&#x3D;&#x3D; 和 equals() 的区别：</h2><ul>
+<h2 id="和-equals-的区别："><a href="#和-equals-的区别：" class="headerlink" title="&#x3D;&#x3D; 和 equals() 的区别："></a>&#x3D;&#x3D; 和 equals() 的区别：</h2><ul>
 <li><strong>“&#x3D;&#x3D;”</strong>：由于 Java 只有值传递，所以，对于 &#x3D;&#x3D; 来说，不管是比较基本数据类型，还是引用数据类型的变量，其本质比较的都是值，只是引用类型变量存的值是对象的地址。因此 &#x3D;&#x3D; 对于基本数据类型来说比较的是值，对于引用数据类型来说比较的是内存地址。</li>
 <li>**equals()**：如果类没有重写equals方法，等价于“&#x3D;&#x3D;”的效果；如果重写了，则比较的是对象的属性是否相等。</li>
 </ul>
-<h2 id="9-3、为什么重写-equals-时必须重写-hashCode-方法？"><a href="#9-3、为什么重写-equals-时必须重写-hashCode-方法？" class="headerlink" title="9.3、为什么重写 equals() 时必须重写 hashCode() 方法？"></a>9.3、为什么重写 equals() 时必须重写 hashCode() 方法？</h2><p>如果不同时重写的话，可能会出现<strong>无法去重的</strong>现象。<br><strong>原因</strong>：set集合在进行去重操作时，会先判断两个对象的hashcode是否相等，<strong>如果不重写hashcode()方法，就会调用object中的hashcode()方法，返回的是对象内存地址的哈希码</strong>，这就意味着两个内容相同的对象，其哈希码会由于内存地址的不同而不同。 两个内容相同的对象哈希码不同，则默认这两个对象不同，都会插入到set集合中，导致set集合有重复对象。</p>
-<h1 id="10、String类"><a href="#10、String类" class="headerlink" title="10、String类"></a>10、String类</h1><h2 id="10-1、String-为什么是不可变的"><a href="#10-1、String-为什么是不可变的" class="headerlink" title="10.1、String 为什么是不可变的?"></a>10.1、String 为什么是不可变的?</h2><p><strong>字符串常量池：</strong><br>Java内存中存在一个字符串常量池，是存储字符串对象的特殊内存区域。当创建一个字符串时，如果该字符串已经存在于字符串常量池中，那么就会直接返回这个字符串的引用；如果不存在，则会将该字符串添加到字符串常量池中，并返回新创建的字符串的引用。由于字符串常量池的存在，多个字符串可以共享同一个实例，这样可以节省内存空间。而如果 String 是可变的，那么在修改字符串时，会导致其他使用相同字符串的地方出问题。<br><strong>安全性：</strong><br>由于String不可变，因此其在多线程环境下是安全的。<br><strong>缓存哈希值：</strong><br>String 类重写了 hashCode()方法，并且在第一次调用时计算并缓存了字符串的哈希值。由于 String 是不可变的，所以可以保证哈希值的唯一性和一致性。</p>
-<h2 id="10-2、String、StringBuffer、StringBuilder-的区别："><a href="#10-2、String、StringBuffer、StringBuilder-的区别：" class="headerlink" title="10.2、String、StringBuffer、StringBuilder 的区别："></a>10.2、String、StringBuffer、StringBuilder 的区别：</h2><p><strong>可变性：</strong><br>String 用于表示字符串，属于不可变类。所以每次对String进行修改都会创建一个新的String对象，导致频繁的内存分配和回收，影响性能。<br>Java提供了StringBuffer 和 StringBuilder两个可变的字符串，用于高效地进行字符串的操作。<br><strong>原理：</strong><br><strong>String</strong> 内部使用字符数组来保存字符串内容，并且该数组是 final 修饰的，当对 String 进行修改时，会创建一个新的 String 对象；<br><strong>StringBuffer</strong> 内部也使用字符数组来保存字符串内容，但是该数组没有被 final 修饰，当对 StringBuffer 进行修改时，直接在原有的字符数组上进行操作，不会创建新的对象。<br><strong>StringBuilder</strong> 的实现原理与 StringBuffer 相同，唯一的区别是 StringBuilder 不是线程安全的，而 StringBuffer 是线程安全的。</p>
-<h2 id="10-3、String-s1-new-String-“abc”-这句话创建了几个字符串对象？"><a href="#10-3、String-s1-new-String-“abc”-这句话创建了几个字符串对象？" class="headerlink" title="10.3、String s1 &#x3D; new String(“abc”);这句话创建了几个字符串对象？"></a>10.3、String s1 &#x3D; new String(“abc”);这句话创建了几个字符串对象？</h2><p>分情况：</p>
+<h2 id="为什么重写-equals-时必须重写-hashCode-方法？"><a href="#为什么重写-equals-时必须重写-hashCode-方法？" class="headerlink" title="为什么重写 equals() 时必须重写 hashCode() 方法？"></a>为什么重写 equals() 时必须重写 hashCode() 方法？</h2><p>如果不同时重写的话，可能会出现<strong>无法去重的</strong>现象。<br><strong>原因</strong>：set集合在进行去重操作时，会先判断两个对象的hashcode是否相等，<strong>如果不重写hashcode()方法，就会调用object中的hashcode()方法，返回的是对象内存地址的哈希码</strong>，这就意味着两个内容相同的对象，其哈希码会由于内存地址的不同而不同。 两个内容相同的对象哈希码不同，则默认这两个对象不同，都会插入到set集合中，导致set集合有重复对象。</p>
+<h1 id="String类"><a href="#String类" class="headerlink" title="String类"></a>String类</h1><h2 id="String-为什么是不可变的"><a href="#String-为什么是不可变的" class="headerlink" title="String 为什么是不可变的?"></a>String 为什么是不可变的?</h2><p><strong>字符串常量池：</strong><br>Java内存中存在一个字符串常量池，是存储字符串对象的特殊内存区域。当创建一个字符串时，如果该字符串已经存在于字符串常量池中，那么就会直接返回这个字符串的引用；如果不存在，则会将该字符串添加到字符串常量池中，并返回新创建的字符串的引用。由于字符串常量池的存在，多个字符串可以共享同一个实例，这样可以节省内存空间。而如果 String 是可变的，那么在修改字符串时，会导致其他使用相同字符串的地方出问题。<br><strong>安全性：</strong><br>由于String不可变，因此其在多线程环境下是安全的。<br><strong>缓存哈希值：</strong><br>String 类重写了 hashCode()方法，并且在第一次调用时计算并缓存了字符串的哈希值。由于 String 是不可变的，所以可以保证哈希值的唯一性和一致性。</p>
+<h2 id="String、StringBuffer、StringBuilder-的区别："><a href="#String、StringBuffer、StringBuilder-的区别：" class="headerlink" title="String、StringBuffer、StringBuilder 的区别："></a>String、StringBuffer、StringBuilder 的区别：</h2><p><strong>可变性：</strong><br>String 用于表示字符串，属于不可变类。所以每次对String进行修改都会创建一个新的String对象，导致频繁的内存分配和回收，影响性能。<br>Java提供了StringBuffer 和 StringBuilder两个可变的字符串，用于高效地进行字符串的操作。<br><strong>原理：</strong><br><strong>String</strong> 内部使用字符数组来保存字符串内容，并且该数组是 final 修饰的，当对 String 进行修改时，会创建一个新的 String 对象；<br><strong>StringBuffer</strong> 内部也使用字符数组来保存字符串内容，但是该数组没有被 final 修饰，当对 StringBuffer 进行修改时，直接在原有的字符数组上进行操作，不会创建新的对象。<br><strong>StringBuilder</strong> 的实现原理与 StringBuffer 相同，唯一的区别是 StringBuilder 不是线程安全的，而 StringBuffer 是线程安全的。</p>
+<h2 id="String-s1-new-String-“abc”-这句话创建了几个字符串对象？"><a href="#String-s1-new-String-“abc”-这句话创建了几个字符串对象？" class="headerlink" title="String s1 &#x3D; new String(“abc”);这句话创建了几个字符串对象？"></a>String s1 &#x3D; new String(“abc”);这句话创建了几个字符串对象？</h2><p>分情况：</p>
 <ul>
 <li>如果字符串常量池无该对象：那么会堆中创建两个字符串对象，一个存在字符串常量池中。</li>
 <li>如果字符串常量池有该对象：那么只会在堆中创建一个字符串对象。</li>
 </ul>
-<h2 id="10-4、String-intern-方法有什么作用"><a href="#10-4、String-intern-方法有什么作用" class="headerlink" title="10.4、String#intern 方法有什么作用?"></a>10.4、String#intern 方法有什么作用?</h2><p><strong>intern</strong> 是一个 native（本地）方法，其作用是将指定的字符串对象的引用保存在字符串常量池中，可以简单分为两种情况：</p>
+<h2 id="String-intern-方法有什么作用"><a href="#String-intern-方法有什么作用" class="headerlink" title="String#intern 方法有什么作用?"></a>String#intern 方法有什么作用?</h2><p><strong>intern</strong> 是一个 native（本地）方法，其作用是将指定的字符串对象的引用保存在字符串常量池中，可以简单分为两种情况：</p>
 <ul>
 <li>如果字符串常量池中保存了对应的字符串对象的引用，就直接返回该引用。</li>
 <li>如果字符串常量池中没有保存了对应的字符串对象的引用，那就在常量池中创建一个指向该字符串对象的引用并返回。</li>
 </ul>
-<h2 id="10-5、String-类型的变量和常量做“-”运算时发生了什么？"><a href="#10-5、String-类型的变量和常量做“-”运算时发生了什么？" class="headerlink" title="10.5、String 类型的变量和常量做“+”运算时发生了什么？"></a>10.5、String 类型的变量和常量做“+”运算时发生了什么？</h2><p>当字符串不加 final 关键字拼接时：</p>
+<h2 id="String-类型的变量和常量做“-”运算时发生了什么？"><a href="#String-类型的变量和常量做“-”运算时发生了什么？" class="headerlink" title="String 类型的变量和常量做“+”运算时发生了什么？"></a>String 类型的变量和常量做“+”运算时发生了什么？</h2><p>当字符串不加 final 关键字拼接时：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">str1</span> <span class="operator">=</span> <span class="string">&quot;str&quot;</span>;</span><br><span class="line"><span class="type">String</span> <span class="variable">str2</span> <span class="operator">=</span> <span class="string">&quot;ing&quot;</span>;</span><br><span class="line"><span class="type">String</span> <span class="variable">str3</span> <span class="operator">=</span> <span class="string">&quot;str&quot;</span> + <span class="string">&quot;ing&quot;</span>;</span><br><span class="line"><span class="type">String</span> <span class="variable">str4</span> <span class="operator">=</span> str1 + str2;</span><br><span class="line"><span class="type">String</span> <span class="variable">str5</span> <span class="operator">=</span> <span class="string">&quot;string&quot;</span>;</span><br><span class="line">System.out.println(str3 == str4);<span class="comment">//false</span></span><br><span class="line">System.out.println(str3 == str5);<span class="comment">//true</span></span><br><span class="line">System.out.println(str4 == str5);<span class="comment">//false</span></span><br></pre></td></tr></table></figure>
 
 <p><strong>执行结果分析</strong>：首先明确，<br><strong>对于编译期可以确定值的字符串，也就是常量字符串 ，jvm 会将其存入字符串常量池。并且，字符串常量拼接得到的字符串常量在编译阶段就已经被存放字符串常量池，这个得益于编译器的优化。</strong><br>因此，上述代码中，<strong>除了str4的其余字符串都已经存入到字符串常量池中</strong>；而str4涉及到两个字符串的拼接，底层会在堆中创建一个新的对象，所以str4和其他字符串的比较都为false。<br>不过，当字符串使用 **final **关键字声明之后，可以让编译器当做常量来处理：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> <span class="type">String</span> <span class="variable">str1</span> <span class="operator">=</span> <span class="string">&quot;str&quot;</span>;</span><br><span class="line"><span class="keyword">final</span> <span class="type">String</span> <span class="variable">str2</span> <span class="operator">=</span> <span class="string">&quot;ing&quot;</span>;</span><br><span class="line"><span class="comment">// 下面两个表达式其实是等价的</span></span><br><span class="line"><span class="type">String</span> <span class="variable">c</span> <span class="operator">=</span> <span class="string">&quot;str&quot;</span> + <span class="string">&quot;ing&quot;</span>;<span class="comment">// 常量池中的对象</span></span><br><span class="line"><span class="type">String</span> <span class="variable">d</span> <span class="operator">=</span> str1 + str2; <span class="comment">// 常量池中的对象</span></span><br><span class="line">System.out.println(c == d);<span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-<h1 id="11、异常"><a href="#11、异常" class="headerlink" title="11、异常"></a>11、异常</h1><p>Java 异常类层次结构图概览：<br><img src="/2024/08/02/%E5%9F%BA%E7%A1%80%E7%AF%87/4.png"></p>
-<h2 id="11-1、Exception-和-Error-的区别："><a href="#11-1、Exception-和-Error-的区别：" class="headerlink" title="11.1、Exception 和 Error 的区别："></a>11.1、Exception 和 Error 的区别：</h2><ul>
+<h1 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h1><p>Java 异常类层次结构图概览：<br><img src="/2024/08/02/%E5%9F%BA%E7%A1%80%E7%AF%87/4.png"></p>
+<h2 id="Exception-和-Error-的区别："><a href="#Exception-和-Error-的区别：" class="headerlink" title="Exception 和 Error 的区别："></a>Exception 和 Error 的区别：</h2><ul>
 <li>Exception：程序本身可以处理的异常，可以通过catch来获取，Exception又可以细分为受检查异常和不受检查异常。</li>
 <li>Error：属于程序无法处理的错误。</li>
 </ul>
-<h2 id="11-2、Checked-Exception-和-Unchecked-Exception的区别："><a href="#11-2、Checked-Exception-和-Unchecked-Exception的区别：" class="headerlink" title="11.2、Checked Exception 和 Unchecked Exception的区别："></a>11.2、Checked Exception 和 Unchecked Exception的区别：</h2><p><strong>Checked Exception：即受检查异常</strong>，<br>Java 代码在编译过程中，如果受检查异常没有被 catch或者throws 关键字处理的话，就没办法通过编译。除了RuntimeException及其子类以外，其他的Exception类及其子类都属于受检查异常 。常见的受检查异常有：IO 相关的异常、ClassNotFoundException、SQLException…。<br><strong>Unchecked Exception：即不受检查异常</strong>，<br>Java 代码在编译过程中 ，我们即使不处理不受检查异常也可以正常通过编译。RuntimeException 及其子类统称为不受检查异常，常见的有：</p>
+<h2 id="Checked-Exception-和-Unchecked-Exception的区别："><a href="#Checked-Exception-和-Unchecked-Exception的区别：" class="headerlink" title="Checked Exception 和 Unchecked Exception的区别："></a>Checked Exception 和 Unchecked Exception的区别：</h2><p><strong>Checked Exception：即受检查异常</strong>，<br>Java 代码在编译过程中，如果受检查异常没有被 catch或者throws 关键字处理的话，就没办法通过编译。除了RuntimeException及其子类以外，其他的Exception类及其子类都属于受检查异常 。常见的受检查异常有：IO 相关的异常、ClassNotFoundException、SQLException…。<br><strong>Unchecked Exception：即不受检查异常</strong>，<br>Java 代码在编译过程中 ，我们即使不处理不受检查异常也可以正常通过编译。RuntimeException 及其子类统称为不受检查异常，常见的有：</p>
 <ol>
 <li>NullPointerException(空指针错误)</li>
 <li>ArrayIndexOutOfBoundsException（数组越界错误）</li>
@@ -464,36 +723,36 @@
 <li>SecurityException （安全错误比如权限不够）</li>
 <li>UnsupportedOperationException(不支持的操作错误比如重复创建同一用户)</li>
 </ol>
-<h2 id="11-3、Throwable-类常用方法有哪些？"><a href="#11-3、Throwable-类常用方法有哪些？" class="headerlink" title="11.3、Throwable 类常用方法有哪些？"></a>11.3、Throwable 类常用方法有哪些？</h2><ul>
+<h2 id="Throwable-类常用方法有哪些？"><a href="#Throwable-类常用方法有哪些？" class="headerlink" title="Throwable 类常用方法有哪些？"></a>Throwable 类常用方法有哪些？</h2><ul>
 <li>String getMessage(): 返回异常发生时的简要描述。</li>
 <li>String toString(): 返回异常发生时的详细信息。</li>
 <li>String getLocalizedMessage(): 返回异常对象的本地化信息。使用 Throwable 的子类覆盖这个方法，可以生成本地化信息。如果子类没有覆盖该方法，则该方法返回的信息与 getMessage()返回的结果相同。</li>
 <li>void printStackTrace(): 在控制台上打印 Throwable 对象封装的异常信息。</li>
 </ul>
-<h2 id="11-4、try-catch-finally-如何使用？"><a href="#11-4、try-catch-finally-如何使用？" class="headerlink" title="11.4、try-catch-finally 如何使用？"></a>11.4、try-catch-finally 如何使用？</h2><ul>
+<h2 id="try-catch-finally-如何使用？"><a href="#try-catch-finally-如何使用？" class="headerlink" title="try-catch-finally 如何使用？"></a>try-catch-finally 如何使用？</h2><ul>
 <li>try块：用于捕获异常。其后可接零个或多个 catch 块，如果没有 catch 块，则必须跟一个 finally 块。</li>
 <li>catch块：用于处理 try 捕获到的异常。</li>
 <li>finally 块：无论是否捕获或处理异常，finally 块里的语句都会被执行。当在 try 块或 catch 块中遇到 return 语句时，finally 语句块将在方法返回之前被执行。</li>
 </ul>
-<h2 id="11-5、finally-中的代码一定会执行吗？"><a href="#11-5、finally-中的代码一定会执行吗？" class="headerlink" title="11.5、finally 中的代码一定会执行吗？"></a>11.5、finally 中的代码一定会执行吗？</h2><p>不一定，在某些情况下，finally 中的代码不会被执行，如：</p>
+<h2 id="finally-中的代码一定会执行吗？"><a href="#finally-中的代码一定会执行吗？" class="headerlink" title="finally 中的代码一定会执行吗？"></a>finally 中的代码一定会执行吗？</h2><p>不一定，在某些情况下，finally 中的代码不会被执行，如：</p>
 <ul>
 <li>在执行finally的代码之前虚拟机被终止了。</li>
 <li>程序所在的线程死亡。</li>
 <li>关闭CPU。</li>
 </ul>
-<h2 id="11-6、如何使用-try-with-resources-代替try-catch-finally？"><a href="#11-6、如何使用-try-with-resources-代替try-catch-finally？" class="headerlink" title="11.6、如何使用 try-with-resources 代替try-catch-finally？"></a>11.6、如何使用 try-with-resources 代替try-catch-finally？</h2><p>try-with-resources 是 Java 7 引入的一种语法结构，用于自动关闭实现了 AutoCloseable 接口的资源。它可以代替传统的 try-catch-finally 结构来处理资源的释放。<br><strong>优点：</strong></p>
+<h2 id="如何使用-try-with-resources-代替try-catch-finally？"><a href="#如何使用-try-with-resources-代替try-catch-finally？" class="headerlink" title="如何使用 try-with-resources 代替try-catch-finally？"></a>如何使用 try-with-resources 代替try-catch-finally？</h2><p>try-with-resources 是 Java 7 引入的一种语法结构，用于自动关闭实现了 AutoCloseable 接口的资源。它可以代替传统的 try-catch-finally 结构来处理资源的释放。<br><strong>优点：</strong></p>
 <ul>
 <li>简化了代码结构：不再需要显式地编写 finally 块来关闭资源。</li>
 <li>自动确保资源的正确关闭：无论是否发生异常，都会自动调用资源的 close() 方法进行关闭。</li>
 <li>支持多个资源同时关闭：可以在 try 后面的括号内声明多个资源，并按照声明顺序逆序关闭。</li>
 </ul>
-<h1 id="12、泛型的使用方式有哪几种？"><a href="#12、泛型的使用方式有哪几种？" class="headerlink" title="12、泛型的使用方式有哪几种？"></a>12、泛型的使用方式有哪几种？</h1><p>使用泛型，可以增加代码的灵活性和安全性，使得代码更加通用和易于维护。</p>
+<h1 id="泛型的使用方式有哪几种？"><a href="#泛型的使用方式有哪几种？" class="headerlink" title="泛型的使用方式有哪几种？"></a>泛型的使用方式有哪几种？</h1><p>使用泛型，可以增加代码的灵活性和安全性，使得代码更加通用和易于维护。</p>
 <ul>
 <li><strong>泛型类</strong>：定义一个类时，可以在类名后面加上尖括号&lt;&gt;，并在其中指定类型参数。</li>
 <li><strong>泛型接口</strong>：与泛型类类似，可以在接口名后面加上尖括号&lt;&gt;，并在其中指定类型参数。然后在实现该接口时，需要指定具体的类型。</li>
 <li><strong>泛型方法</strong>：即在方法返回值前面加上尖括号&lt;&gt;，并在其中指定类型参数。</li>
 </ul>
-<h1 id="13、反射"><a href="#13、反射" class="headerlink" title="13、反射"></a>13、反射</h1><h2 id="13-1、反射的使用："><a href="#13-1、反射的使用：" class="headerlink" title="13.1、反射的使用："></a>13.1、反射的使用：</h2><p><strong>反射是java语言的一个特性，它允程序在运行时动态获取和调用类的属性和方法。</strong><br>要使用反射，需要先获取类的class对象(字节码对象)，有三种方式：</p>
+<h1 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h1><h2 id="反射的使用："><a href="#反射的使用：" class="headerlink" title="反射的使用："></a>反射的使用：</h2><p><strong>反射是java语言的一个特性，它允程序在运行时动态获取和调用类的属性和方法。</strong><br>要使用反射，需要先获取类的class对象(字节码对象)，有三种方式：</p>
 <ul>
 <li>Class.forName(“全类名”);</li>
 <li>类名.class;</li>
@@ -505,9 +764,9 @@
 <li>获取类成员变量：getFields()等方法。</li>
 <li>获取类成员方法：getMethods()等方法。</li>
 </ul>
-<h2 id="13-2、反射的应用场景："><a href="#13-2、反射的应用场景：" class="headerlink" title="13.2、反射的应用场景："></a>13.2、反射的应用场景：</h2><p>Spring 框架的 IOC（动态加载管理 Bean）、加载数据库驱动：Class.forName(“com.mysql.cj.jdbc.Driver”);、IDEA的方法提醒都需要用到反射机制。</p>
-<h1 id="14、注解的解析方法有哪几种？"><a href="#14、注解的解析方法有哪几种？" class="headerlink" title="14、注解的解析方法有哪几种？"></a>14、注解的解析方法有哪几种？</h1><p>注解只有被解析之后才会生效，常见的解析方法有两种：<br><strong>编译期直接扫描：</strong><br>编译器在编译 Java 代码的时候扫描对应的注解并处理，比如某个方法使用<a href="/Override">@Override </a> 注解，编译器在编译的时候就会检测当前的方法是否重写了父类对应的方法。<br><strong>运行期通过反射处理：</strong><br>像框架中自带的注解(比如 Spring 框架的 @Value、@Component)都是通过反射来进行处理的。</p>
-<h1 id="15、什么是序列化-什么是反序列化"><a href="#15、什么是序列化-什么是反序列化" class="headerlink" title="15、什么是序列化?什么是反序列化?"></a>15、什么是序列化?什么是反序列化?</h1><p>如果我们需要持久化 Java 对象比如将 Java 对象保存在文件中，或者在网络传输 Java 对象，这些场景都需要用到序列化。<br>简单来说：</p>
+<h2 id="反射的应用场景："><a href="#反射的应用场景：" class="headerlink" title="反射的应用场景："></a>反射的应用场景：</h2><p>Spring 框架的 IOC（动态加载管理 Bean）、加载数据库驱动：Class.forName(“com.mysql.cj.jdbc.Driver”);、IDEA的方法提醒都需要用到反射机制。</p>
+<h1 id="注解的解析方法有哪几种？"><a href="#注解的解析方法有哪几种？" class="headerlink" title="注解的解析方法有哪几种？"></a>注解的解析方法有哪几种？</h1><p>注解只有被解析之后才会生效，常见的解析方法有两种：<br><strong>编译期直接扫描：</strong><br>编译器在编译 Java 代码的时候扫描对应的注解并处理，比如某个方法使用<a href="/Override">@Override </a> 注解，编译器在编译的时候就会检测当前的方法是否重写了父类对应的方法。<br><strong>运行期通过反射处理：</strong><br>像框架中自带的注解(比如 Spring 框架的 @Value、@Component)都是通过反射来进行处理的。</p>
+<h1 id="什么是序列化-什么是反序列化"><a href="#什么是序列化-什么是反序列化" class="headerlink" title="什么是序列化?什么是反序列化?"></a>什么是序列化?什么是反序列化?</h1><p>如果我们需要持久化 Java 对象比如将 Java 对象保存在文件中，或者在网络传输 Java 对象，这些场景都需要用到序列化。<br>简单来说：</p>
 <ul>
 <li>序列化：将数据结构或对象转换成二进制字节流的过程。</li>
 <li>反序列化：将在序列化过程中所生成的二进制字节流转换成数据结构或者对象的过程。</li>
@@ -516,7 +775,7 @@
 <blockquote>
 <p>transient 只能修饰变量，不能修饰类和方法。<br>static 变量不属于任何对象(Object)，所以无论有无 transient修饰，均不会被序列化。</p>
 </blockquote>
-<h1 id="16、I-O流"><a href="#16、I-O流" class="headerlink" title="16、I&#x2F;O流"></a>16、I&#x2F;O流</h1><p>I&#x2F;O即Input&#x2F;Output，数据输入到计算机内存的过程即输入，反之输出到外部存储（比如数据库，文件，远程主机）的过程即输出。数据传输过程类似于水流，因此称为 IO 流。IO 流在 Java 中分为输入流和输出流，而根据数据的处理方式又分为字节流和字符流。<br>Java I&#x2F;O流中有四个抽象类基类，其架构如下图：<br><img src="/2024/08/02/%E5%9F%BA%E7%A1%80%E7%AF%87/6.png"><br><strong>字节流</strong>适合传输所有类型的文件，如音频、视频、图片、文本文件的复制转移等。<strong>字符流</strong>只适合传输纯文本文件，如txt、java文件等。<br><strong>字节缓冲流：</strong><br>    字节流在调用 write(int b) 和 read() 方法的时候，一次只能读取一个字节。由于字节缓冲流内部有缓冲区（字节数组），因此，字节缓冲流会先将读取到的字节存放在缓存区，大幅减少 IO 次数，提高读取效率。</p>
+<h1 id="I-O流"><a href="#I-O流" class="headerlink" title="I&#x2F;O流"></a>I&#x2F;O流</h1><p>I&#x2F;O即Input&#x2F;Output，数据输入到计算机内存的过程即输入，反之输出到外部存储（比如数据库，文件，远程主机）的过程即输出。数据传输过程类似于水流，因此称为 IO 流。IO 流在 Java 中分为输入流和输出流，而根据数据的处理方式又分为字节流和字符流。<br>Java I&#x2F;O流中有四个抽象类基类，其架构如下图：<br><img src="/2024/08/02/%E5%9F%BA%E7%A1%80%E7%AF%87/6.png"><br><strong>字节流</strong>适合传输所有类型的文件，如音频、视频、图片、文本文件的复制转移等。<strong>字符流</strong>只适合传输纯文本文件，如txt、java文件等。<br><strong>字节缓冲流：</strong><br>    字节流在调用 write(int b) 和 read() 方法的时候，一次只能读取一个字节。由于字节缓冲流内部有缓冲区（字节数组），因此，字节缓冲流会先将读取到的字节存放在缓存区，大幅减少 IO 次数，提高读取效率。</p>
 <p><strong>Java 中 3 种常见 IO 模型：</strong></p>
 <ul>
 <li><strong>BIO (Blocking I&#x2F;O)：</strong>同步阻塞 IO 模型，就是当应用发起读取数据申请时，在内核数据没有准备好之前，该应用会一直处于等待数据状态，直到内核把数据准备好了交给应用才结束。cpu空闲时间较多。</li>
@@ -608,7 +867,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-count">3</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -650,7 +909,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共7.3k字</span>
+  <span class="post-count">博客全站共11k字</span>
 </div>
 
 
