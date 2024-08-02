@@ -22,16 +22,16 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="集合总体框架图：      一、单列集合汇总1、List, Set, Queue, Map 的区别 List：底层基于object[]数组，存储的元素有序、可重复。 Set：底层基于HashMap实现，存储的元素无序，不可重复。 Queue：单端队列，存储的元素有序、可重复。 Map：使用键值对（key-value）存储，key 是无序的、不可重复的。  2、HashSet、LinkedHa">
+  <meta name="description" content="集合总体框架图：      单列集合汇总List, Set, Queue, Map 的区别 List：底层基于object[]数组，存储的元素有序、可重复。 Set：底层基于HashMap实现，存储的元素无序，不可重复。 Queue：单端队列，存储的元素有序、可重复。 Map：使用键值对（key-value）存储，key 是无序的、不可重复的。  HashSet、LinkedHashSet">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java集合">
 <meta property="og:url" content="http://example.com/2024/08/02/%E9%9B%86%E5%90%88%E7%AF%87/index.html">
 <meta property="og:site_name" content="Michael-Jay">
-<meta property="og:description" content="集合总体框架图：      一、单列集合汇总1、List, Set, Queue, Map 的区别 List：底层基于object[]数组，存储的元素有序、可重复。 Set：底层基于HashMap实现，存储的元素无序，不可重复。 Queue：单端队列，存储的元素有序、可重复。 Map：使用键值对（key-value）存储，key 是无序的、不可重复的。  2、HashSet、LinkedHa">
+<meta property="og:description" content="集合总体框架图：      单列集合汇总List, Set, Queue, Map 的区别 List：底层基于object[]数组，存储的元素有序、可重复。 Set：底层基于HashMap实现，存储的元素无序，不可重复。 Queue：单端队列，存储的元素有序、可重复。 Map：使用键值对（key-value）存储，key 是无序的、不可重复的。  HashSet、LinkedHashSet">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/2024/08/02/%E9%9B%86%E5%90%88%E7%AF%87/1.png">
 <meta property="article:published_time" content="2024-08-02T08:54:00.000Z">
-<meta property="article:modified_time" content="2024-08-02T08:57:32.960Z">
+<meta property="article:modified_time" content="2024-08-02T09:04:59.385Z">
 <meta property="article:author" content="吴华杰">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/2024/08/02/%E9%9B%86%E5%90%88%E7%AF%87/1.png">
@@ -185,7 +185,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2024-08-02 16:54:00 / 修改时间：16:57:32" itemprop="dateCreated datePublished" datetime="2024-08-02T16:54:00+08:00">2024-08-02</time>
+              <time title="创建时间：2024-08-02 16:54:00 / 修改时间：17:04:59" itemprop="dateCreated datePublished" datetime="2024-08-02T16:54:00+08:00">2024-08-02</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -220,25 +220,25 @@
 </div>
 
 <p><img src="/2024/08/02/%E9%9B%86%E5%90%88%E7%AF%87/1.png"></p>
-<h1 id="一、单列集合汇总"><a href="#一、单列集合汇总" class="headerlink" title="一、单列集合汇总"></a>一、单列集合汇总</h1><h2 id="1、List-Set-Queue-Map-的区别"><a href="#1、List-Set-Queue-Map-的区别" class="headerlink" title="1、List, Set, Queue, Map 的区别"></a>1、List, Set, Queue, Map 的区别</h2><ul>
+<h1 id="单列集合汇总"><a href="#单列集合汇总" class="headerlink" title="单列集合汇总"></a>单列集合汇总</h1><h2 id="List-Set-Queue-Map-的区别"><a href="#List-Set-Queue-Map-的区别" class="headerlink" title="List, Set, Queue, Map 的区别"></a>List, Set, Queue, Map 的区别</h2><ul>
 <li>List：底层基于object[]数组，存储的元素有序、可重复。</li>
 <li>Set：底层基于HashMap实现，存储的元素无序，不可重复。</li>
 <li>Queue：单端队列，存储的元素有序、可重复。</li>
 <li>Map：使用键值对（key-value）存储，key 是无序的、不可重复的。</li>
 </ul>
-<h2 id="2、HashSet、LinkedHashSet-和-TreeSet-的异同"><a href="#2、HashSet、LinkedHashSet-和-TreeSet-的异同" class="headerlink" title="2、HashSet、LinkedHashSet 和 TreeSet 的异同"></a>2、HashSet、LinkedHashSet 和 TreeSet 的异同</h2><p><strong>三者都是Set 接口的实现类，都能保证元素唯一，并且都不是线程安全的。</strong><br>三者主要区别在于底层实现的数据结构不同：</p>
+<h2 id="HashSet、LinkedHashSet-和-TreeSet-的异同"><a href="#HashSet、LinkedHashSet-和-TreeSet-的异同" class="headerlink" title="HashSet、LinkedHashSet 和 TreeSet 的异同"></a>HashSet、LinkedHashSet 和 TreeSet 的异同</h2><p><strong>三者都是Set 接口的实现类，都能保证元素唯一，并且都不是线程安全的。</strong><br>三者主要区别在于底层实现的数据结构不同：</p>
 <ul>
 <li>HashSet底层基于哈希表，元素无序，不可重复。</li>
 <li>LinkedHashSet底层基于链表和哈希表，元素具有唯一性和有序性(元素顺序满足FIFO)</li>
 <li>TreeSet底层基于红黑树，支持对元素自定义排序规则。</li>
 </ul>
-<h2 id="3、ArrayList-和-Array（数组）的区别？"><a href="#3、ArrayList-和-Array（数组）的区别？" class="headerlink" title="3、ArrayList 和 Array（数组）的区别？"></a>3、ArrayList 和 Array（数组）的区别？</h2><ul>
+<h2 id="ArrayList-和-Array（数组）的区别？"><a href="#ArrayList-和-Array（数组）的区别？" class="headerlink" title="ArrayList 和 Array（数组）的区别？"></a>ArrayList 和 Array（数组）的区别？</h2><ul>
 <li>Array的大小固定；ArrayList可以动态扩容。</li>
 <li>ArrayList允许使用泛型确保类型安全；Array不行。</li>
 <li>ArrayList具备基本的增删改查操作；Array只能下标进行查询，没有动态增删改元素的能力。</li>
 <li>Array既可以存储基本数据类型也可以存储对象；ArrayList只能存储对象，对于基本数据类型，需要将其转化为对应的包装类。</li>
 </ul>
-<h2 id="4、ArrayList-与-LinkedList-区别-（⭐）"><a href="#4、ArrayList-与-LinkedList-区别-（⭐）" class="headerlink" title="4、ArrayList 与 LinkedList 区别?（⭐）"></a>4、ArrayList 与 LinkedList 区别?（⭐）</h2><ul>
+<h2 id="ArrayList-与-LinkedList-区别-（⭐）"><a href="#ArrayList-与-LinkedList-区别-（⭐）" class="headerlink" title="ArrayList 与 LinkedList 区别?（⭐）"></a>ArrayList 与 LinkedList 区别?（⭐）</h2><ul>
 <li><strong>底层数据结构</strong>：ArrayList底层使用object[]数组，LinkedList底层使用双向链表。</li>
 <li><strong>是否支持快速随机访问</strong>：ArrayList支持，LinkedList不支持。</li>
 <li><strong>插入和删除是否受元素位置的影响</strong>：<ul>
@@ -247,7 +247,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="5、ArrayList底层及扩容机制（⭐）"><a href="#5、ArrayList底层及扩容机制（⭐）" class="headerlink" title="5、ArrayList底层及扩容机制（⭐）"></a>5、ArrayList底层及扩容机制（⭐）</h2><p><strong>ArrayList三个构造函数：</strong></p>
+<h2 id="ArrayList底层及扩容机制（⭐）"><a href="#ArrayList底层及扩容机制（⭐）" class="headerlink" title="ArrayList底层及扩容机制（⭐）"></a>ArrayList底层及扩容机制（⭐）</h2><p><strong>ArrayList三个构造函数：</strong></p>
 <ul>
 <li>ArrayList() 默认创建长度为0的数组。</li>
 <li>ArrayList(int initialCapacity) 创建指定容量的数组。</li>
@@ -271,7 +271,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="6、Comparable-和-Comparator-的区别"><a href="#6、Comparable-和-Comparator-的区别" class="headerlink" title="6、Comparable 和 Comparator 的区别"></a>6、Comparable 和 Comparator 的区别</h2><pre><code>  Comparable和Comparator都是接口，都可以用来进行比较、排序，可以将Comparable理解为“内部比较器”，Comparator理解为“外部比较器”。
+<h2 id="Comparable-和-Comparator-的区别"><a href="#Comparable-和-Comparator-的区别" class="headerlink" title="Comparable 和 Comparator 的区别"></a>Comparable 和 Comparator 的区别</h2><pre><code>  Comparable和Comparator都是接口，都可以用来进行比较、排序，可以将Comparable理解为“内部比较器”，Comparator理解为“外部比较器”。
 </code></pre>
 <ul>
 <li><strong>实现方式：</strong><ul>
@@ -286,8 +286,8 @@
 </li>
 </ul>
 <p>具体参考这篇文章<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45559536/article/details/106091870">https://blog.csdn.net/qq_45559536&#x2F;article&#x2F;details&#x2F;106091870</a></p>
-<h2 id="7、ArrayList-list-new-ArrayList-10-中的list扩容几次"><a href="#7、ArrayList-list-new-ArrayList-10-中的list扩容几次" class="headerlink" title="7、ArrayList list&#x3D;new ArrayList(10) 中的list扩容几次"></a>7、ArrayList list&#x3D;new ArrayList(10) 中的list扩容几次</h2><p><strong>该语句声明和实例了一个 ArrayList，指定了容量为 10，未进行扩容。</strong></p>
-<h2 id="8、如何实现数组和List之间的转换"><a href="#8、如何实现数组和List之间的转换" class="headerlink" title="8、如何实现数组和List之间的转换"></a>8、如何实现数组和List之间的转换</h2><ul>
+<h2 id="ArrayList-list-new-ArrayList-10-中的list扩容几次"><a href="#ArrayList-list-new-ArrayList-10-中的list扩容几次" class="headerlink" title="ArrayList list&#x3D;new ArrayList(10) 中的list扩容几次"></a>ArrayList list&#x3D;new ArrayList(10) 中的list扩容几次</h2><p><strong>该语句声明和实例了一个 ArrayList，指定了容量为 10，未进行扩容。</strong></p>
+<h2 id="如何实现数组和List之间的转换"><a href="#如何实现数组和List之间的转换" class="headerlink" title="如何实现数组和List之间的转换"></a>如何实现数组和List之间的转换</h2><ul>
 <li>数组转List：使用Arrays工具类的asList方法。</li>
 <li>List转数组：使用List的toArray方法。</li>
 </ul>
@@ -299,7 +299,7 @@
 <ul>
 <li><strong>不受影响，调用toArray方法之后，底层会进行数组的拷贝，和原来List的元素就没关系了。</strong></li>
 </ul>
-<h1 id="二、双列集合汇总"><a href="#二、双列集合汇总" class="headerlink" title="二、双列集合汇总"></a>二、双列集合汇总</h1><h2 id="1、HashMap底层原理（⭐）"><a href="#1、HashMap底层原理（⭐）" class="headerlink" title="1、HashMap底层原理（⭐）"></a>1、HashMap底层原理（⭐）</h2><p>   关键点：<strong>①底层数据结构 ②工作方式</strong><br>        HashMap是一个集合了查询效率和增删效率的容器，内部存的都是一个个键值对，可以通过访问键值对其进行访问和修改。</p>
+<h1 id="双列集合汇总"><a href="#双列集合汇总" class="headerlink" title="双列集合汇总"></a>双列集合汇总</h1><h2 id="HashMap底层原理（⭐）"><a href="#HashMap底层原理（⭐）" class="headerlink" title="HashMap底层原理（⭐）"></a>HashMap底层原理（⭐）</h2><p>   关键点：<strong>①底层数据结构 ②工作方式</strong><br>        HashMap是一个集合了查询效率和增删效率的容器，内部存的都是一个个键值对，可以通过访问键值对其进行访问和修改。</p>
 <ul>
 <li>在jdk1.8以前：<ul>
 <li>HashMap底层采用<strong>数组+链表</strong>的结构。</li>
@@ -315,11 +315,11 @@
 </ul>
 </li>
 </ul>
-<h2 id="2、HashMap-中-hash-值的作用？"><a href="#2、HashMap-中-hash-值的作用？" class="headerlink" title="2、HashMap 中 hash 值的作用？"></a>2、HashMap 中 hash 值的作用？</h2><pre><code> **HashMap 中的 hash 值是由hash函数产生的，所有键值对存放的位置都是由 hash值和(length-1) 与运算得到的(length必须为2的幂次方，此时与运算等价于对length-1取模)。因此，简单来说hash值就是用来定位某键值对在HashMap中存放的位置的。**
+<h2 id="HashMap-中-hash-值的作用？"><a href="#HashMap-中-hash-值的作用？" class="headerlink" title="HashMap 中 hash 值的作用？"></a>HashMap 中 hash 值的作用？</h2><pre><code> **HashMap 中的 hash 值是由hash函数产生的，所有键值对存放的位置都是由 hash值和(length-1) 与运算得到的(length必须为2的幂次方，此时与运算等价于对length-1取模)。因此，简单来说hash值就是用来定位某键值对在HashMap中存放的位置的。**
 </code></pre>
-<h2 id="3、HashMap-中的数组长度为什么必须是-2-的幂次方？"><a href="#3、HashMap-中的数组长度为什么必须是-2-的幂次方？" class="headerlink" title="3、HashMap 中的数组长度为什么必须是 2 的幂次方？"></a>3、HashMap 中的数组长度为什么必须是 2 的幂次方？</h2><p> <strong>length</strong>为2的幂次方可以确保**(length-1)<strong>的二进制低位都是1，此时</strong>hash&amp;(length-1) **等价于 <strong>hash%(length-1)</strong> ，并且位运算的效率较高。</p>
-<h2 id="4、JDK-1-7中HashMap-为什么会形成死循环？"><a href="#4、JDK-1-7中HashMap-为什么会形成死循环？" class="headerlink" title="4、JDK 1.7中HashMap 为什么会形成死循环？"></a>4、JDK 1.7中HashMap 为什么会形成死循环？</h2><p>JDK 1.7中在链表中添加元素的方式是<strong>头插法</strong>，<strong>当两个线程同时对HashMap进行扩容操作时，可能会形成环形链表，产生死循环</strong>。JDK 1.7中采用了<strong>尾插法</strong>来避免链表导致，从而避免产生环形链表。<br>        具体来说：HashMap扩容时，会将旧HashMap的数据移植到 扩容的新HashMap中，而由于链表的插入方式是头插法，a-&gt;b-&gt;c 会变成 c-&gt;b-&gt;a ，旧线程仍然认为a节点后面是b，而b节点后面已经是a了，这里就会产生死循环。</p>
-<h2 id="5、HashMap和Hashtable的区别"><a href="#5、HashMap和Hashtable的区别" class="headerlink" title="5、HashMap和Hashtable的区别"></a>5、HashMap和Hashtable的区别</h2><ul>
+<h2 id="HashMap-中的数组长度为什么必须是-2-的幂次方？"><a href="#HashMap-中的数组长度为什么必须是-2-的幂次方？" class="headerlink" title="HashMap 中的数组长度为什么必须是 2 的幂次方？"></a>HashMap 中的数组长度为什么必须是 2 的幂次方？</h2><p> <strong>length</strong>为2的幂次方可以确保**(length-1)<strong>的二进制低位都是1，此时</strong>hash&amp;(length-1) **等价于 <strong>hash%(length-1)</strong> ，并且位运算的效率较高。</p>
+<h2 id="JDK-1-7中HashMap-为什么会形成死循环？"><a href="#JDK-1-7中HashMap-为什么会形成死循环？" class="headerlink" title="JDK 1.7中HashMap 为什么会形成死循环？"></a>JDK 1.7中HashMap 为什么会形成死循环？</h2><p>JDK 1.7中在链表中添加元素的方式是<strong>头插法</strong>，<strong>当两个线程同时对HashMap进行扩容操作时，可能会形成环形链表，产生死循环</strong>。JDK 1.7中采用了<strong>尾插法</strong>来避免链表导致，从而避免产生环形链表。<br>        具体来说：HashMap扩容时，会将旧HashMap的数据移植到 扩容的新HashMap中，而由于链表的插入方式是头插法，a-&gt;b-&gt;c 会变成 c-&gt;b-&gt;a ，旧线程仍然认为a节点后面是b，而b节点后面已经是a了，这里就会产生死循环。</p>
+<h2 id="HashMap和Hashtable的区别"><a href="#HashMap和Hashtable的区别" class="headerlink" title="HashMap和Hashtable的区别"></a>HashMap和Hashtable的区别</h2><ul>
 <li><p><strong>线程安全与效率：</strong></p>
 <ul>
 <li>HashMap线程不安全，但效率相对较高。</li>
@@ -359,9 +359,9 @@
 </ul>
 </li>
 </ul>
-<h2 id="6、HashSet-如何检查重复"><a href="#6、HashSet-如何检查重复" class="headerlink" title="6、HashSet 如何检查重复"></a>6、HashSet 如何检查重复</h2><p> <strong>当我们将对象加入HashSet时，HashSet会计算该对象的hashcode值，并与HashSet中其他对象作比较：若没有hashcode相同的对象，则该对象不重复，允许加入；若有hashcode相同的对象，还需要使用equals()方法检查两对象是否真的相同，如果相同则不允许加入该对象。</strong><br>ps：<strong>hashcode是某个对象的哈希值，相同对象的hashcode值一定相同，不同对象的hashcode值也有可能相同(即哈希冲突)。</strong></p>
-<h2 id="7、HashMap-为什么线程不安全？"><a href="#7、HashMap-为什么线程不安全？" class="headerlink" title="7、HashMap 为什么线程不安全？"></a>7、HashMap 为什么线程不安全？</h2><p>jdk1.8之前HashMap存在<strong>死循环</strong>和<strong>数据丢失</strong>的问题。而数据丢失是所有版本都存在的问题，主要是<strong>由于并发情况下多线程同时进行put操作，并发生了哈希冲突，此时线程A在判断完哈希冲突之后阻塞了，线程B将数据插入，然后线程B苏醒之后就会将线程A的数据覆盖掉。</strong></p>
-<h2 id="8、HashMap-常见的遍历方式"><a href="#8、HashMap-常见的遍历方式" class="headerlink" title="8、HashMap 常见的遍历方式?"></a>8、HashMap 常见的遍历方式?</h2><p>主要有四种遍历方式：</p>
+<h2 id="HashSet-如何检查重复"><a href="#HashSet-如何检查重复" class="headerlink" title="HashSet 如何检查重复"></a>HashSet 如何检查重复</h2><p> <strong>当我们将对象加入HashSet时，HashSet会计算该对象的hashcode值，并与HashSet中其他对象作比较：若没有hashcode相同的对象，则该对象不重复，允许加入；若有hashcode相同的对象，还需要使用equals()方法检查两对象是否真的相同，如果相同则不允许加入该对象。</strong><br>ps：<strong>hashcode是某个对象的哈希值，相同对象的hashcode值一定相同，不同对象的hashcode值也有可能相同(即哈希冲突)。</strong></p>
+<h2 id="HashMap-为什么线程不安全？"><a href="#HashMap-为什么线程不安全？" class="headerlink" title="HashMap 为什么线程不安全？"></a>HashMap 为什么线程不安全？</h2><p>jdk1.8之前HashMap存在<strong>死循环</strong>和<strong>数据丢失</strong>的问题。而数据丢失是所有版本都存在的问题，主要是<strong>由于并发情况下多线程同时进行put操作，并发生了哈希冲突，此时线程A在判断完哈希冲突之后阻塞了，线程B将数据插入，然后线程B苏醒之后就会将线程A的数据覆盖掉。</strong></p>
+<h2 id="HashMap-常见的遍历方式"><a href="#HashMap-常见的遍历方式" class="headerlink" title="HashMap 常见的遍历方式?"></a>HashMap 常见的遍历方式?</h2><p>主要有四种遍历方式：</p>
 <ul>
 <li><p>使用迭代器（Iterator）的方式进行遍历。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//使用迭代器（Iterator）EntrySet 的方式进行遍历.</span></span><br><span class="line">Iterator&lt;Map.Entry&lt;Integer, String&gt;&gt; iterator = map.entrySet().iterator();</span><br><span class="line"><span class="keyword">while</span>(iterator.hasNext())&#123;</span><br><span class="line">    Map.Entry&lt;Integer, String&gt; entry = iterator.next();</span><br><span class="line">    System.out.println(entry.getKey());</span><br><span class="line">    System.out.println(entry.getValue());</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">//使用迭代器（Iterator）KeySet 的方式进行遍历；</span></span><br><span class="line">Iterator&lt;Integer&gt; iterator1 = map.keySet().iterator();</span><br><span class="line"><span class="keyword">while</span> (iterator1.hasNext())&#123;</span><br><span class="line">    <span class="type">Integer</span> <span class="variable">next</span> <span class="operator">=</span> iterator1.next();</span><br><span class="line">    System.out.println(next);</span><br><span class="line">    System.out.println(map.get(next));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -377,18 +377,18 @@
 <p>从性能上来说，<strong>迭代器是遍历是最快的，使用entryset比使用keyset要快</strong>。</p>
 </li>
 </ul>
-<h2 id="9、ConcurrentHashMap-和-Hashtable-的区别（⭐）"><a href="#9、ConcurrentHashMap-和-Hashtable-的区别（⭐）" class="headerlink" title="9、ConcurrentHashMap 和 Hashtable 的区别（⭐）"></a>9、ConcurrentHashMap 和 Hashtable 的区别（⭐）</h2><p><strong>实现线程安全的方式不一样：</strong></p>
+<h2 id="ConcurrentHashMap-和-Hashtable-的区别（⭐）"><a href="#ConcurrentHashMap-和-Hashtable-的区别（⭐）" class="headerlink" title="ConcurrentHashMap 和 Hashtable 的区别（⭐）"></a>ConcurrentHashMap 和 Hashtable 的区别（⭐）</h2><p><strong>实现线程安全的方式不一样：</strong></p>
 <ul>
 <li>Hashtable几乎在所有添加、删除等方法都加了<strong>synchronized同步锁</strong>，相当于给哈希表加了一个大锁，<strong>多线程访问的时候，大量线程会被阻塞，效率低下</strong>。</li>
 <li>jdk1.8之前的ConcurrentHashMap采用的是<strong>分段锁</strong>的思想，将哈希数组切割成若干个<strong>segment</strong>，每个<strong>segment</strong>包含n个键值对。 每一个segment都进行加锁，不同的segment不会有锁竞争，因此比Hashtable效率要高。</li>
 <li>jdk1.8之后的ConcurrentHashMap锁粒度更细，没有采用分段锁的策略，而是<strong>在元素的节点上采用 CAS + synchronized 操作来保证并发的安全性</strong>，仅在链表或红黑树的首节点进行加锁，只要hash值不冲突，就不会产生并发，大大提高了效率。</li>
 </ul>
-<h2 id="10、JDK-1-7-和-JDK-1-8-的-ConcurrentHashMap-实现有何不同？"><a href="#10、JDK-1-7-和-JDK-1-8-的-ConcurrentHashMap-实现有何不同？" class="headerlink" title="10、JDK 1.7 和 JDK 1.8 的 ConcurrentHashMap 实现有何不同？"></a>10、JDK 1.7 和 JDK 1.8 的 ConcurrentHashMap 实现有何不同？</h2><ul>
+<h2 id="JDK-1-7-和-JDK-1-8-的-ConcurrentHashMap-实现有何不同？"><a href="#JDK-1-7-和-JDK-1-8-的-ConcurrentHashMap-实现有何不同？" class="headerlink" title="JDK 1.7 和 JDK 1.8 的 ConcurrentHashMap 实现有何不同？"></a>JDK 1.7 和 JDK 1.8 的 ConcurrentHashMap 实现有何不同？</h2><ul>
 <li><strong>线程安全实现方式</strong>：JDK 1.7采用分段锁，JDK 1.8锁粒度更细，对每个链表或红黑树的头节点加锁。</li>
 <li><strong>Hash 碰撞解决方法</strong>：JDK 1.7采用拉链法(头插法)，JDK 1.8采用拉链法(尾插法)+红黑树。</li>
 <li><strong>并发度</strong>：JDK 1.7 最大并发度是 Segment 的个数，默认是 16。JDK 1.8 最大并发度是 Node 数组的大小，并发度更大。</li>
 </ul>
-<h2 id="11、HashMap的put的具体流程。"><a href="#11、HashMap的put的具体流程。" class="headerlink" title="11、HashMap的put的具体流程。"></a>11、HashMap的put的具体流程。</h2><ul>
+<h2 id="HashMap的put的具体流程。"><a href="#HashMap的put的具体流程。" class="headerlink" title="HashMap的put的具体流程。"></a>HashMap的put的具体流程。</h2><ul>
 <li>判断键值对数组是否为空，是的话就执行resize()方法进行扩容。</li>
 <li>根据键值key计算hash值得到数组索引。</li>
 <li>判断索引位置是否为空，是的话直接新建节点进行添加；不为空的话，判断索引位置的首个元素是否和key一样，一样就直接覆盖，不一样则：<ul>
@@ -398,7 +398,7 @@
 </li>
 <li>最后插入成功后，判断存在的键值对数量是否超过阈值，超过了需要进行扩容。</li>
 </ul>
-<h2 id="12、HashMap的扩容机制"><a href="#12、HashMap的扩容机制" class="headerlink" title="12、HashMap的扩容机制"></a>12、HashMap的扩容机制</h2><ul>
+<h2 id="HashMap的扩容机制"><a href="#HashMap的扩容机制" class="headerlink" title="HashMap的扩容机制"></a>HashMap的扩容机制</h2><ul>
 <li>在初始化或元素达到阈值时，需要调用resize函数进行扩容，第一次数组长度初始化为16，扩容阈值为12(数组长度*0.75)，每次扩容扩大为原来的两倍。</li>
 <li>扩容之后会创建一个新数组，遍历老数组，将元素移到新数组中：<ul>
 <li>当前节点没有哈希冲突，直接对新数组的长度做模运算，插入当前节点。</li>
@@ -407,12 +407,12 @@
 </ul>
 </li>
 </ul>
-<h2 id="13、hashMap的寻址算法"><a href="#13、hashMap的寻址算法" class="headerlink" title="13、hashMap的寻址算法"></a>13、hashMap的寻址算法</h2><ul>
+<h2 id="hashMap的寻址算法"><a href="#hashMap的寻址算法" class="headerlink" title="hashMap的寻址算法"></a>hashMap的寻址算法</h2><ul>
 <li>先计算对象的<strong>哈希值</strong>，再进行<strong>二次哈希</strong>，即将哈希值右移16位再进行<strong>异或运算</strong>，可以<strong>使哈希分布更加均匀</strong>。</li>
 <li>最后使用与运算**( (capacity-1)  &amp; hash))**得到对象的索引。</li>
 </ul>
-<h2 id="14、LinkedHashMap-使用场景"><a href="#14、LinkedHashMap-使用场景" class="headerlink" title="14、LinkedHashMap 使用场景"></a>14、LinkedHashMap 使用场景</h2><p>HashMap有一个问题，就是<strong>迭代HashMap的顺序并不是HashMap放置的顺序</strong>，也就是无序。HashMap的这一缺点往往会带来困扰，因为有些场景，我们期待一个有序的Map。<br>LinkedHashMap 继承自 HashMap，实现了 Map 接口。<strong>它在HashMap的基础上维护了一个双向链表，并且按照插入顺序或者访问顺序来迭代元素。既保证了HashMap的快速访问性能，又提供了顺序访问的能力，因此在某些场景下非常有用。</strong><br>比如我实习期间有一个功能接口是要返回一个 {key &#x3D; 日期，value &#x3D; 发电量} 的 map 给前端，这些键值对是按照时间顺序添加进去的，我们希望它们在 map 中也是按照我们添加的顺序存放，所以这个场景下可以使用 **LinkedHashMap **来存。</p>
-<h1 id="三、其他"><a href="#三、其他" class="headerlink" title="三、其他"></a>三、其他</h1><h2 id="1、为什么数组的索引从0开始？"><a href="#1、为什么数组的索引从0开始？" class="headerlink" title="1、为什么数组的索引从0开始？"></a>1、为什么数组的索引从0开始？</h2><ul>
+<h2 id="LinkedHashMap-使用场景"><a href="#LinkedHashMap-使用场景" class="headerlink" title="LinkedHashMap 使用场景"></a>LinkedHashMap 使用场景</h2><p>HashMap有一个问题，就是<strong>迭代HashMap的顺序并不是HashMap放置的顺序</strong>，也就是无序。HashMap的这一缺点往往会带来困扰，因为有些场景，我们期待一个有序的Map。<br>LinkedHashMap 继承自 HashMap，实现了 Map 接口。<strong>它在HashMap的基础上维护了一个双向链表，并且按照插入顺序或者访问顺序来迭代元素。既保证了HashMap的快速访问性能，又提供了顺序访问的能力，因此在某些场景下非常有用。</strong><br>比如我实习期间有一个功能接口是要返回一个 {key &#x3D; 日期，value &#x3D; 发电量} 的 map 给前端，这些键值对是按照时间顺序添加进去的，我们希望它们在 map 中也是按照我们添加的顺序存放，所以这个场景下可以使用 **LinkedHashMap **来存。</p>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><h2 id="为什么数组的索引从0开始？"><a href="#为什么数组的索引从0开始？" class="headerlink" title="为什么数组的索引从0开始？"></a>为什么数组的索引从0开始？</h2><ul>
 <li>数组在根据索引获取元素时，会使用寻址公式：<strong>数组首地址 + 索引 * 存储数据的类型大小</strong></li>
 <li>如果索引从1开始算的话，寻址公式就变为：<strong>数组首地址 + （索引-1） * 存储数据的类型大小</strong>，底层多运算了一次减法操作，性能会降低。</li>
 </ul>
@@ -504,7 +504,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%8D%95%E5%88%97%E9%9B%86%E5%90%88%E6%B1%87%E6%80%BB"><span class="nav-number">1.</span> <span class="nav-text">一、单列集合汇总</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81List-Set-Queue-Map-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.1.</span> <span class="nav-text">1、List, Set, Queue, Map 的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81HashSet%E3%80%81LinkedHashSet-%E5%92%8C-TreeSet-%E7%9A%84%E5%BC%82%E5%90%8C"><span class="nav-number">1.2.</span> <span class="nav-text">2、HashSet、LinkedHashSet 和 TreeSet 的异同</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81ArrayList-%E5%92%8C-Array%EF%BC%88%E6%95%B0%E7%BB%84%EF%BC%89%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">1.3.</span> <span class="nav-text">3、ArrayList 和 Array（数组）的区别？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4%E3%80%81ArrayList-%E4%B8%8E-LinkedList-%E5%8C%BA%E5%88%AB-%EF%BC%88%E2%AD%90%EF%BC%89"><span class="nav-number">1.4.</span> <span class="nav-text">4、ArrayList 与 LinkedList 区别?（⭐）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5%E3%80%81ArrayList%E5%BA%95%E5%B1%82%E5%8F%8A%E6%89%A9%E5%AE%B9%E6%9C%BA%E5%88%B6%EF%BC%88%E2%AD%90%EF%BC%89"><span class="nav-number">1.5.</span> <span class="nav-text">5、ArrayList底层及扩容机制（⭐）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6%E3%80%81Comparable-%E5%92%8C-Comparator-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.6.</span> <span class="nav-text">6、Comparable 和 Comparator 的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7%E3%80%81ArrayList-list-new-ArrayList-10-%E4%B8%AD%E7%9A%84list%E6%89%A9%E5%AE%B9%E5%87%A0%E6%AC%A1"><span class="nav-number">1.7.</span> <span class="nav-text">7、ArrayList list&#x3D;new ArrayList(10) 中的list扩容几次</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8%E3%80%81%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%95%B0%E7%BB%84%E5%92%8CList%E4%B9%8B%E9%97%B4%E7%9A%84%E8%BD%AC%E6%8D%A2"><span class="nav-number">1.8.</span> <span class="nav-text">8、如何实现数组和List之间的转换</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%8F%8C%E5%88%97%E9%9B%86%E5%90%88%E6%B1%87%E6%80%BB"><span class="nav-number">2.</span> <span class="nav-text">二、双列集合汇总</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81HashMap%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86%EF%BC%88%E2%AD%90%EF%BC%89"><span class="nav-number">2.1.</span> <span class="nav-text">1、HashMap底层原理（⭐）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81HashMap-%E4%B8%AD-hash-%E5%80%BC%E7%9A%84%E4%BD%9C%E7%94%A8%EF%BC%9F"><span class="nav-number">2.2.</span> <span class="nav-text">2、HashMap 中 hash 值的作用？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81HashMap-%E4%B8%AD%E7%9A%84%E6%95%B0%E7%BB%84%E9%95%BF%E5%BA%A6%E4%B8%BA%E4%BB%80%E4%B9%88%E5%BF%85%E9%A1%BB%E6%98%AF-2-%E7%9A%84%E5%B9%82%E6%AC%A1%E6%96%B9%EF%BC%9F"><span class="nav-number">2.3.</span> <span class="nav-text">3、HashMap 中的数组长度为什么必须是 2 的幂次方？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4%E3%80%81JDK-1-7%E4%B8%ADHashMap-%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%BD%A2%E6%88%90%E6%AD%BB%E5%BE%AA%E7%8E%AF%EF%BC%9F"><span class="nav-number">2.4.</span> <span class="nav-text">4、JDK 1.7中HashMap 为什么会形成死循环？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5%E3%80%81HashMap%E5%92%8CHashtable%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">2.5.</span> <span class="nav-text">5、HashMap和Hashtable的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6%E3%80%81HashSet-%E5%A6%82%E4%BD%95%E6%A3%80%E6%9F%A5%E9%87%8D%E5%A4%8D"><span class="nav-number">2.6.</span> <span class="nav-text">6、HashSet 如何检查重复</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7%E3%80%81HashMap-%E4%B8%BA%E4%BB%80%E4%B9%88%E7%BA%BF%E7%A8%8B%E4%B8%8D%E5%AE%89%E5%85%A8%EF%BC%9F"><span class="nav-number">2.7.</span> <span class="nav-text">7、HashMap 为什么线程不安全？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8%E3%80%81HashMap-%E5%B8%B8%E8%A7%81%E7%9A%84%E9%81%8D%E5%8E%86%E6%96%B9%E5%BC%8F"><span class="nav-number">2.8.</span> <span class="nav-text">8、HashMap 常见的遍历方式?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9%E3%80%81ConcurrentHashMap-%E5%92%8C-Hashtable-%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%88%E2%AD%90%EF%BC%89"><span class="nav-number">2.9.</span> <span class="nav-text">9、ConcurrentHashMap 和 Hashtable 的区别（⭐）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10%E3%80%81JDK-1-7-%E5%92%8C-JDK-1-8-%E7%9A%84-ConcurrentHashMap-%E5%AE%9E%E7%8E%B0%E6%9C%89%E4%BD%95%E4%B8%8D%E5%90%8C%EF%BC%9F"><span class="nav-number">2.10.</span> <span class="nav-text">10、JDK 1.7 和 JDK 1.8 的 ConcurrentHashMap 实现有何不同？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11%E3%80%81HashMap%E7%9A%84put%E7%9A%84%E5%85%B7%E4%BD%93%E6%B5%81%E7%A8%8B%E3%80%82"><span class="nav-number">2.11.</span> <span class="nav-text">11、HashMap的put的具体流程。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12%E3%80%81HashMap%E7%9A%84%E6%89%A9%E5%AE%B9%E6%9C%BA%E5%88%B6"><span class="nav-number">2.12.</span> <span class="nav-text">12、HashMap的扩容机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13%E3%80%81hashMap%E7%9A%84%E5%AF%BB%E5%9D%80%E7%AE%97%E6%B3%95"><span class="nav-number">2.13.</span> <span class="nav-text">13、hashMap的寻址算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14%E3%80%81LinkedHashMap-%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">2.14.</span> <span class="nav-text">14、LinkedHashMap 使用场景</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%85%B6%E4%BB%96"><span class="nav-number">3.</span> <span class="nav-text">三、其他</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E6%95%B0%E7%BB%84%E7%9A%84%E7%B4%A2%E5%BC%95%E4%BB%8E0%E5%BC%80%E5%A7%8B%EF%BC%9F"><span class="nav-number">3.1.</span> <span class="nav-text">1、为什么数组的索引从0开始？</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%95%E5%88%97%E9%9B%86%E5%90%88%E6%B1%87%E6%80%BB"><span class="nav-number">1.</span> <span class="nav-text">单列集合汇总</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#List-Set-Queue-Map-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.1.</span> <span class="nav-text">List, Set, Queue, Map 的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HashSet%E3%80%81LinkedHashSet-%E5%92%8C-TreeSet-%E7%9A%84%E5%BC%82%E5%90%8C"><span class="nav-number">1.2.</span> <span class="nav-text">HashSet、LinkedHashSet 和 TreeSet 的异同</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ArrayList-%E5%92%8C-Array%EF%BC%88%E6%95%B0%E7%BB%84%EF%BC%89%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">1.3.</span> <span class="nav-text">ArrayList 和 Array（数组）的区别？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ArrayList-%E4%B8%8E-LinkedList-%E5%8C%BA%E5%88%AB-%EF%BC%88%E2%AD%90%EF%BC%89"><span class="nav-number">1.4.</span> <span class="nav-text">ArrayList 与 LinkedList 区别?（⭐）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ArrayList%E5%BA%95%E5%B1%82%E5%8F%8A%E6%89%A9%E5%AE%B9%E6%9C%BA%E5%88%B6%EF%BC%88%E2%AD%90%EF%BC%89"><span class="nav-number">1.5.</span> <span class="nav-text">ArrayList底层及扩容机制（⭐）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Comparable-%E5%92%8C-Comparator-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.6.</span> <span class="nav-text">Comparable 和 Comparator 的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ArrayList-list-new-ArrayList-10-%E4%B8%AD%E7%9A%84list%E6%89%A9%E5%AE%B9%E5%87%A0%E6%AC%A1"><span class="nav-number">1.7.</span> <span class="nav-text">ArrayList list&#x3D;new ArrayList(10) 中的list扩容几次</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%95%B0%E7%BB%84%E5%92%8CList%E4%B9%8B%E9%97%B4%E7%9A%84%E8%BD%AC%E6%8D%A2"><span class="nav-number">1.8.</span> <span class="nav-text">如何实现数组和List之间的转换</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%8C%E5%88%97%E9%9B%86%E5%90%88%E6%B1%87%E6%80%BB"><span class="nav-number">2.</span> <span class="nav-text">双列集合汇总</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HashMap%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86%EF%BC%88%E2%AD%90%EF%BC%89"><span class="nav-number">2.1.</span> <span class="nav-text">HashMap底层原理（⭐）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HashMap-%E4%B8%AD-hash-%E5%80%BC%E7%9A%84%E4%BD%9C%E7%94%A8%EF%BC%9F"><span class="nav-number">2.2.</span> <span class="nav-text">HashMap 中 hash 值的作用？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HashMap-%E4%B8%AD%E7%9A%84%E6%95%B0%E7%BB%84%E9%95%BF%E5%BA%A6%E4%B8%BA%E4%BB%80%E4%B9%88%E5%BF%85%E9%A1%BB%E6%98%AF-2-%E7%9A%84%E5%B9%82%E6%AC%A1%E6%96%B9%EF%BC%9F"><span class="nav-number">2.3.</span> <span class="nav-text">HashMap 中的数组长度为什么必须是 2 的幂次方？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JDK-1-7%E4%B8%ADHashMap-%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%BD%A2%E6%88%90%E6%AD%BB%E5%BE%AA%E7%8E%AF%EF%BC%9F"><span class="nav-number">2.4.</span> <span class="nav-text">JDK 1.7中HashMap 为什么会形成死循环？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HashMap%E5%92%8CHashtable%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">2.5.</span> <span class="nav-text">HashMap和Hashtable的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HashSet-%E5%A6%82%E4%BD%95%E6%A3%80%E6%9F%A5%E9%87%8D%E5%A4%8D"><span class="nav-number">2.6.</span> <span class="nav-text">HashSet 如何检查重复</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HashMap-%E4%B8%BA%E4%BB%80%E4%B9%88%E7%BA%BF%E7%A8%8B%E4%B8%8D%E5%AE%89%E5%85%A8%EF%BC%9F"><span class="nav-number">2.7.</span> <span class="nav-text">HashMap 为什么线程不安全？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HashMap-%E5%B8%B8%E8%A7%81%E7%9A%84%E9%81%8D%E5%8E%86%E6%96%B9%E5%BC%8F"><span class="nav-number">2.8.</span> <span class="nav-text">HashMap 常见的遍历方式?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ConcurrentHashMap-%E5%92%8C-Hashtable-%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%88%E2%AD%90%EF%BC%89"><span class="nav-number">2.9.</span> <span class="nav-text">ConcurrentHashMap 和 Hashtable 的区别（⭐）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JDK-1-7-%E5%92%8C-JDK-1-8-%E7%9A%84-ConcurrentHashMap-%E5%AE%9E%E7%8E%B0%E6%9C%89%E4%BD%95%E4%B8%8D%E5%90%8C%EF%BC%9F"><span class="nav-number">2.10.</span> <span class="nav-text">JDK 1.7 和 JDK 1.8 的 ConcurrentHashMap 实现有何不同？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HashMap%E7%9A%84put%E7%9A%84%E5%85%B7%E4%BD%93%E6%B5%81%E7%A8%8B%E3%80%82"><span class="nav-number">2.11.</span> <span class="nav-text">HashMap的put的具体流程。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HashMap%E7%9A%84%E6%89%A9%E5%AE%B9%E6%9C%BA%E5%88%B6"><span class="nav-number">2.12.</span> <span class="nav-text">HashMap的扩容机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hashMap%E7%9A%84%E5%AF%BB%E5%9D%80%E7%AE%97%E6%B3%95"><span class="nav-number">2.13.</span> <span class="nav-text">hashMap的寻址算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LinkedHashMap-%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">2.14.</span> <span class="nav-text">LinkedHashMap 使用场景</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-number">3.</span> <span class="nav-text">其他</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%95%B0%E7%BB%84%E7%9A%84%E7%B4%A2%E5%BC%95%E4%BB%8E0%E5%BC%80%E5%A7%8B%EF%BC%9F"><span class="nav-number">3.1.</span> <span class="nav-text">为什么数组的索引从0开始？</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
