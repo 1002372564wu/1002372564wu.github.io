@@ -181,7 +181,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2024-08-05 15:09:20 / 修改时间：16:12:39" itemprop="dateCreated datePublished" datetime="2024-08-05T15:09:20+08:00">2024-08-05</time>
+              <time title="创建时间：2024-08-05 15:09:20 / 修改时间：16:13:57" itemprop="dateCreated datePublished" datetime="2024-08-05T15:09:20+08:00">2024-08-05</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -205,9 +205,9 @@
 
       
           <h1 id="TCP-IP-网络模型"><a href="#TCP-IP-网络模型" class="headerlink" title="TCP&#x2F;IP 网络模型"></a>TCP&#x2F;IP 网络模型</h1><p>对于同一台设备上的进程间通信，有很多种方式，比如有管道、消息队列、共享内存、信号等方式，而<strong>对于不同设备上的进程间通信，就需要网络通信，而设备是多样性的，所以要兼容多种多样的设备</strong>，就协商出了一套<strong>通用的网络协议</strong>。<br>TCP&#x2F;IP 网络通常是由上到下分成 4 层，分别是<strong>应用层，传输层，网络层，网络接口层</strong>。<br><img src="/2024/08/05/%E8%AE%A1%E7%BD%91%E7%AF%87/1.png"></p>
-<p><strong>应用层:</strong></p>
+<p><strong>$\color{yellow} {应用层:}$</strong></p>
 <p>应用层是不用去关心数据是如何传输的，只需要专注于为用户提供应用功能，比如 HTTP、FTP、Telnet、DNS、SMTP等。<strong>应用层是工作在操作系统中的用户态，传输层及以下则工作在内核态</strong>。</p>
-<p><strong>传输层：</strong></p>
+<p><strong>$\color{yellow} {传输层:}$</strong></p>
 <p><strong>传输层的作用在于为运行在不同主机上的应用进程之间提供逻辑通信</strong>（这里的逻辑通信指的是在传输层角度看来两个进程间直接进行通信，实际上还是通过下层提供的服务）。传输层有两个传输协议，分别是 TCP 和 UDP：</p>
 <ul>
 <li><strong>TCP</strong>：提供面向连接的，可靠的数据传输服务。</li>
