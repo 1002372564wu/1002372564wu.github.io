@@ -155,7 +155,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/08/05/JUC%E7%AF%87/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/08/05/%E6%A1%86%E6%9E%B6%E7%AF%87/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/jay.jpg">
@@ -169,7 +169,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2024/08/05/JUC%E7%AF%87/" class="post-title-link" itemprop="url">JUC</a>
+            <a href="/2024/08/05/%E6%A1%86%E6%9E%B6%E7%AF%87/" class="post-title-link" itemprop="url">Java框架</a>
         </h2>
 
         <div class="post-meta">
@@ -181,7 +181,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2024-08-05 11:22:08 / 修改时间：13:48:08" itemprop="dateCreated datePublished" datetime="2024-08-05T11:22:08+08:00">2024-08-05</time>
+              <time title="创建时间：2024-08-05 13:50:50 / 修改时间：14:06:26" itemprop="dateCreated datePublished" datetime="2024-08-05T13:50:50+08:00">2024-08-05</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -204,264 +204,168 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="线程基础"><a href="#线程基础" class="headerlink" title="线程基础"></a>线程基础</h1><h2 id="进程与线程的区别？"><a href="#进程与线程的区别？" class="headerlink" title="进程与线程的区别？"></a>进程与线程的区别？</h2><ul>
-<li><strong>进程：进程是程序的一次执行过程，是操作系统资源分配的基本单位。</strong>程序由指令和数据组成，指令要运行就得加载至CPU，数据要读写就得加载至内存，在指令运行过程中还需要用到磁盘、网络等设备。<strong>进程就是用来加载指令、管理内存以及IO 的</strong>。</li>
-<li><strong>线程：一个线程就是一个指令流，是操作系统中最小的调度单位</strong>，负责将指令流中的一条条指令以一定的顺序交给 CPU 执行。</li>
-<li><strong>两者区别</strong>：<ul>
-<li><strong>关系</strong>：进程是正在运行程序的实例，进程中包含了线程，每个线程执行不同的任务。</li>
-<li><strong>内存</strong>：不同的进程使用不同的内存空间，同一进程下的所有线程共享内存空间。</li>
-<li><strong>开销</strong>：线程更轻量，线程上下文切换开销要比进程上下文切换开销低。</li>
+          <h1 id="Spring框架中的单例bean是线程安全的吗？"><a href="#Spring框架中的单例bean是线程安全的吗？" class="headerlink" title="Spring框架中的单例bean是线程安全的吗？"></a>Spring框架中的单例bean是线程安全的吗？</h1><p>所谓单例就是所有的请求都用一个对象来处理，而多例则指每个请求用一个新的对象来处理。<br>结论：<strong>线程不安全</strong>。<br><strong>Spring框架中有一个@Scope注解，默认的值就是singleton，单例的。一般在spring的bean都是注入无状态的对象(如service)，无状态对象没有线程安全问题；</strong>但如果在bean中定义了可修改的成员变量，所有线程都共享一个单例bean，此时需要考虑线程安全问题，可使用多例或者加锁解决。<br><strong>为什么bean默认是单例的？</strong><br><strong>Java在创建Java实例时，需要进行内存申请；销毁实例时，需要完成垃圾回收，这些工作都会导致系统开销的增加。因此，prototype作用域Bean的创建、销毁代价比较大。而singleton作用域的Bean实例一旦创建成功，可以重复使用。因此，除非必要，否则尽量避免将Bean被设置成prototype作用域。</strong></p>
+<h1 id="什么是AOP？（⭐）"><a href="#什么是AOP？（⭐）" class="headerlink" title="什么是AOP？（⭐）"></a>什么是AOP？（⭐）</h1><p>   即<strong>面向切面编程</strong>。<strong>将与核心业务无关的代码（即交叉业务）独立的抽取出来，形成一个独立的组件，然后以横向交叉的方式应用到业务流程当中。有利于降低模块之间的耦合。</strong><br><img src="/2024/08/05/%E6%A1%86%E6%9E%B6%E7%AF%87/d4c0bf4c308d4e8cb6da4fc12fde095a.png"></p>
+<h1 id="项目中哪里使用了AOP？"><a href="#项目中哪里使用了AOP？" class="headerlink" title="项目中哪里使用了AOP？"></a>项目中哪里使用了AOP？</h1><ul>
+<li><strong>记录操作日志。</strong><ul>
+<li>使用 aop 中的环绕通知 +切点表达式。</li>
+<li>切点表达式用来定义通知（Advice）往哪些方法上切入 。</li>
 </ul>
 </li>
+<li><strong>spring实现事务。</strong></li>
 </ul>
-<h2 id="并行和并发的区别"><a href="#并行和并发的区别" class="headerlink" title="并行和并发的区别"></a>并行和并发的区别</h2><ul>
-<li><strong>并发</strong>：两个及两个以上的作业在同一 <strong>时间段</strong> 内执行。</li>
-<li><strong>并行</strong>：两个及两个以上的作业在同一 <strong>时刻</strong> 执行。</li>
-</ul>
-<h2 id="创建线程的方式（⭐）"><a href="#创建线程的方式（⭐）" class="headerlink" title="创建线程的方式（⭐）"></a>创建线程的方式（⭐）</h2><ul>
-<li><p><strong>继承Thread类：</strong>继承 Thread 类，并重写了其 run () 方法，之后直接调用 start () 即可实现多线程。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyThread</span> <span class="keyword">extends</span> <span class="title class_">Thread</span> &#123;</span><br><span class="line"> </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;通过集成 Thread 类实现线程&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">new</span> <span class="title class_">MyThread</span>().start()</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>实现runnable接口</strong>：定义一个线程执行的任务（run 方法里面的逻辑）并没有创建线程。它首先通过 MyRunnable 类实现 Runnable 接口，然后重写 run () 方法，之后还要把这个实现了 run () 方法的实例传到 Thread 类中才可以实现多线程。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyRunnable</span> <span class="keyword">implements</span> <span class="title class_">Runnable</span> &#123;</span><br><span class="line"> </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;通过实现 Runnable 方式实现线程&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 使用</span></span><br><span class="line"><span class="comment">// 1、创建MyRunnable实例</span></span><br><span class="line"><span class="type">MyRunnable</span> <span class="variable">runnable</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MyRunnable</span>();</span><br><span class="line"><span class="comment">//2.创建Thread对象</span></span><br><span class="line"><span class="comment">//3.将MyRunnable放入Thread实例中</span></span><br><span class="line"><span class="type">Thread</span> <span class="variable">thread</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Thread</span>(runnable);</span><br><span class="line"><span class="comment">//4.通过线程对象操作线程(运行、停止)</span></span><br><span class="line">thread.start();</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>实现Callable接口</strong>：Callable 与 Runnable 名字还有点像，区别在于 Runnable 是无返回值的。它们的本质都是定义线程要做的任务（call 或 run 方法里面的逻辑），而不是说他们本身就是线程。但无论有无返回值，它们都是需要被线程执行。</p>
-</li>
-<li><p><strong>线程池创建线程</strong></p>
-</li>
-</ul>
-<h3 id="runnable和Callable的区别："><a href="#runnable和Callable的区别：" class="headerlink" title="runnable和Callable的区别："></a>runnable和Callable的区别：</h3><ul>
-<li>Runnable 接口 run 方法没有返回值； Callable 接口 call 方法有返回值，是个泛型，和Future 、 FutureTask 配合可以用来获取异步执行的结果。</li>
-<li>Callalbe 接口支持返回执行结果，需要调用 FutureTask.get() 得到，此方法会阻塞主进程的继续往下执行，如果不调用不会阻塞。</li>
-<li>Callable接口的call()方法允许抛出异常；而Runnable接口的run()方法的异常只能在内部使用try-catch消化，不能继续上抛。</li>
-</ul>
-<h3 id="线程中的run-和-start-的区别："><a href="#线程中的run-和-start-的区别：" class="headerlink" title="线程中的run()和 start()的区别："></a>线程中的run()和 start()的区别：</h3><ul>
-<li>**start():**用来启动线程，通过该线程调用run方法执行run方法中所定义的逻辑代码。start方法只能被调用一次。</li>
-<li>**run():**封装了要被线程执行的代码，可以被调用多次。</li>
-</ul>
-<p><strong>调用 start() 方法方可启动线程并使线程进入就绪状态，直接执行 run() 方法的话不会以多线程的方式执行，会把 run() 方法当成一个 main 线程下的普通方法去执行。</strong></p>
-<h2 id="线程的状态及其生命周期（⭐）"><a href="#线程的状态及其生命周期（⭐）" class="headerlink" title="线程的状态及其生命周期（⭐）"></a>线程的状态及其生命周期（⭐）</h2><ul>
-<li><strong>新建状态(New)：</strong> 线程对象被创建出来，但没有执行start()。</li>
-<li><strong>可执行状态(RUNNABLE)：</strong> 线程调用start()方法转为可执行状态。</li>
-<li><strong>阻塞状态(Blocked)：</strong> 没有获取锁则进入阻塞状态，获得锁再切换为可执行状态。</li>
-<li><strong>等待状态(wating)：</strong> 线程调用了wait()方法进入等待状态，其他线程调用notify()唤醒后可切换为可执行状态。</li>
-<li><strong>计时等待状态(TIME_WAITING)：</strong> 线程调用了sleep(50)方法，进入计时等待状态，到时间后可切换为可执行状态。</li>
-<li><strong>终止状态(TERMINATED)：</strong> 该线程已经运行完毕。</li>
-</ul>
-<p><img src="/2024/08/05/JUC%E7%AF%87/9.png"></p>
-<h2 id="新建-T1、T2、T3-三个线程，如何保证按顺序执行？（⭐）"><a href="#新建-T1、T2、T3-三个线程，如何保证按顺序执行？（⭐）" class="headerlink" title="新建 T1、T2、T3 三个线程，如何保证按顺序执行？（⭐）"></a>新建 T1、T2、T3 三个线程，如何保证按顺序执行？（⭐）</h2><p>使用线程类的<strong>join()<strong>方法在一个线程中启动另一个线程，另外一个线程完成该线程继续执行。</strong>如：在t2线程里添加代码:t1.join(); 在t3线程里添加代码t2.join()；</strong></p>
-<blockquote>
-<p><strong>join()方法的作用：</strong><br><strong>使主线程(即调用t.join方法的线程)挂起，并等待子线程 t 执行完毕后才会被唤醒。</strong></p>
-</blockquote>
-<h2 id="notify-和-notifyAll-的区别"><a href="#notify-和-notifyAll-的区别" class="headerlink" title="notify()和 notifyAll()的区别"></a>notify()和 notifyAll()的区别</h2><ul>
-<li><strong>notifyAll：</strong> 唤醒所有wait的线程。</li>
-<li><strong>notify：</strong> 随机唤醒一个 wait 线程。</li>
-</ul>
-<h2 id="sleep-方法和-wait-方法的异同"><a href="#sleep-方法和-wait-方法的异同" class="headerlink" title="sleep() 方法和 wait() 方法的异同"></a>sleep() 方法和 wait() 方法的异同</h2><ul>
-<li><strong>相同点：</strong> 都可以让线程进入阻塞状态。</li>
-<li><strong>不同点：</strong><ul>
-<li><strong>方法归属：</strong> sleep是Thread的静态本地方法，wait()是Object类的本地方法。</li>
-<li><strong>醒来时机：</strong> sleep执行完线程会自动苏醒；wait需要其他线程调用notify或notifyAll。</li>
-<li><strong>锁特性：</strong> 调用wait方法需要获取对象锁，唤醒后会释放锁；调用sleep不需要获取锁也不会释放锁。</li>
+<h1 id="Spring中的事务是如何实现的？"><a href="#Spring中的事务是如何实现的？" class="headerlink" title="Spring中的事务是如何实现的？"></a>Spring中的事务是如何实现的？</h1><p>使用了 <strong>@Transactional</strong> 注解后事务的自动提交功能就会关闭，由spring帮助实现事务的控制。<strong>spring实现的事务本质就是由aop完成：对方法前后进行拦截，在执行方法之前 开启事务，在执行完目标方法之后根据执行情况提交或者回滚事务。</strong></p>
+<h1 id="Spring中事务失效的场景有哪些？"><a href="#Spring中事务失效的场景有哪些？" class="headerlink" title="Spring中事务失效的场景有哪些？"></a>Spring中事务失效的场景有哪些？</h1><ul>
+<li>异常捕获处理，自己处理了异常，没有抛出，spring不会进行回滚操作。<ul>
+<li>解决：捕获异常后，手动抛出。</li>
 </ul>
 </li>
+<li>spring默认只会滚非检查异常，如抛出检查异常，也会导致事务失效。<ul>
+<li>解决：@Transactional注解上配置rollbackFor属性为Exception，任意异常都会回滚。</li>
 </ul>
-<h2 id="如何停止一个正在运行的线程？（⭐）"><a href="#如何停止一个正在运行的线程？（⭐）" class="headerlink" title="如何停止一个正在运行的线程？（⭐）"></a>如何停止一个正在运行的线程？（⭐）</h2><ul>
-<li>使用退出标志，使线程正常退出，也就是当run方法完成后线程终止。</li>
-<li>使用stop方法强行终止（不推荐，方法已作废）。</li>
-<li>使用interrupt方法中断线程。</li>
+</li>
+<li>事务方法不是public修饰的，也会导致事务失效。</li>
 </ul>
-<h2 id="使用两个线程交替打印1-100（⭐）"><a href="#使用两个线程交替打印1-100（⭐）" class="headerlink" title="使用两个线程交替打印1-100（⭐）"></a>使用两个线程交替打印1-100（⭐）</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@description</span>: 使用两个线程交替打印1-100</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span>: Jay</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@create</span>: 2024-05-27 21:29</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">print_1_to_100</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">volatile</span> <span class="type">int</span> <span class="variable">flag</span> <span class="operator">=</span> <span class="number">1</span>; <span class="comment">//此处需要加关键字volatile保证变量之间的可见性，否则程序将会阻塞在while循环中动不了（有点类似死锁）。</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">Thread</span>(<span class="keyword">new</span> <span class="title class_">thread1</span>()).start();</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">Thread</span>(<span class="keyword">new</span> <span class="title class_">thread2</span>()).start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">class</span> <span class="title class_">thread1</span> <span class="keyword">implements</span> <span class="title class_">Runnable</span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (i&lt;=<span class="number">99</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(print_1_to_100.flag == <span class="number">1</span>)&#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;线程1: &quot;</span> + i );</span><br><span class="line">                i += <span class="number">2</span>;</span><br><span class="line">                print_1_to_100.flag = <span class="number">2</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">thread2</span> <span class="keyword">implements</span> <span class="title class_">Runnable</span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">while</span> (i&lt;=<span class="number">100</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(print_1_to_100.flag == <span class="number">2</span>)&#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;线程2: &quot;</span> + i );</span><br><span class="line">                i += <span class="number">2</span>;</span><br><span class="line">                print_1_to_100.flag = <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>运行结果：</strong><br><img src="/2024/08/05/JUC%E7%AF%87/4.png"></p>
-<h1 id="线程中的并发安全"><a href="#线程中的并发安全" class="headerlink" title="线程中的并发安全"></a>线程中的并发安全</h1><h2 id="synchronized关键字的底层原理（⭐）"><a href="#synchronized关键字的底层原理（⭐）" class="headerlink" title="synchronized关键字的底层原理（⭐）"></a>synchronized关键字的底层原理（⭐）</h2><blockquote>
-<p><strong>回答思路：宏观介绍一下synchronized的大致功能—&gt;底层实现monitor—&gt;锁升级</strong></p>
-</blockquote>
+<h1 id="Spring的bean的生命周期（⭐）"><a href="#Spring的bean的生命周期（⭐）" class="headerlink" title="Spring的bean的生命周期（⭐）"></a>Spring的bean的生命周期（⭐）</h1><p>   <strong>Spring Bean 的生命周期主要指的是 singleton bean，对于 prototype bean ，Spring 在创建好交给使用者之后则不会再管理后续的生命周期。</strong><br>   spring在实例化bean之前，会根据BeanDefinition获取bean的定义信息，如：类的全路径、是否单例、是否延迟加载等等…</p>
+<ol>
+<li><strong>调用构造函数实例化bean。（这一步属于bean的创建阶段）</strong></li>
+<li><strong>bean的依赖注入。(如：set注入、autowire注入等)</strong></li>
+<li><strong>检查bean是否实现了Aware结尾的相关接口，并重写相关方法。（BeanNameAware、BeanFactoryAware等，通过实现这些接口可以获取bean的相关信息）</strong></li>
+<li><strong>bean后处理器的before方法。</strong></li>
+<li><strong>bean的初始化方法。</strong></li>
+<li><strong>bean后处理器的after方法。（这五步属于bean的赋值阶段）</strong></li>
+<li><strong>使用bean。</strong></li>
+<li><strong>销毁bean。</strong></li>
+</ol>
+<h1 id="Spring中的循环依赖"><a href="#Spring中的循环依赖" class="headerlink" title="Spring中的循环依赖"></a>Spring中的循环依赖</h1><p><strong>即 两个或多个实例存在相互依赖的关系，A对象赋值需要用到B对象，B对象赋值需要用到A对象，有点像死锁。</strong></p>
 <ul>
-<li><strong>synchronized</strong>用于<strong>解决多线程的并发安全问题</strong>，可以保证被它修饰的方法或者代码块在任意时刻只能有一个线程执行。</li>
-<li><strong>synchronized</strong>底层是由<strong>monitor</strong>实现的，在线程获取锁成功过后需要和monitor对象进行关联，即将对象头的mark word字段存储monitor的地址，并将<strong>monitor的owner字段指向该线程</strong>。</li>
-<li>由于monitor是操作系统级别的对象，<strong>在实现线程之间的切换时需要从用户态转换到内核态，成本较高，因此synchronized属于重量级锁</strong>，效率低下。 jdk1.6之后引入了锁升级减少了锁的开销，如：轻量级锁、偏向锁等。<ul>
-<li>monitor有三个字段：<ul>
-<li><strong>Owner</strong>：存储当前获取锁的线程的，只能有一个线程可以获取。</li>
-<li><strong>EntryList</strong>：关联没有抢到锁的线程，处于Blocked状态的线程。</li>
-<li><strong>WaitSet</strong>：关联调用了wait方法的线程，处于Waiting状态的线程 。</li>
+<li><strong>singleton + set注入：</strong><ul>
+<li>spring可以解决此情况的循环依赖问题：<strong>在set注入下，“实例化Bean”和“给Bean属性赋值”两个动作可以分开，又因为bean是单例的，所以在实例化完之后可以直接“曝光”。</strong></li>
+</ul>
+</li>
+<li><strong>prototype + set注入：</strong><ul>
+<li>spring无法解决多例+set 注入的循环依赖，因为 bean 的实例化和赋值虽然是分开的，但是每一次实例的对象都不是同一个，但是只要其中一个bean对象改为单例就能解决。</li>
+</ul>
+</li>
+<li><strong>singleton + 构造注入:</strong><ul>
+<li><strong>spring无法解决。</strong> 构造注入会导致 <strong>“实例化Bean”</strong> 和 <strong>“给Bean属性赋值”</strong> 两个动作无法分开，单例bean来不及“曝光”。<strong>可以使用注解@Lazy懒加载</strong>，什么时候需要对象再进行bean对象的创建。</li>
 </ul>
 </li>
 </ul>
-</li>
+<h2 id="spring解决循环依赖的三级缓存："><a href="#spring解决循环依赖的三级缓存：" class="headerlink" title="spring解决循环依赖的三级缓存："></a><strong>spring解决循环依赖的三级缓存：</strong></h2><ul>
+<li><strong>一级缓存：</strong> 存储的是完整的单例Bean对象，这个Bean对象已经赋值过了。</li>
+<li><strong>二级缓存：</strong> 存储的是早期的单例Bean对象，这个Bean对象属性还没有赋值。</li>
+<li><strong>三级缓存：</strong> 存储的是单例工厂对象，每一个单例Bean对象都会对应一个单例工厂对象。</li>
 </ul>
-<h2 id="锁升级："><a href="#锁升级：" class="headerlink" title="锁升级："></a>锁升级：</h2><p>介绍锁升级之前，需要先介绍一下<strong>Java对象的内存结构</strong>。在HotSpot虚拟机中，<strong>对象的内存结构</strong>包括三个字段：<strong>对象头</strong>、<strong>实例数据</strong>、<strong>对齐填充。</strong></p>
+<p><strong>解决流程：</strong></p>
 <ul>
-<li>其中对象头有两个字段：<ul>
-<li><strong>Klass pointer：</strong> 指向方法区中存的类元数据，<strong>通过这个指针来确定这个对象是哪个类的实例</strong>。</li>
-<li><strong>Mark word：</strong> 对象的hashcode，分代年龄，锁状态，类元数据指针等信息，如下图。</li>
+<li>先实例化A对象，同时创建其工厂对象存入三级缓存。</li>
+<li>A对象属性赋值需要B对象，实例化B对象，同时创建B的工厂对象，存入三级缓存。</li>
+<li>B属性赋值需要注入A对象，于是从三级缓存中获取A的工厂对象，生成A对象存入二级缓存。</li>
+<li>B通过二级缓存里获取A对象，属性赋值成功，于是B对象创建成功，存入一级缓存。</li>
+<li>此时A对象从一级缓存中获取B对象，注入成功，并将A对象存入一级缓存。</li>
+<li>将二级缓存的临时对象A清除。</li>
 </ul>
-</li>
-</ul>
-<p><img src="/2024/08/05/JUC%E7%AF%87/3.png"><br><strong>由于阻塞一个线程涉及到操作系统用户态和内核态的转换，开销较大，因此jdk1.6之后，synchronized锁进行了优化，锁一共分为四种状态：</strong></p>
+<h1 id="SpringMVC的执行流程"><a href="#SpringMVC的执行流程" class="headerlink" title="SpringMVC的执行流程"></a>SpringMVC的执行流程</h1><p><strong>基于前后端分离开发的执行流程：</strong></p>
 <ul>
-<li><strong>无锁状态</strong></li>
-<li><strong>偏向锁：</strong>用于<strong>解决锁的重入问题</strong>。共享资源首次被访问时，JVM会对该共享资源对象做一些设置，比如将对象头中是否偏向锁标志位置为1，<strong>对象头中的线程ID设置为当前线程ID，后续当前线程再次访问这个共享资源时，会根据偏向锁标识跟线程ID进行比对是否相同，比对成功则直接获取到锁</strong>，进入临界区域，这也是synchronized锁的可重入功能。</li>
-<li><strong>轻量级锁：</strong> 当前锁是偏向锁的时候，有另外的线程访问，则会升级成轻量级锁。<strong>轻量级锁通过自旋等待（CAS操作）来尝试获取锁</strong>，避免线程立即挂起。如果自旋等待达到一定次数仍无法获取锁，则会升级为重量级锁。</li>
-<li><strong>重量级锁</strong></li>
+<li>用户发送出请求到前端控制器DispatcherServlet</li>
+<li>DispatcherServlet收到请求调用HandlerMapping（处理器映射器）</li>
+<li>HandlerMapping找到具体的处理器，生成处理器对象及处理器拦截器(如果有)，再一起返回给DispatcherServlet。</li>
+<li>DispatcherServlet调用HandlerAdapter（处理器适配器）</li>
+<li>HandlerAdapter经过适配调用具体的处理器（Handler&#x2F;Controller）</li>
+<li>方法上添加了@ResponseBody，通过HttpMessageConverter将返回结果转换为JSON并响应</li>
 </ul>
-<h2 id="谈谈-JMM（Java-内存模型）（⭐）"><a href="#谈谈-JMM（Java-内存模型）（⭐）" class="headerlink" title="谈谈 JMM（Java 内存模型）（⭐）"></a>谈谈 JMM（Java 内存模型）（⭐）</h2><p>首先搞清楚<strong>java内存区域</strong>和<strong>java内存模型</strong>的区别：</p>
+<h1 id="Springboot自动配置原理（⭐）"><a href="#Springboot自动配置原理（⭐）" class="headerlink" title="Springboot自动配置原理（⭐）"></a>Springboot自动配置原理（⭐）</h1><p>在Spring Boot项目中的引导类上有一个注解 <strong>@SpringBootApplication</strong>，这个注解是对三个注解进行了封装，分别是：<br><strong>@SpringBootConfiguration</strong>：声明自己是spring的一个配置类，可替换xml文件。<br><strong>@EnableAutoConfiguration</strong>：实现自动化配置的核心注解。<br><strong>@ComponentScan</strong> : 扫描被@Component (@Service,@Controller)注解的 bean，默认扫描该类所在包下的所有类，可以自定义不扫描某些 bean。</p>
+<h1 id="Spring框架常见注解（⭐）"><a href="#Spring框架常见注解（⭐）" class="headerlink" title="Spring框架常见注解（⭐）"></a>Spring框架常见注解（⭐）</h1><p><strong>Spring：</strong></p>
 <ul>
-<li><strong>java内存区域</strong>：定义的是jvm在运行时如何如何分区存储程序数据。</li>
-<li><strong>java内存模型</strong>：和java并发编程相关，描述了Java程序中各种变量(线程共享变量)的访问规则<br>，目的是为了简化多线程编程。</li>
+<li><strong>@Component、@Controller、@Service、@Repository：</strong> 将实体类对象实例化到spring中，纳入spring管理。</li>
+<li><strong>@Autowired</strong>：对类成员变量、方法及构造函数进行自动装配，默认根据类型自动装配。</li>
+<li><strong>@Qualifier :</strong> 结合@Autowired一起使用，用于根据名称进行自动装配。(同一接口有多个实现类，Autowired不知道装配哪个类型)</li>
+<li><strong>@Scope :</strong> 标注Bean的作用范围。</li>
+<li><strong>@Configuration :</strong> 指定当前类是一个 Spring 配置类，当创建容器时会从该类上加载注解。</li>
+<li><strong>@ComponentScan：</strong> 用于指定 Spring 在初始化容器时要扫描的包。</li>
+<li><strong>@Bean：</strong> 使用在方法上，标注将该方法的返回值存储到Spring容器中。</li>
+<li><strong>@Import：</strong> 使用@Import导入的类会被Spring加载到IOC容器中。</li>
+<li><strong>@Aspect、@Before、@After、@Around、@Pointcut：</strong> 用于切面编程（AOP）</li>
 </ul>
-<p><img src="/2024/08/05/JUC%E7%AF%87/10.png"></p>
+<p><strong>SpringMVC：</strong></p>
 <ul>
-<li>所有的<strong>共享变量</strong>都存储于<strong>主内存</strong>，这里所说的变量指的是<strong>实例变量</strong>和<strong>类变量</strong>。不包含局部变量，因为<strong>局部变量是线程私有的，因此不存在竞争问题。</strong></li>
-<li>每一个线程还存在自己的<strong>工作内存</strong>，线程的工作内存，保留了被线程使用的变量的工作副本。</li>
-<li><strong>线程对变量的所有操作(读，写)都必须在工作内存中完成</strong>，而不能直接读写主内存中的变量，不同线程之间也不能直接访问对方工作内存中的变量，线程之间交互需要通过<strong>主内存</strong>完成。</li>
+<li><strong>@RequestMapping：</strong> 用于将任意HTTP 请求映射到控制器方法上。<ul>
+<li><strong>各种衍生注解，如：</strong> @GetMapping、@PostMapping、@PutMapping等。</li>
 </ul>
-<h2 id="谈谈CAS（⭐）"><a href="#谈谈CAS（⭐）" class="headerlink" title="谈谈CAS（⭐）"></a>谈谈CAS（⭐）</h2><p><strong>CAS</strong>全称是：<strong>Compare And Swap(比较再交换)，它体现的是一种乐观锁的思想， 在无锁情况下保证多线程操作共享数据的原子性</strong>。<br> 高并发的场景下，乐观锁相比悲观锁来说，<strong>不存在锁竞争造成线程阻塞</strong>，也不会有死锁的问题，在性能上往往会更胜一筹。但是，<strong>如果冲突频繁发生（写占比非常多的情况），会频繁失败和重试，这样同样会非常影响性能，导致 CPU 飙升</strong>。<br>CAS 的思想很简单，<strong>就是用一个预期值和要更新的变量值进行比较，两值相等才会进行更新</strong>，不相等则自旋重试。<br><strong>Java 语言并没有直接实现 CAS，CAS 相关的实现是通过 C++ 内联汇编的形式实现的（JNI 调用）</strong>。sun.misc包下的<strong>Unsafe</strong>类提供了compareAndSwapObject、compareAndSwapInt、compareAndSwapLong方法来实现的对Object、int、long类型的 CAS 操作。</p>
-<blockquote>
-<p><strong>CAS引出的ABA问题</strong>：就是在比较并交换时，存在一个时间差，在这期间数据可能会被修改多次，只不过最终结果和最初结果恰巧相同。<br><strong>解决办法</strong>：使用AtomicStampedReference类可以解决ABA问题。这个类维护了一个版本号Stamp，在进行CAS操作的时候，不仅要比较当前值，还要比较版本号。只有两者都相等，才执行更新操作。</p>
-</blockquote>
-<h2 id="谈谈volatile（⭐）"><a href="#谈谈volatile（⭐）" class="headerlink" title="谈谈volatile（⭐）"></a>谈谈volatile（⭐）</h2><h3 id="可见性问题："><a href="#可见性问题：" class="headerlink" title="可见性问题："></a>可见性问题：</h3><p>可见性问题和<strong>Java内存模型(JMM)<strong>有关，在JMM中，存在</strong>主内存</strong>和<strong>工作内存</strong>，主内存存的是共享变量，工作内存是线程私有的，线程对数据的操作是在工作内存当中进行的，此时数据的改动对于主内存以及其他工作内存是不可见的。当一个共享变量（类的成员变量、类的静态成员变量）被volatile修饰之后，那么就具备了两层语义：</p>
+</li>
+<li><strong>@RequestBody：</strong> 将前端传过来的 json数据转化为java对象。</li>
+<li><strong>@RequestParam：</strong> 将请求参数绑定到你控制器的方法参数上。</li>
+<li><strong>@PathViriable：</strong> 从请求路径下中获取请求参数(&#x2F;user&#x2F;{id})，传递给方法的形参。</li>
+<li><strong>@ResponseBody：</strong> 将controller方法返回的java对象转化为json对象响应给客户端。</li>
+<li><strong>@RequestHeader：</strong> 将请求头中的参数值映射到控制器的参数中。</li>
+<li><strong>@RestController：</strong> @Controller + @ResponseBody</li>
+</ul>
+<p><strong>SpringBoot：</strong></p>
 <ul>
-<li><strong>保证线程间的可见性</strong>：一个线程修改了某个变量的值，该新值对其他线程来说是立即可见的。<ul>
-<li>volatile关键字可以保证变量的可见性，如果我们将变量声明为 volatile，这就指示 JVM，这个变量是共享且不稳定的，每次使用它都到主存中进行读取。</li>
+<li><strong>@SpringBootConfiguration</strong>：用于定义配置类，可替换xml文件。</li>
+<li><strong>@EnableAutoConfiguration</strong>：打开自动配置功能。</li>
+<li><strong>@ComponentScan</strong>：扫描被@Component (@Service,@Controller)注解的 bean。</li>
 </ul>
-</li>
-<li><strong>禁止指令重排序：</strong> 用volatile 修饰共享变量会在读、写共享变量时加入不同的屏障，阻止其他读写操作越过屏障，从而达到阻止重排序的效果。</li>
+<h1 id="MyBatis执行流程"><a href="#MyBatis执行流程" class="headerlink" title="MyBatis执行流程"></a>MyBatis执行流程</h1><ul>
+<li><strong>读取MyBatis核心配置文件</strong>：mybatis-config.xml，加载运行环境和映射文件。运行环境包括：事务管理器的配置 + 数据源的配置 ，见MyBatis核心配置文件详解。</li>
+<li><strong>加载映射文件</strong>：映射文件即SQL映射文件(mapper.xml)，配置了操作数据库的SQL语句。</li>
+<li><strong>构造会话工厂SqlSessionFactory对象</strong>：使用SqlSessionFactoryBuilder对象构建。</li>
+<li><strong>创建会话对象SqlSession</strong>：由会话工厂创建，对象中包含了执行SQL语句的所有方法，每个线程都应该有它自己的 SqlSession 实例。</li>
+<li><strong>Executor执行器</strong>：是MyBatis的核心，它将根据SqlSession传递的参数动态地生成需要执行的SQL语句，同时负责维护查询缓存。</li>
+<li><strong>MappedStatement对象</strong>：MappedStatement是对解析的SQL语句的封装，一个MappedStatement代表了一个sql语句标签。</li>
+<li><strong>输入参数映射</strong>：输入参数类型可以是基本数据类型，也可以是Map、List、POJO等复杂数据类型。</li>
+<li><strong>封装结果集</strong>：可以将结果集封装成基本数据类型，也可以是Map、List、POJO等复杂数据类型。</li>
 </ul>
-<h2 id="谈谈AQS（⭐）"><a href="#谈谈AQS（⭐）" class="headerlink" title="谈谈AQS（⭐）"></a>谈谈AQS（⭐）</h2><p>AQS全称AbstractQueuedSynchronizer，即<strong>抽象队列同步器</strong>。它是<strong>构建锁或者其他同步组件的基础框架</strong>，常见的实现类有：<strong>ReentrantLock</strong>(阻塞式锁)、<strong>Semaphore</strong>(信号量)、<strong>CountDownLatch</strong>(倒计时锁)。AQS与Synchronized的区别如下图：<br><img src="/2024/08/05/JUC%E7%AF%87/6.png"><br><strong>AQS 核心思想</strong>：如果被请求的共享资源空闲，则将当前请求资源的线程设置为有效的工作线程，并且将共享资源设置为锁定状态。如果被请求的共享资源被占用，那么就需要一套线程阻塞等待以及被唤醒时锁分配的机制。<br><strong>AQS的核心框架实现：</strong></p>
+<h1 id="Mybatis是否支持延迟加载？底层原理是什么？"><a href="#Mybatis是否支持延迟加载？底层原理是什么？" class="headerlink" title="Mybatis是否支持延迟加载？底层原理是什么？"></a>Mybatis是否支持延迟加载？底层原理是什么？</h1><p><strong>Mybatis支持延迟加载：</strong></p>
 <ul>
-<li>AQS内部维护了一个先进先出的<strong>双向队列CLH</strong>，队列中存储排队等候唤醒的线程。<ul>
-<li>CLH队列是一个<strong>虚拟的双向队列</strong>（虚拟的双向队列即不存在队列实例，仅存在结点之间的关联关系），暂时获取不到锁的线程将被加入到该队列中。<strong>每个线程被封装成队列中的一个节点，节点保存着线程的引用、前驱节点、后继节点等信息</strong>。</li>
+<li>延迟加载是加载策略的一种，分为<strong>延迟加载</strong>和<strong>直接加载</strong>两种策略，延迟加载主要体现在关联查询中。即需要用到数据时才加载，不需要用到就不加载，又叫<strong>懒加载</strong>。</li>
+<li><strong>⼀对多，多对多</strong>的情况下通常采⽤<strong>延迟加载</strong>。</li>
+<li>在Mybatis配置文件中，可以配置<strong>lazyLoadingEnabled</strong>决定是否启用延迟加载，默认关闭。</li>
 </ul>
-</li>
-</ul>
-<p><img src="/2024/08/05/JUC%E7%AF%87/11.png"></p>
+<p><strong>底层原理：</strong></p>
 <ul>
-<li>AQS内部还维护了一个属性<strong>state</strong>，由 <strong>volatile <strong>修饰。相当于资源，默认为0(无锁状态)。当有线程修改了state为1，则该线程获取了资源。状态信息state可以通过</strong>getState</strong>和<strong>setState</strong>方法获取和修改，这些方法由final修饰，无法更改。</li>
-<li>使用<strong>CAS</strong>操作保证各线程对state修改的原子性。即<strong>compareAndSetState</strong>方法。</li>
+<li>使用<strong>CGLIB</strong>创建目标对象的代理对象。</li>
+<li>当调用目标方法时，进入拦截器invoke方法，发现目标方法是null值，执行sql查询。</li>
+<li>获取数据以后，调用set方法设置属性值，再继续查询目标方法，就有值了。</li>
 </ul>
-<p><img src="/2024/08/05/JUC%E7%AF%87/5.png"></p>
-<h2 id="AQS底层的实现类（⭐）"><a href="#AQS底层的实现类（⭐）" class="headerlink" title="AQS底层的实现类（⭐）"></a>AQS底层的实现类（⭐）</h2><h3 id="ReentrantLock"><a href="#ReentrantLock" class="headerlink" title="ReentrantLock"></a>ReentrantLock</h3><ul>
-<li>ReentrantLock表示可重入锁，属于独占式锁，同一线程可多次获取锁。</li>
-<li>ReentrantLock主要利用CAS+AQS队列来实现。</li>
-<li>ReentrantLock支持公平锁和非公平锁，在提供的构造器的中无参默认是非公平锁，也可以传参设置为公平锁。</li>
-</ul>
-<h3 id="Semaphore"><a href="#Semaphore" class="headerlink" title="Semaphore"></a>Semaphore</h3><ul>
-<li>synchronized 和 ReentrantLock都是一次只允许一个线程访问某个资源，<strong>Semaphore (信号量)可以控制同时访问特定资源的线程数量</strong>，通常用于那些资源有明确访问数量限制的场景比如<strong>限流</strong>。</li>
-<li>Semaphore 的使用：假设有 N个线程来获取 Semaphore 中的共享资源，以下代码表示同一时刻 只有N 个线程能获取到共享资源，其他线程都会阻塞。直到有线程释放了共享资源，其他阻塞的线程才能获取到资源。</li>
-<li>Semaphore也支持公平锁和非公平锁：<ul>
-<li><strong>公平模式：</strong> 调用 <strong>acquire()</strong> 方法的顺序遵循 FIFO；</li>
-<li><strong>非公平模式：</strong> 抢占式的。</li>
-</ul>
-</li>
-</ul>
-<h2 id="谈谈ConcurrentHashMap-（⭐）"><a href="#谈谈ConcurrentHashMap-（⭐）" class="headerlink" title="谈谈ConcurrentHashMap （⭐）"></a>谈谈ConcurrentHashMap （⭐）</h2><ul>
-<li><strong>底层数据结构：</strong><ul>
-<li>JDK1.7及之前之前采用** 分段数组(segment) + 链表**实现。</li>
-<li>JDK1.8开始底层的数据结构和JDK1.8HashMap一样，采用<strong>数组+链表&#x2F;红黑树</strong>实现。</li>
-</ul>
-</li>
-<li><strong>加锁方式：</strong><ul>
-<li>JDK1.7采用Segment分段锁，底层使用的是ReentrantLock。</li>
-<li>JDK1.8放弃了Segment分段锁的设计，采用** CAS + synchronized **保证线程安全，锁粒度更细。CAS控制数组节点的添加，synchronized只锁定当前链表或红黑二叉树的首节点，只要hash不冲突，就不会产生并发安全问题。</li>
-</ul>
-</li>
-</ul>
-<p>jdk1.7：<br><img src="/2024/08/05/JUC%E7%AF%87/7.png"><br>jdk1.8：<br><img src="/2024/08/05/JUC%E7%AF%87/2.png"></p>
-<h2 id="Java中怎么保证多线程的执行安全？（导致并发程序出现安全问题的根本原因是什么？）"><a href="#Java中怎么保证多线程的执行安全？（导致并发程序出现安全问题的根本原因是什么？）" class="headerlink" title="Java中怎么保证多线程的执行安全？（导致并发程序出现安全问题的根本原因是什么？）"></a>Java中怎么保证多线程的执行安全？（导致并发程序出现安全问题的根本原因是什么？）</h2><p>满足Java并发编程的三大特性：</p>
+<h1 id="Mybatis的一级、二级缓存"><a href="#Mybatis的一级、二级缓存" class="headerlink" title="Mybatis的一级、二级缓存"></a>Mybatis的一级、二级缓存</h1><p>MyBatis的缓存会将 select 语句的查询结果放到缓存（内存）当中，下一次还是这条select语句的话，直接从缓存中取。因此，<strong>缓存只针对于DQL语句，也就是说缓存机制只对应select语句。</strong></p>
 <ul>
-<li><strong>原子性：</strong> 一段程序执行是不可分割的，要么全部执行成功，要么全部失败。<ul>
-<li>可以使用synchronized和lock保证程序的原子性。</li>
-</ul>
-</li>
-<li><strong>可见性：</strong> 一个线程对共享变量的修改对另一个线程可见。<ul>
-<li>可以使用volatile(推荐)保证可见性，synchronized、Lock也可以。</li>
-</ul>
-</li>
-<li><strong>有序性：</strong> 在Java内存模型中，允许编译器和处理器对指令进行重排序，但是重排序过程不会影响到单线程程序的执行，却会影响到多线程并发执行的正确性。<ul>
-<li>可以通过volatile关键字来保证一定的“有序性”，synchronized和Lock也可以。</li>
+<li><strong>一级缓存：</strong><ul>
+<li><strong>作用域</strong>：SqlSession。</li>
+<li><strong>默认开启</strong>，只要同一个SqlSession对象执行同一select语句就会走缓存。</li>
+<li><strong>缓存失效的情况</strong>：<ul>
+<li>①手动情况了一级缓存：sqlSession.clearCache();</li>
+<li>②进行了增删改操作。</li>
 </ul>
 </li>
 </ul>
-<h1 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h1><h2 id="什么是线程池？为什么要用线程池？（⭐）"><a href="#什么是线程池？为什么要用线程池？（⭐）" class="headerlink" title="什么是线程池？为什么要用线程池？（⭐）"></a>什么是线程池？为什么要用线程池？（⭐）</h2><p>线程池就是管理一系列线程的资源池。当有任务要处理时，直接从线程池中获取线程来处理，处理完之后线程并不会立即被销毁，而是等待下一个任务。<strong>线程池可以把线程和任务进行解耦，线程归线程，任务归任务，摆脱了之前通过 Thread 创建线程时的一个线程必须对应一个任务的限制</strong>。池化技术的好处：</p>
-<ul>
-<li><strong>降低资源消耗</strong>。重复利用已创建的线程降低线程创建和销毁造成的消耗。</li>
-<li><strong>提高响应速度</strong>。当有任务时，可以不需要等待线程的创建就能立即执行。</li>
+</li>
+<li><strong>二级缓存：</strong><ul>
+<li><strong>作用域：</strong> SqlSessionFactory</li>
+<li><strong>使用二级缓存需要四个条件：</strong><ul>
+<li>①在配置文件中开启缓存，默认开启。</li>
+<li>②在需要使用二级缓存的SqlMapper.xml文件中添加配置：<cache>。</cache></li>
+<li>③使用二级缓存的实体类对象必须是可序列化的，即实现Serializable接口。</li>
+<li>④SqlSession对象关闭后，一级缓存才会写入二级缓存。</li>
 </ul>
-<h4 id="线程池的关闭方式："><a href="#线程池的关闭方式：" class="headerlink" title="线程池的关闭方式："></a>线程池的关闭方式：</h4><ul>
-<li><strong>shutdown</strong>：使线程池状态从 <strong>RUNNING</strong> 转变为 <strong>SHUTDOWN</strong>，该状态下不再处理新任务，但会将工作队列中的任务执行结束。</li>
-<li><strong>shutdownNow</strong>：使线程池状态将会从 <strong>RUNNING</strong> 转变为 <strong>STOP</strong>，该状态下新任务旧任务都不再处理，并且会中断线程。</li>
+</li>
+<li><strong>缓存失效的情况：</strong><ul>
+<li>进行了增删改操作。</li>
 </ul>
-<h2 id="线程池的核心参数（⭐）"><a href="#线程池的核心参数（⭐）" class="headerlink" title="线程池的核心参数（⭐）"></a>线程池的核心参数（⭐）</h2><p>线程池有七个参数：</p>
-<ul>
-<li><strong>corePoolSize</strong>：核心线程数目</li>
-<li><strong>maximumPoolSize</strong>：最大线程数目 &#x3D; 核心线程 + 临时线程的最大数目</li>
-<li><strong>workQueue</strong>：当没有空闲核心线程时，新来任务会加入到此队列排队，当队列满时会创建临时线程执行任务</li>
-<li><strong>keepAliveTime</strong>：临时线程的生存时间，若生存时间内没有新任务，此线程资源会释放</li>
-<li><strong>unit</strong>：临时线程生存时间的单位</li>
-<li><strong>threadFactory：线程工厂，可以定制线程对象的创建，如设置线程名字、是否是守护线程等</strong></li>
-<li><strong>handler</strong>：拒绝策略 - 当所有线程都在繁忙，队列也放满时，会触发拒绝策略<ul>
-<li>1.<strong>AbortPolicy</strong>：直接抛出异常，默认策略；</li>
-<li>2.<strong>CallerRunsPolicy</strong>：用调用者所在的线程来执行任务；</li>
-<li>3.<strong>DiscardOldestPolicy</strong>：丢弃阻塞队列中靠最前的任务，并执行当前任务；</li>
-<li>4.<strong>DiscardPolicy</strong>：直接丢弃任务。</li>
+</li>
+<li><strong>相关配置：</strong><ul>
+<li>eviction：指定从缓存中移除某个对象的淘汰算法。默认采用LRU策略。</li>
+<li>flushInterval：二级缓存的刷新时间间隔。</li>
 </ul>
 </li>
 </ul>
-<p><img src="/2024/08/05/JUC%E7%AF%87/8.png"></p>
-<h2 id="线程池中有哪些常见的阻塞队列（⭐）"><a href="#线程池中有哪些常见的阻塞队列（⭐）" class="headerlink" title="线程池中有哪些常见的阻塞队列（⭐）"></a>线程池中有哪些常见的阻塞队列（⭐）</h2><ul>
-<li><strong>ArrayBlockingQueue</strong>：基于数组结构的有界阻塞队列，FIFO。</li>
-<li><strong>LinkedBlockingQueue</strong>：基于链表结构的有界阻塞队列，FIFO。</li>
-<li><strong>DelayedWorkQueue</strong> ：是一个优先级队列，它可以保证每次出队的任务都是当前队列中执行时间最靠前的。</li>
-<li><strong>SynchronousQueue</strong>：不存储元素的阻塞队列，每个插入操作都必须等待一个移出操作。</li>
-</ul>
-<p><strong>ArrayBlockingQueue</strong>的<strong>LinkedBlockingQueue</strong>区别：</p>
-<ul>
-<li>LinkedBlockingQueue默认无界，支持有界；ArrayBlockingQueue强制有界。</li>
-<li>LinkedBlockingQueue底层是单向链表实现；ArrayBlockingQueue基于数组实现。</li>
-<li>LinkedBlockingQueue头尾各一把锁，效率较高；ArrayBlockingQueue只有一把锁。</li>
-</ul>
-<h2 id="如何确定核心线程数？（⭐）"><a href="#如何确定核心线程数？（⭐）" class="headerlink" title="如何确定核心线程数？（⭐）"></a>如何确定核心线程数？（⭐）</h2><ul>
-<li><strong>CPU密集型任务：</strong> 这类任务消耗的主要是 CPU 资源，可将线程核心数设置为 <strong>N（CPU 核心数）+1。</strong><ul>
-<li><strong>多出来的一个核心线程是为了防止各种原因导致任务暂停而带来的影响</strong>。一旦任务暂停，CPU 就会处于空闲状态，而在这种情况下多出来的线程可以充分利用 CPU 的空闲时间。</li>
-</ul>
-</li>
-<li><strong>I&#x2F;O密集型任务</strong>：这类任务系统会将大部分时间用在I&#x2F;O交互上，这段时间CPU是空闲的，可以交给其他线程使用，因此可以多配置一些线程，常用的值为<strong>2N（CPU核心数）</strong>。</li>
-</ul>
-<h2 id="如何创建线程池？线程池有哪些种类？（⭐）"><a href="#如何创建线程池？线程池有哪些种类？（⭐）" class="headerlink" title="如何创建线程池？线程池有哪些种类？（⭐）"></a>如何创建线程池？线程池有哪些种类？（⭐）</h2><ul>
-<li><strong>方式一：</strong>使用<strong>ThreadPoolExecutor</strong>构造函数来创建。</li>
-</ul>
-<p><img src="/2024/08/05/JUC%E7%AF%87/1.png"></p>
-<ul>
-<li><strong>方式二：</strong>使用<strong>Executors</strong>工具类来创建。<ul>
-<li>newFixedThreadPool：创建一个定长线程池，控制线程最大并发数，超出的线程会在队列中等待。</li>
-<li>newSingleThreadExecutor：创建一个单线程的线程池，若多余的任务被提交到该线程池，其会被保存在一个任务队列中，待线程空闲，按先入先出的顺序执行队列中的任务。</li>
-<li>newCachedThreadPool：创建一个可缓存线程池，如果线程池长度超过处理需要，可灵活回收空闲线程，若无可回收，则新建线程。</li>
-<li>newScheduledThreadPool：可执行延迟任务的线程池，支持定时及周期性任务执行。</li>
-</ul>
 </li>
 </ul>
-<h2 id="为什么不推荐使用内置线程池（Executors）？（⭐）"><a href="#为什么不推荐使用内置线程池（Executors）？（⭐）" class="headerlink" title="为什么不推荐使用内置线程池（Executors）？（⭐）"></a>为什么不推荐使用内置线程池（Executors）？（⭐）</h2><ul>
-<li>采用无界的阻塞队列，可能会堆积大量的任务，最终导致内存溢出。</li>
-<li>允许创建的线程数为<strong>Integer.MAX_VALUE</strong>，也可能导致内存溢出。</li>
+<h1 id="和-的区别"><a href="#和-的区别" class="headerlink" title="#{}和${}的区别"></a>#{}和${}的区别</h1><ul>
+<li><strong>#{}：</strong> 先编译 sql 语句，再给占位符传值，底层是PreparedStatement实现。可以防止 <strong>sql注入</strong>，比较常用。</li>
+<li><strong>${}：</strong> 先进行sql语句拼接，然后再编译sql语句，底层是Statement实现。存在 <strong>sql 注入</strong> 现象。只有在需要进行sql语句关键字拼接的情况下才会用到。</li>
 </ul>
-<h2 id="谈谈对ThreadLocal的理解（⭐）"><a href="#谈谈对ThreadLocal的理解（⭐）" class="headerlink" title="谈谈对ThreadLocal的理解（⭐）"></a>谈谈对ThreadLocal的理解（⭐）</h2><p><strong>ThreadLocal</strong>，<strong>本地线程变量，ThreadLocal可以让每个线程绑定自己的变量，该变量对其他线程而言是封闭且隔离的。</strong></p>
-<h3 id="ThreadLocal的原理："><a href="#ThreadLocal的原理：" class="headerlink" title="ThreadLocal的原理："></a>ThreadLocal的原理：</h3><p><strong>ThreadLocal的set方法源码：</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">set</span><span class="params">(T value)</span> &#123;</span><br><span class="line">    <span class="comment">//获取当前请求的线程</span></span><br><span class="line">    <span class="type">Thread</span> <span class="variable">t</span> <span class="operator">=</span> Thread.currentThread();</span><br><span class="line">    <span class="comment">//取出 Thread 类内部的 threadLocals 变量(哈希表结构)</span></span><br><span class="line">    <span class="type">ThreadLocalMap</span> <span class="variable">map</span> <span class="operator">=</span> getMap(t);</span><br><span class="line">    <span class="keyword">if</span> (map != <span class="literal">null</span>)</span><br><span class="line">        <span class="comment">// 将需要存储的值放入到这个哈希表中</span></span><br><span class="line">        map.set(<span class="built_in">this</span>, value);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        createMap(t, value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>ThrealLocal 类中可以通过Thread.currentThread()获取到当前线程对象后，直接通过getMap(Thread t)可以访问到该线程的ThreadLocalMap对象。<br>        每个Thread中都具备一个ThreadLocalMap，而ThreadLocalMap可以存储以ThreadLocal为 key ，Object 对象为 value 的键值对。<br><strong>ThreadLocal的get方法源码：</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> T <span class="title function_">get</span><span class="params">(Thread t)</span> &#123;</span><br><span class="line">    <span class="type">ThreadLocalMap</span> <span class="variable">map</span> <span class="operator">=</span> getMap(t);</span><br><span class="line">    <span class="keyword">if</span> (map != <span class="literal">null</span>) &#123;</span><br><span class="line">        ThreadLocalMap.<span class="type">Entry</span> <span class="variable">e</span> <span class="operator">=</span> map.getEntry(<span class="built_in">this</span>);</span><br><span class="line">        <span class="keyword">if</span> (e != <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="meta">@SuppressWarnings(&quot;unchecked&quot;)</span></span><br><span class="line">            <span class="type">T</span> <span class="variable">result</span> <span class="operator">=</span> (T) e.value;</span><br><span class="line">            <span class="keyword">return</span> result;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> setInitialValue(t);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">private</span> Entry <span class="title function_">getEntry</span><span class="params">(ThreadLocal&lt;?&gt; key)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> key.threadLocalHashCode &amp; (table.length - <span class="number">1</span>);</span><br><span class="line">    <span class="type">Entry</span> <span class="variable">e</span> <span class="operator">=</span> table[i];</span><br><span class="line">    <span class="keyword">if</span> (e != <span class="literal">null</span> &amp;&amp; e.refersTo(key))</span><br><span class="line">        <span class="keyword">return</span> e;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> getEntryAfterMiss(key, i, e);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="ThreadLocal-的应用场景："><a href="#ThreadLocal-的应用场景：" class="headerlink" title="ThreadLocal 的应用场景："></a>ThreadLocal 的应用场景：</h3><ul>
-<li><p><strong>解决高并发条件下多线程访问共享变量产生的并发安全问题。</strong></p>
-<blockquote>
-<p><strong>例如：项目中@Autowired默认是单例模式，那么负责连接数据库的connection也是单例的，如果多个线程同时获取connection请求连接数据库的话，就会产生并发安全问题。底层的解决方案就是使用ThreadLocal，每个线程请求连接数据库的时候，会先从自己的ThreadLocal中获取connection对象，达到各个线程隔离的效果。</strong></p>
-</blockquote>
-</li>
-<li><p><strong>ThreadLocal 用作每个线程内需要独立保存信息</strong>，以便<strong>供其他方法更方便地获取</strong>该信息的场景。每个线程获取到的信息可能都是不一样的，前面执行的方法保存了信息后，后续方法可以通过 ThreadLocal 直接获取到，避免了传参，类似于全局变量的概念。</p>
-<blockquote>
-<p><strong>例如：项目中拦截器中获取到的用户信息，可以让不同方法直接使用，避免了各个类传参的麻烦。</strong></p>
-</blockquote>
-</li>
-</ul>
-<h3 id="ThreadLocal-的弊端："><a href="#ThreadLocal-的弊端：" class="headerlink" title="ThreadLocal 的弊端："></a>ThreadLocal 的弊端：</h3><p><strong>内存泄漏：</strong> 如果我们使用线程池创建的线程，那么该线程很长一段时间都不会消失，而ThreadLocalMap中的value值属于强引用，不会被垃圾回收，而key是弱引用，此时就会产生<strong>内存泄漏</strong>的问题。</p>
 
       
     </div>
@@ -483,7 +387,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -550,13 +454,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-count">9</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -592,7 +496,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共38.2k字</span>
+  <span class="post-count">博客全站共46.6k字</span>
 </div>
 
 
