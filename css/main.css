@@ -1200,7 +1200,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #2febff;
+  background: #ff335d;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -1542,7 +1542,7 @@ pre .javascript .function {
   }
 }
 .reading-progress-bar {
-  background: #37c6c0;
+  background: #FFD700;
   display: block;
   height: 3px;
   left: 0;
