@@ -181,7 +181,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2024-08-05 15:09:20 / 修改时间：16:13:57" itemprop="dateCreated datePublished" datetime="2024-08-05T15:09:20+08:00">2024-08-05</time>
+              <time title="创建时间：2024-08-05 15:09:20 / 修改时间：16:16:31" itemprop="dateCreated datePublished" datetime="2024-08-05T15:09:20+08:00">2024-08-05</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -214,7 +214,7 @@
 <li><strong>UDP</strong>：提供无连接的，尽最大努力的数据传输（不保证数据传输的可靠性），简单高效。</li>
 </ul>
 <p>应用需要传输的数据可能会非常大，如果直接传输就不好控制，因此<strong>当传输层的数据包大小超过 MSS（TCP 最大报文段长度），就要将数据包分块</strong> ，这样即使中途有一个分块丢失或损坏了，只需要重新发送这一个分块，而不用重新发送整个数据包。在 TCP 协议中，我们把每个分块称为一个 TCP 段。</p>
-<p><strong>$\color{yellow} {网络层：}$</strong></p>
+<p><strong>$\color{yellow} {网络层:}$</strong></p>
 <p>我们不希望传输层处理太多的事情，只需要服务好应用即可，让其作为应用间数据传输的媒介，帮助实现应用到应用的通信，而实际的传输功能交给网络层。</p>
 <p>网络层最常使用的是 IP 协议（Internet Protocol），IP 协议会将传输层的报文作为数据部分，再加上 IP 包头组装成 IP 报文，如果 IP 报文大小超过 MTU（以太网中一般为 1500 字节）就会再次进行分片，得到一个即将发送到网络的 IP 报文。</p>
 <p>网络层将数据从一个设备传输到另一个设备，需要依赖<strong>IP地址</strong>和<strong>子网掩码</strong>进行寻址找到对应的子网，再去寻找对应的主机。  </p>
