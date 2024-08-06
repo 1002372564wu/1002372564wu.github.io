@@ -29,6 +29,76 @@
 ]]></content>
   </entry>
   <entry>
+    <title>操作系统常见面试题</title>
+    <url>/2024/08/06/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%AF%87/</url>
+    <content><![CDATA[<h1 id="进程和线程的区别"><a href="#进程和线程的区别" class="headerlink" title="进程和线程的区别"></a>进程和线程的区别</h1><ul>
+<li><strong>根本区别：</strong>进程是操作系统<strong>资源分配</strong>的基本单位，而线程是处理器<strong>任务调度和执行</strong>的基本单位。  </li>
+<li><strong>资源开销</strong>：  <ul>
+<li>每个进程都有独立的内存空间，进程间切换需要保存和恢复进程的状态，因此进程上下文切换的开销较大。  </li>
+<li>线程间共享进程的内存空间，线程的上下文切换开销较小。</li>
+</ul>
+</li>
+<li><strong>通信与同步</strong>：  <ul>
+<li>由于进程间相互隔离，进程间的通信需要通过一些特殊机制，如<strong>管道、消息队列、信号量</strong>等。</li>
+<li>由于线程共享进程的内存空间，因此它们可以直接访问共享数据，通信更方便。</li>
+</ul>
+</li>
+<li><strong>安全性：</strong><ul>
+<li>由于进程间相互隔离，一个进程的崩溃不会影响到其他进程的运行。</li>
+<li>由于线程共享内存空间，一个线程的崩溃可能会影响到整个进程的运行。</li>
+</ul>
+</li>
+</ul>
+<h1 id="死锁是什么？如何解决？"><a href="#死锁是什么？如何解决？" class="headerlink" title="死锁是什么？如何解决？"></a>死锁是什么？如何解决？</h1><h2 id="死锁："><a href="#死锁：" class="headerlink" title="死锁："></a><strong>死锁：</strong></h2><p>由于多个进程对资源进行抢夺，造成了这些进程同时阻塞，互相等待对方释放资源的这么一种僵局的状态。</p>
+<h2 id="死锁产生的必要条件："><a href="#死锁产生的必要条件：" class="headerlink" title="死锁产生的必要条件："></a><strong>死锁产生的必要条件：</strong></h2><ul>
+<li><strong>互斥条件：</strong> 多个线程不能同时使用同一个资源。</li>
+<li><strong>持有并等待条件：</strong> 当前线程持有了资源A，想去申请资源B，而资源B已经被其他线程所持有，当前线程就会在持有资源A的状态下阻塞。</li>
+<li><strong>不可剥夺条件：</strong> 线程持有的资源在使用完之前不会被其他线程所抢占。</li>
+<li><strong>环路等待条件</strong>：两个线程获取资源的顺序构成了环形链。</li>
+</ul>
+<h2 id="死锁的预防："><a href="#死锁的预防：" class="headerlink" title="死锁的预防："></a><strong>死锁的预防：</strong></h2><ul>
+<li><strong>破坏互斥条件：</strong> 将互斥资源改为共享资源。</li>
+<li><strong>破坏持有并等待条件：</strong> 使进程在执行前一次性申请到所需的所有资源。</li>
+<li><strong>破坏不可剥夺条件：</strong> 将获取资源的方式改为抢占式的。</li>
+<li><strong>破坏循环等待条件：</strong> 使用资源有序分配法，规定进程获取资源的顺序以破坏死锁环路。</li>
+</ul>
+<h2 id="死锁的避免："><a href="#死锁的避免：" class="headerlink" title="死锁的避免："></a>死锁的避免：</h2><p>当一个进程申请使用资源的时候，<strong>银行家算法</strong> 通过先 <strong>试探</strong> 分配给该进程资源，然后通过 <strong>安全性算法</strong> 判断分配后系统是否处于安全状态，若不安全则试探分配作废，让该进程继续等待，若能够进入到安全的状态，则就 <strong>真的分配资源给该进程</strong>。</p>
+<h2 id="死锁的检测与解除："><a href="#死锁的检测与解除：" class="headerlink" title="死锁的检测与解除："></a>死锁的检测与解除：</h2><ul>
+<li>Java可以使用jstack查看进程信息，jstack会在最后给出进程的分析信息。</li>
+<li>使用图形化工具<strong>jconsole，</strong>用于对JVM中内存，线程和类等的监控，其下有<strong>检测死锁</strong>功能。</li>
+</ul>
+<p>通过死锁检测程序检测是否发生了死锁，若发生了死锁，应设法解除当前的死锁状态：</p>
+<ul>
+<li><strong>立即结束所有进程的执行，重新启动操作系统。</strong></li>
+<li><strong>逐个撤销涉及死锁的进程，回收其资源直至死锁解除。</strong></li>
+</ul>
+<h1 id="进程间的通信方式"><a href="#进程间的通信方式" class="headerlink" title="进程间的通信方式"></a>进程间的通信方式</h1><ul>
+<li><strong>管道：</strong>管道的实质是一个<strong>内核缓冲区</strong>，进程以<strong>先进先出</strong>的方式从缓冲区存取数据：管道一端的进程顺序地将进程数据写入缓冲区，另一端的进程则顺序地读取数据。<ul>
+<li><strong>pipe匿名管道：</strong>用于<strong>具有亲缘关系的进程</strong>之间的通信，例如父进程和子进程，它通过pipe()系统调用来创建并打开。</li>
+<li><strong>FIFO命名管道：</strong>命名管道的名字对应于一个<strong>磁盘索引节点</strong>，有了这个文件名，<strong>任何进程都有权限对它进行访问</strong>。Linux中通过系统调用makefifo()来创建一个命名管道。</li>
+</ul>
+</li>
+</ul>
+<p><strong>管道的通信效率较低，因此不适合进程间频繁地交换数据。</strong></p>
+<ul>
+<li><strong>消息队列：</strong><ul>
+<li><strong>是保存在内核中的消息链表，</strong> 用户进程可以向消息队列添加消息，也可以向消息队列读取消息。 </li>
+<li><strong>消息体</strong>是用户<strong>自定义</strong>的数据类型，与管道通信相比，其优势是不需要按照队列次序，可以根据自定义条件接收特定类型的消息。</li>
+<li>消息队列的生命周期随内核，进程结束了也不会消失。</li>
+</ul>
+</li>
+</ul>
+<p><strong>消息队列不适合大数据的传输，因为在内核中每个消息体都有一个最大长度的限制。且消息队列通信过程中，存在用户态与内核态之间的数据拷贝开销。</strong></p>
+<ul>
+<li><strong>共享内存：</strong>各进程<strong>取出一块虚拟地址空间来，映射到相同的物理内存中，</strong>这样这个进程写入的东西，另外一个进程马上就能看到了，都不需要拷贝来拷贝去，大大<strong>提高进程间通信的速度</strong>。</li>
+<li><strong>信号量：</strong>信号量其实是一个<strong>整型计数器</strong>，主要用于实现<strong>进程间的互斥与同步</strong>，解决共享内存产生的<strong>访问数据冲突</strong>问题。主要包括两种操作：等待（wait）和释放（signal）。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>操作系统</category>
+      </categories>
+  </entry>
+  <entry>
     <title>计网常见面试题</title>
     <url>/2024/08/05/%E8%AE%A1%E7%BD%91%E7%AF%87/</url>
     <content><![CDATA[<h1 id="TCP-IP-网络模型"><a href="#TCP-IP-网络模型" class="headerlink" title="TCP&#x2F;IP 网络模型"></a>TCP&#x2F;IP 网络模型</h1><p>对于同一台设备上的进程间通信，有很多种方式，比如有管道、消息队列、共享内存、信号等方式，而<strong>对于不同设备上的进程间通信，就需要网络通信，而设备是多样性的，所以要兼容多种多样的设备</strong>，就协商出了一套<strong>通用的网络协议</strong>。<br>TCP&#x2F;IP 网络通常是由上到下分成 4 层，分别是<strong>应用层，传输层，网络层，网络接口层</strong>。<br><img src="/2024/08/05/%E8%AE%A1%E7%BD%91%E7%AF%87/1.png"></p>
