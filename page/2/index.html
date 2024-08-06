@@ -184,7 +184,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2024-08-06 14:37:57 / 修改时间：14:44:40" itemprop="dateCreated datePublished" datetime="2024-08-06T14:37:57+08:00">2024-08-06</time>
+              <time title="创建时间：2024-08-06 14:37:57 / 修改时间：14:49:56" itemprop="dateCreated datePublished" datetime="2024-08-06T14:37:57+08:00">2024-08-06</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -222,7 +222,12 @@
 
       
           <h1 id="Kafka的基本概念"><a href="#Kafka的基本概念" class="headerlink" title="Kafka的基本概念"></a>Kafka的基本概念</h1><p>Kafka是一个<strong>基于 Zookeeper 的分布式消息流平台</strong>，也是一款开源的<strong>基于发布订阅模式的消息引擎系统</strong>。</p>
-<p>Kafka 的消息队列一般分为两种模式：<strong>点对点模式</strong>和<strong>发布订阅模式</strong>。<br><img src="/2024/08/06/Kafka/1.png"><br>如果一个生产者或者多个生产者产生的消息能够被多个消费者同时消费的情况，这样的消息队列成为发布订阅模式的消息队列。<br><img src="/2024/08/06/Kafka/2.jpg"><br><strong>Kafka 的系统架构图</strong><br><img src="/2024/08/06/Kafka/3.jpg"></p>
+<p>Kafka 的消息队列一般分为两种模式：<strong>点对点模式</strong>和<strong>发布订阅模式</strong>。</p>
+<p><img src="/2024/08/06/Kafka/1.png"></p>
+<p>如果一个生产者或者多个生产者产生的消息能够被多个消费者同时消费的情况，这样的消息队列成为发布订阅模式的消息队列。</p>
+<p><img src="/2024/08/06/Kafka/2.jpg"></p>
+<p><strong>Kafka 的系统架构图</strong></p>
+<p><img src="/2024/08/06/Kafka/3.jpg"></p>
 <p><strong>Kafka 的基本术语</strong></p>
 <ul>
 <li><strong>消息</strong>：Kafka 中的数据单元被称为<strong>消息</strong>，也被称为记录，可以把它看作数据库表中某一行的记录。</li>
@@ -246,7 +251,7 @@
 <li><strong>容错性</strong>：允许集群中的节点失败，某个节点宕机，Kafka 集群能够正常工作。</li>
 <li><strong>高并发</strong>：支持数千个客户端同时读写。</li>
 </ul>
-<h3 id="Kafka-的优缺点："><a href="#Kafka-的优缺点：" class="headerlink" title="Kafka 的优缺点："></a>Kafka 的优缺点：</h3><p><strong>优点：</strong></p>
+<h2 id="Kafka-的优缺点："><a href="#Kafka-的优缺点：" class="headerlink" title="Kafka 的优缺点："></a>Kafka 的优缺点：</h2><p><strong>优点：</strong></p>
 <ul>
 <li><strong>异步：</strong><ul>
 <li>某些非必要的业务逻辑以<strong>同步</strong>的方式运行，将耗费大量时间。<strong>在使用消息队列后，将发送的消息写入消息队列，非必要的业务逻辑以异步的方式运行，这样总耗时就只有发送消息和响应消息的时间了，大大提升了响应给用户的速度。</strong></li>
