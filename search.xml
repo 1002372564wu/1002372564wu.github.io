@@ -151,6 +151,7 @@
 <p>当用户访问”基础库建设”模块时，后端会查询总表，返回一个 list 集合，该集合记录了所有子目录的信息，也包括这些目录的中文字段信息。（即刚刚添加的非数据库字段），接着会调用本地的 getTree 方法将集合转换成树结构，供前端显示。<br>剩下的子表开发就比较简单了，每个子表建立相对应的数据库表，使用 mybatis-plus 提供的代码生成器生成对应的 controller、service、mapper 以及对应的实体类 Entity，再编写相应的 crud 代码即可。</p>
 ]]></content>
       <categories>
+        <category>practice</category>
         <category>实习</category>
       </categories>
   </entry>
