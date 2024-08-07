@@ -3,7 +3,7 @@
   <entry>
     <title>首页</title>
     <url>/2024/07/31/hello-world/</url>
-    <content><![CDATA[<div style="text-align: center; font-size: 24px;">
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><div style="text-align: center; font-size: 24px;">
 <b>  欢迎来到 Michael-Jay 的博客！ </b>
 </div>
 <div style="text-align: center; font-size: 20px;">
@@ -31,7 +31,7 @@
   <entry>
     <title>Kafka</title>
     <url>/2024/08/06/Kafka/</url>
-    <content><![CDATA[<h1 id="Kafka的基本概念"><a href="#Kafka的基本概念" class="headerlink" title="Kafka的基本概念"></a>Kafka的基本概念</h1><p>Kafka是一个<strong>基于 Zookeeper 的分布式消息流平台</strong>，也是一款开源的<strong>基于发布订阅模式的消息引擎系统</strong>。</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h1 id="Kafka的基本概念"><a href="#Kafka的基本概念" class="headerlink" title="Kafka的基本概念"></a>Kafka的基本概念</h1><p>Kafka是一个<strong>基于 Zookeeper 的分布式消息流平台</strong>，也是一款开源的<strong>基于发布订阅模式的消息引擎系统</strong>。</p>
 <p>Kafka 的消息队列一般分为两种模式：<strong>点对点模式</strong>和<strong>发布订阅模式</strong>。</p>
 <p><img src="/2024/08/06/Kafka/1.png"></p>
 <p>如果一个生产者或者多个生产者产生的消息能够被多个消费者同时消费的情况，这样的消息队列成为发布订阅模式的消息队列。</p>
@@ -144,7 +144,7 @@
   <entry>
     <title>java8新特性</title>
     <url>/2024/08/06/Java8%E6%96%B0%E7%89%B9%E6%80%A7/</url>
-    <content><![CDATA[<h1 id="Lambda-表达式"><a href="#Lambda-表达式" class="headerlink" title="Lambda 表达式"></a>Lambda 表达式</h1><p>使用 Lambda 表达式可以使代码变的更加简洁紧凑，Lambda 表达式是一个匿名函数，java 8 允许把函数作为参数传递进方法中。<br>过去给方法传动态参数的唯一方法是使用<strong>内部类</strong>。比如：</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h1 id="Lambda-表达式"><a href="#Lambda-表达式" class="headerlink" title="Lambda 表达式"></a>Lambda 表达式</h1><p>使用 Lambda 表达式可以使代码变的更加简洁紧凑，Lambda 表达式是一个匿名函数，java 8 允许把函数作为参数传递进方法中。<br>过去给方法传动态参数的唯一方法是使用<strong>内部类</strong>。比如：</p>
 <p><strong>runnable 接口：</strong></p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="title class_">Thread</span>(<span class="keyword">new</span> <span class="title class_">Runnable</span>() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;The runable now is using!&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">&#125;).start();</span><br><span class="line"><span class="comment">//用lambda</span></span><br><span class="line"><span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; System.out.println(<span class="string">&quot;It&#x27;s a lambda function!&quot;</span>)).start();</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p><strong>comparator 接口：</strong></p>
@@ -169,7 +169,7 @@
   <entry>
     <title>设计模式</title>
     <url>/2024/08/06/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</url>
-    <content><![CDATA[<h1 id="单例设计模式"><a href="#单例设计模式" class="headerlink" title="单例设计模式"></a>单例设计模式</h1><p>单例模式（Singleton Pattern）是 Java 中最简单的设计模式之一。这种类型的设计模式属于<strong>创建型模式</strong>，它提供了一种<strong>创建对象的最佳方式</strong>。它确保一个类只有一个实例，并提供了一个全局访问点来访问该实例。<br>单例设计模式分为两种：</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h1 id="单例设计模式"><a href="#单例设计模式" class="headerlink" title="单例设计模式"></a>单例设计模式</h1><p>单例模式（Singleton Pattern）是 Java 中最简单的设计模式之一。这种类型的设计模式属于<strong>创建型模式</strong>，它提供了一种<strong>创建对象的最佳方式</strong>。它确保一个类只有一个实例，并提供了一个全局访问点来访问该实例。<br>单例设计模式分为两种：</p>
 <ul>
 <li><strong>饿汉式：</strong> 类加载就会导致该单实例对象被创建。</li>
 <li><strong>懒汉式：</strong> 类加载不会导致该单实例对象被创建，而是首次使用该对象时才会创建。</li>
@@ -257,7 +257,7 @@
   <entry>
     <title>操作系统常见面试题</title>
     <url>/2024/08/06/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%AF%87/</url>
-    <content><![CDATA[<h1 id="进程和线程的区别"><a href="#进程和线程的区别" class="headerlink" title="进程和线程的区别"></a>进程和线程的区别</h1><ul>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h1 id="进程和线程的区别"><a href="#进程和线程的区别" class="headerlink" title="进程和线程的区别"></a>进程和线程的区别</h1><ul>
 <li><strong>根本区别：</strong>进程是操作系统<strong>资源分配</strong>的基本单位，而线程是处理器<strong>任务调度和执行</strong>的基本单位。  </li>
 <li><strong>资源开销</strong>：  <ul>
 <li>每个进程都有独立的内存空间，进程间切换需要保存和恢复进程的状态，因此进程上下文切换的开销较大。  </li>
@@ -327,7 +327,7 @@
   <entry>
     <title>计网常见面试题</title>
     <url>/2024/08/05/%E8%AE%A1%E7%BD%91%E7%AF%87/</url>
-    <content><![CDATA[<h1 id="TCP-IP-网络模型"><a href="#TCP-IP-网络模型" class="headerlink" title="TCP&#x2F;IP 网络模型"></a>TCP&#x2F;IP 网络模型</h1><p>对于同一台设备上的进程间通信，有很多种方式，比如有管道、消息队列、共享内存、信号等方式，而<strong>对于不同设备上的进程间通信，就需要网络通信，而设备是多样性的，所以要兼容多种多样的设备</strong>，就协商出了一套<strong>通用的网络协议</strong>。<br>TCP&#x2F;IP 网络通常是由上到下分成 4 层，分别是<strong>应用层，传输层，网络层，网络接口层</strong>。<br><img src="/2024/08/05/%E8%AE%A1%E7%BD%91%E7%AF%87/1.png"></p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h1 id="TCP-IP-网络模型"><a href="#TCP-IP-网络模型" class="headerlink" title="TCP&#x2F;IP 网络模型"></a>TCP&#x2F;IP 网络模型</h1><p>对于同一台设备上的进程间通信，有很多种方式，比如有管道、消息队列、共享内存、信号等方式，而<strong>对于不同设备上的进程间通信，就需要网络通信，而设备是多样性的，所以要兼容多种多样的设备</strong>，就协商出了一套<strong>通用的网络协议</strong>。<br>TCP&#x2F;IP 网络通常是由上到下分成 4 层，分别是<strong>应用层，传输层，网络层，网络接口层</strong>。<br><img src="/2024/08/05/%E8%AE%A1%E7%BD%91%E7%AF%87/1.png"></p>
 <p><strong>应用层</strong></p>
 <p>应用层是不用去关心数据是如何传输的，只需要专注于为用户提供应用功能，比如 HTTP、FTP、Telnet、DNS、SMTP等。<strong>应用层是工作在操作系统中的用户态，传输层及以下则工作在内核态</strong>。</p>
 <p><strong>传输层:</strong></p>
@@ -592,7 +592,7 @@
   <entry>
     <title>Java框架</title>
     <url>/2024/08/05/%E6%A1%86%E6%9E%B6%E7%AF%87/</url>
-    <content><![CDATA[<h1 id="Spring框架中的单例bean是线程安全的吗？"><a href="#Spring框架中的单例bean是线程安全的吗？" class="headerlink" title="Spring框架中的单例bean是线程安全的吗？"></a>Spring框架中的单例bean是线程安全的吗？</h1><p>所谓单例就是所有的请求都用一个对象来处理，而多例则指每个请求用一个新的对象来处理。<br>结论：<strong>线程不安全</strong>。<br><strong>Spring框架中有一个@Scope注解，默认的值就是singleton，单例的。一般在spring的bean都是注入无状态的对象(如service)，无状态对象没有线程安全问题；</strong>但如果在bean中定义了可修改的成员变量，所有线程都共享一个单例bean，此时需要考虑线程安全问题，可使用多例或者加锁解决。<br><strong>为什么bean默认是单例的？</strong><br><strong>Java在创建Java实例时，需要进行内存申请；销毁实例时，需要完成垃圾回收，这些工作都会导致系统开销的增加。因此，prototype作用域Bean的创建、销毁代价比较大。而singleton作用域的Bean实例一旦创建成功，可以重复使用。因此，除非必要，否则尽量避免将Bean被设置成prototype作用域。</strong></p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h1 id="Spring框架中的单例bean是线程安全的吗？"><a href="#Spring框架中的单例bean是线程安全的吗？" class="headerlink" title="Spring框架中的单例bean是线程安全的吗？"></a>Spring框架中的单例bean是线程安全的吗？</h1><p>所谓单例就是所有的请求都用一个对象来处理，而多例则指每个请求用一个新的对象来处理。<br>结论：<strong>线程不安全</strong>。<br><strong>Spring框架中有一个@Scope注解，默认的值就是singleton，单例的。一般在spring的bean都是注入无状态的对象(如service)，无状态对象没有线程安全问题；</strong>但如果在bean中定义了可修改的成员变量，所有线程都共享一个单例bean，此时需要考虑线程安全问题，可使用多例或者加锁解决。<br><strong>为什么bean默认是单例的？</strong><br><strong>Java在创建Java实例时，需要进行内存申请；销毁实例时，需要完成垃圾回收，这些工作都会导致系统开销的增加。因此，prototype作用域Bean的创建、销毁代价比较大。而singleton作用域的Bean实例一旦创建成功，可以重复使用。因此，除非必要，否则尽量避免将Bean被设置成prototype作用域。</strong></p>
 <h1 id="什么是AOP？（⭐）"><a href="#什么是AOP？（⭐）" class="headerlink" title="什么是AOP？（⭐）"></a>什么是AOP？（⭐）</h1><p>   即<strong>面向切面编程</strong>。<strong>将与核心业务无关的代码（即交叉业务）独立的抽取出来，形成一个独立的组件，然后以横向交叉的方式应用到业务流程当中。有利于降低模块之间的耦合。</strong><br><img src="/2024/08/05/%E6%A1%86%E6%9E%B6%E7%AF%87/d4c0bf4c308d4e8cb6da4fc12fde095a.png"></p>
 <h1 id="项目中哪里使用了AOP？"><a href="#项目中哪里使用了AOP？" class="headerlink" title="项目中哪里使用了AOP？"></a>项目中哪里使用了AOP？</h1><ul>
 <li><strong>记录操作日志。</strong><ul>
@@ -762,7 +762,7 @@
   <entry>
     <title>JUC</title>
     <url>/2024/08/05/JUC%E7%AF%87/</url>
-    <content><![CDATA[<h1 id="线程基础"><a href="#线程基础" class="headerlink" title="线程基础"></a>线程基础</h1><h2 id="进程与线程的区别？"><a href="#进程与线程的区别？" class="headerlink" title="进程与线程的区别？"></a>进程与线程的区别？</h2><ul>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h1 id="线程基础"><a href="#线程基础" class="headerlink" title="线程基础"></a>线程基础</h1><h2 id="进程与线程的区别？"><a href="#进程与线程的区别？" class="headerlink" title="进程与线程的区别？"></a>进程与线程的区别？</h2><ul>
 <li><strong>进程：进程是程序的一次执行过程，是操作系统资源分配的基本单位。</strong>程序由指令和数据组成，指令要运行就得加载至CPU，数据要读写就得加载至内存，在指令运行过程中还需要用到磁盘、网络等设备。<strong>进程就是用来加载指令、管理内存以及IO 的</strong>。</li>
 <li><strong>线程：一个线程就是一个指令流，是操作系统中最小的调度单位</strong>，负责将指令流中的一条条指令以一定的顺序交给 CPU 执行。</li>
 <li><strong>两者区别</strong>：<ul>
@@ -1028,7 +1028,7 @@
   <entry>
     <title>JVM</title>
     <url>/2024/08/05/JVM%E7%AF%87/</url>
-    <content><![CDATA[<h1 id="JVM的组成："><a href="#JVM的组成：" class="headerlink" title="JVM的组成："></a>JVM的组成：</h1><h2 id="JVM-概述-⭐"><a href="#JVM-概述-⭐" class="headerlink" title="JVM 概述(⭐)"></a>JVM 概述(⭐)</h2><h3 id="JVM是什么？"><a href="#JVM是什么？" class="headerlink" title="JVM是什么？"></a>JVM是什么？</h3><p><strong>jvm(Java Virtual Machine)，</strong>是Java程序的运行环境（java二进制字节码的运行环境）。</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h1 id="JVM的组成："><a href="#JVM的组成：" class="headerlink" title="JVM的组成："></a>JVM的组成：</h1><h2 id="JVM-概述-⭐"><a href="#JVM-概述-⭐" class="headerlink" title="JVM 概述(⭐)"></a>JVM 概述(⭐)</h2><h3 id="JVM是什么？"><a href="#JVM是什么？" class="headerlink" title="JVM是什么？"></a>JVM是什么？</h3><p><strong>jvm(Java Virtual Machine)，</strong>是Java程序的运行环境（java二进制字节码的运行环境）。</p>
 <ul>
 <li><strong>优点：</strong><ul>
 <li>一次编写，到处运行。(jvm屏蔽了各种操作系统)</li>
@@ -1366,7 +1366,7 @@
   <entry>
     <title>Redis</title>
     <url>/2024/08/05/Redis%E7%AF%87/</url>
-    <content><![CDATA[<h1 id="Redis常见数据类型及其应用场景（⭐）"><a href="#Redis常见数据类型及其应用场景（⭐）" class="headerlink" title="Redis常见数据类型及其应用场景（⭐）"></a>Redis常见数据类型及其应用场景（⭐）</h1><pre><code>    Redis 中比较常见的数据类型有：String（字符串）、List（列表）、Set（集合）、Hash（散列）、Zset（有序集合）。 
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h1 id="Redis常见数据类型及其应用场景（⭐）"><a href="#Redis常见数据类型及其应用场景（⭐）" class="headerlink" title="Redis常见数据类型及其应用场景（⭐）"></a>Redis常见数据类型及其应用场景（⭐）</h1><pre><code>    Redis 中比较常见的数据类型有：String（字符串）、List（列表）、Set（集合）、Hash（散列）、Zset（有序集合）。 
 </code></pre>
 <ul>
 <li><p><strong>String</strong>：一般用于存储一些常规数据，如Session、Token、序列化后的对象，还可以用来实现分布式锁。</p>
@@ -1599,7 +1599,7 @@
   <entry>
     <title>MySQL</title>
     <url>/2024/08/02/MySQL%E7%AF%87/</url>
-    <content><![CDATA[<h1 id="常规："><a href="#常规：" class="headerlink" title="常规："></a>常规：</h1><h2 id="数据库三大范式"><a href="#数据库三大范式" class="headerlink" title="数据库三大范式"></a>数据库三大范式</h2><ul>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h1 id="常规："><a href="#常规：" class="headerlink" title="常规："></a>常规：</h1><h2 id="数据库三大范式"><a href="#数据库三大范式" class="headerlink" title="数据库三大范式"></a>数据库三大范式</h2><ul>
 <li><strong>1NF</strong> : 表中字段的数据不可再拆分。(原子性)</li>
 <li><strong>2NF</strong> : 在满足第一范式的情况下，遵循唯一性，消除部分依赖。即，表中任意一个主键或任意一组联合主键，可以确定除该主键外的所有的非主键值。(一个表只能描述一件事情)</li>
 <li><strong>3NF</strong> : 在满足第二范式的情况下，消除传递依赖。即，在任一主键都可以确定所有非主键字段值的情况下，不能存在某非主键字段 A 可以获取 某非主键字段 B。<span id="more"></span></li>
@@ -1887,7 +1887,7 @@
   <entry>
     <title>Java集合</title>
     <url>/2024/08/02/%E9%9B%86%E5%90%88%E7%AF%87/</url>
-    <content><![CDATA[<div style="text-align: center; font-size: 24px;">
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><div style="text-align: center; font-size: 24px;">
 <b>  集合总体框架图：  </b>
 </div>
 
@@ -2096,7 +2096,7 @@
   <entry>
     <title>Java基础</title>
     <url>/2024/08/02/%E5%9F%BA%E7%A1%80%E7%AF%87/</url>
-    <content><![CDATA[<h1 id="java语言有哪些优点和缺点"><a href="#java语言有哪些优点和缺点" class="headerlink" title="java语言有哪些优点和缺点?"></a>java语言有哪些优点和缺点?</h1><h2 id="优点："><a href="#优点：" class="headerlink" title="优点："></a>优点：</h2><ul>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h1 id="java语言有哪些优点和缺点"><a href="#java语言有哪些优点和缺点" class="headerlink" title="java语言有哪些优点和缺点?"></a>java语言有哪些优点和缺点?</h1><h2 id="优点："><a href="#优点：" class="headerlink" title="优点："></a>优点：</h2><ul>
 <li>面向对象（封装，继承，多态）</li>
 <li>平台无关性（ Java 虚拟机实现平台无关性）</li>
 <li>支持多线程</li>
