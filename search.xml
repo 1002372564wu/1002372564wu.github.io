@@ -292,6 +292,119 @@
       </categories>
   </entry>
   <entry>
+    <title>Kafka</title>
+    <url>/2024/08/06/Kafka/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h1 id="Kafka的基本概念"><a href="#Kafka的基本概念" class="headerlink" title="Kafka的基本概念"></a>Kafka的基本概念</h1><p>Kafka是一个<strong>基于 Zookeeper 的分布式消息流平台</strong>，也是一款开源的<strong>基于发布订阅模式的消息引擎系统</strong>。</p>
+<p>Kafka 的消息队列一般分为两种模式：<strong>点对点模式</strong>和<strong>发布订阅模式</strong>。</p>
+<p><img src="/2024/08/06/Kafka/1.png"></p>
+<p>如果一个生产者或者多个生产者产生的消息能够被多个消费者同时消费的情况，这样的消息队列成为发布订阅模式的消息队列。</p>
+<p><img src="/2024/08/06/Kafka/2.jpg"></p>
+<p><strong>Kafka 的系统架构图</strong></p>
+<p><img src="/2024/08/06/Kafka/3.jpg"></p>
+<p><strong>Kafka 的基本术语</strong></p>
+<ul>
+<li><strong>消息</strong>：Kafka 中的数据单元被称为<strong>消息</strong>，也被称为记录，可以把它看作数据库表中某一行的记录。</li>
+<li><strong>批次</strong>：为了提高效率， 消息会<strong>分批次</strong>写入 Kafka，批次就代指的是一组消息。</li>
+<li><strong>主题</strong>：消息的种类称为 <strong>主题</strong>（Topic）,可以说一个主题代表了一类消息，相当于是对消息进行分类。</li>
+<li><strong>分区</strong>：主题可以被分为若干个分区（partition），同一个主题中的分区可以不在一个机器上，有可能会部署在多个机器上，由此来实现 kafka 的<strong>伸缩性</strong>。</li>
+<li><strong>生产者</strong>：向主题发布消息的客户端应用程序称为<strong>生产者</strong>（Producer），生产者用于持续不断的向某个主题发送消息。</li>
+<li><strong>消费者</strong>：订阅主题消息的客户端程序称为<strong>消费者</strong>（Consumer），消费者用于处理生产者产生的消息。</li>
+<li><strong>消费者群组</strong>：生产者与消费者的关系就如同餐厅中的厨师和顾客之间的关系一样，一个厨师对应多个顾客，也就是一个生产者对应多个消费者，<strong>消费者群组</strong>（Consumer Group）指的就是由一个或多个消费者组成的群体。</li>
+<li><strong>偏移量</strong>：<strong>偏移量</strong>（Consumer Offset）是一种元数据，它是一个不断递增的整数值，用来记录消费者发生重平衡时的位置，以便用来恢复数据。</li>
+<li><strong>broker:</strong> 一个独立的 Kafka 服务器就被称为 <strong>broker</strong>，broker 接收来自生产者的消息，为消息设置偏移量，并提交消息到磁盘保存。</li>
+<li><strong>broker 集群</strong>：broker 是<strong>集群</strong> 的组成部分，broker 集群由一个或多个 broker 组成，每个集群都有一个 broker 同时充当了<strong>集群控制器</strong>的角色（自动从集群的活跃成员中选举出来）。</li>
+<li><strong>副本</strong>：Kafka 中消息的备份又叫做 副本（Replica），副本的数量是可以配置的，Kafka 定义了两类副本：领导者副本（Leader Replica） 和 追随者副本（Follower Replica），前者对外提供服务，后者只是被动跟随。</li>
+<li><strong>重平衡</strong>：Rebalance。消费者组内某个消费者实例挂掉后，其他消费者实例自动重新分配订阅主题分区的过程。Rebalance 是 Kafka 消费者端实现高可用的重要手段。</li>
+</ul>
+<p><strong>Kafka 的特性</strong></p>
+<ul>
+<li><strong>高吞吐、低延迟</strong>：kakfa 最大的特点就是收发消息非常快，kafka 每秒可以处理几十万条消息，它的最低延迟只有几毫秒。</li>
+<li><strong>高伸缩性</strong>：每个主题(topic) 包含多个分区(partition)，主题中的分区可以分布在不同的主机(broker)中。</li>
+<li><strong>持久性、可靠性</strong>：Kafka 能够允许数据的持久化存储，消息被持久化到磁盘，并支持<strong>数据备份</strong>防止数据丢失，Kafka 底层的数据存储是基于 Zookeeper 存储的，Zookeeper 我们知道它的数据能够持久存储。</li>
+<li><strong>容错性</strong>：允许集群中的节点失败，某个节点宕机，Kafka 集群能够正常工作。</li>
+<li><strong>高并发</strong>：支持数千个客户端同时读写。</li>
+</ul>
+<h2 id="Kafka-的优缺点："><a href="#Kafka-的优缺点：" class="headerlink" title="Kafka 的优缺点："></a>Kafka 的优缺点：</h2><p><strong>优点：</strong></p>
+<ul>
+<li><strong>异步：</strong><ul>
+<li>某些非必要的业务逻辑以<strong>同步</strong>的方式运行，将耗费大量时间。<strong>在使用消息队列后，将发送的消息写入消息队列，非必要的业务逻辑以异步的方式运行，这样总耗时就只有发送消息和响应消息的时间了，大大提升了响应给用户的速度。</strong></li>
+</ul>
+</li>
+<li><strong>解耦：</strong><ul>
+<li>在未使用消息队列的系统中，系统间耦合性太强，上游系统需要考虑下游系统的消息可靠性问题。<strong>在使用消息队列后，将下游需要的消息push到消息队列中，需要消息的系统自己从消息队列中订阅；如果某个系统不需要这条数据了，就取消对 MQ 消息的订阅即可，上游系统不需要做任何修改，也不需要考虑下游消费失败的情况。</strong></li>
+</ul>
+</li>
+<li><strong>削峰：</strong><ul>
+<li>在未使用消息队列的系统中，系统面对突发大流量会导致系统崩溃。<strong>在使用消息队列后，下游系统按照数据库能处理的并发量，从消息队列中慢慢拉取消息。在大多数生产系统的业务场景中，短暂的高峰期的消息积压是允许的。这样就可以用有限的机器资源承载高并发请求。</strong></li>
+</ul>
+</li>
+</ul>
+<p><strong>缺点：</strong></p>
+<ul>
+<li><strong>系统可用性降低：</strong><ul>
+<li>系统每增加一个组件，必然导致可用性降低（中间件宕机会导致整个系统的崩溃）。Kafka 通过 <strong>broker 集群 + replica 副本机制</strong> 保证可用性。</li>
+</ul>
+</li>
+<li><strong>系统复杂性增加：</strong><ul>
+<li>保证消息的可靠传输。（消息不丢失）</li>
+<li>保证消息的幂等性。（不被重复消费）</li>
+<li>保证消息消费的顺序性。</li>
+</ul>
+</li>
+</ul>
+<h1 id="Kafka是如何保证消息不丢失的？（Kafka-如何保证消息的可靠传输？）"><a href="#Kafka是如何保证消息不丢失的？（Kafka-如何保证消息的可靠传输？）" class="headerlink" title="Kafka是如何保证消息不丢失的？（Kafka 如何保证消息的可靠传输？）"></a>Kafka是如何保证消息不丢失的？（Kafka 如何保证消息的可靠传输？）</h1><p>一条消息从产生，到发送到kafka保存，到被取出消费，有三个阶段可能会出现丢失的情况，即生产者端、broker端、消费者端。 下面分别概述解决办法：</p>
+<p><strong>生产者端丢失数据：</strong><br>为了提高效率，生产者发送消息到 Kafka 的时候，通常采用<strong>异步发送</strong>的方式，即发送完了之后会立即返回不会阻塞，但此时并不能保证消息一定发送成功了，有可能出现消息丢失的问题。</p>
+<p><strong>解决办法：使用重载的 send 方法。</strong><br>普通的 send 方法可以将消息发送出去，但是对发送出去的消息没有掌控能力，无法得知消息是否到达了 Kafka，是一种不可靠的发送方式。<br>而重载的 send 方法，其里面有一个参数为回调函数 callback，有了这个回调函数，一旦出现消息提交失败等异常情况，就可以有针对性地进行处理，如进行消息的重发等。</p>
+<p><strong>broker端丢失数据：</strong><br>数据发送到消息队列之后，由于 broker 端出的问题导致消息丢失。</p>
+<p><strong>解决办法：发送确认机制 acks。</strong><br>broker 端有三种确认机制，如下图：</p>
+<p><img src="/2024/08/06/Kafka/4.png" alt="image.png"></p>
+<p>通常情况下默认采用 acks&#x3D;1 的机制，只要 leader 接收到数据，就会给发送端返回确认消息。只有在 leader 接收到数据之后，还没来得及同步给 follower 就挂掉了才会导致数据的丢失，但是这种情况概率极小，无特殊场景下一般采用这种机制。</p>
+<p><strong>消费者端丢失数据：</strong><br>消费者端是通过 offset 偏移量来对消息进行消费的，默认是每隔 5 秒钟自动提交已经消费的偏移量 offset，如果消费端在消费消息的过程中挂掉了，而这条消息被自动提交了，那么就相当于丢了一条消息。</p>
+<p><strong>解决办法：关闭自动提交 offset 机制。</strong><br>让消费端在处理完消息之后手动提交 offset，这样就可以保证消息不丢失了。</p>
+<p>但是此时还可能会出现<strong>重复消费</strong>的问题，比如说刚处理完这条消息，在提交 offset 的前一瞬间挂掉了，那么下次这条消息还会被再消费一次，这里就设计到<strong>保证幂等性</strong>的问题了，不再赘述。</p>
+<h1 id="Kafka-如何保证消费的顺序性？"><a href="#Kafka-如何保证消费的顺序性？" class="headerlink" title="Kafka 如何保证消费的顺序性？"></a>Kafka 如何保证消费的顺序性？</h1><p><strong>造成 Kafka 消息无序的原因</strong></p>
+<p>Kafka 的设计目标是提供<strong>高吞吐量和低延迟</strong>，而不是强制保证全局有序性，所以Kafka使用多分区的概念，并且<strong>只保证单分区有序</strong>（offset）。</p>
+<p><strong>解决办法</strong></p>
+<ul>
+<li><strong>单分区策略</strong>：一个 topic 只有一个 partition，但是这样子做毫无并发度可言，失去了 Kafka 的意义。</li>
+<li><strong>基于 key 的消息分配策略</strong>：生产者在发送消息时，指定分区号或者根据业务设置相同的 key（Kafka 默认按照 key 的 hashcode 值寻找分区）。</li>
+</ul>
+<h1 id="Kafka-的高可用性如何保证？"><a href="#Kafka-的高可用性如何保证？" class="headerlink" title="Kafka 的高可用性如何保证？"></a>Kafka 的高可用性如何保证？</h1><p>由 <strong>broker 集群 + replica 副本机制</strong> 保证</p>
+<p>对<strong>Kafka 的整体架构</strong>的基本认识：一个 Kafka 集群由多个 broker 实例组成，每个 broker 实例中有不同的 topic，每个 topic 又划分为多个 partition，这些 partition 可以存在于不同的 broker 中。这就是一个天然的分布式消息队列，也就是说<strong>一个 topic 的数据是分散在多个机器上的</strong>。</p>
+<p>如果某一个 broker 节点宕机了，那么这上面的 partition 就相当于消失了。</p>
+<p>Kafka 为了保证高可用性，提供了 <strong>replica 副本机制</strong>，每个 partition 的数据都会同步到不同的 broker 中，形成数据的多个 replica 副本。这些 replica 副本会选举一个 leader，其余的为 follower，消息的生产和消费都和 leader 打交道。 如果 leader 节点宕机的话，会通过选举策略选举一个新的 leader。</p>
+<ul>
+<li>生产数据的时候，leader 会将数据同步给 follower，并通过<strong>acks 确认机制</strong>返回给生产者。（acks 可以取 0、1、all 分别代表不同的确认机制，具体可以看上面） </li>
+<li>消费数据的时候，也只会从 leader 那里取数据。（如果可以从 follower 那里取还需要保证一致性，非常麻烦）</li>
+</ul>
+<p>follower 副本分为两类：</p>
+<ul>
+<li><strong>ISR（in-sync-replica）副本</strong>：该副本是通过同步复制的方式与 leader 交互的，一致性更高。</li>
+<li><strong>普通副本</strong>：该副本通过异步复制的方式与 leader 进行交互，一致性一般。</li>
+</ul>
+<p>因此，当 leader 挂掉之后，<strong>优先从一致性高的 ISR 副本中选举中 leader</strong>。</p>
+<h1 id="Kafka-的数据清理机制"><a href="#Kafka-的数据清理机制" class="headerlink" title="Kafka 的数据清理机制"></a>Kafka 的数据清理机制</h1><ul>
+<li>根据消息的保留时间，当消息保存的时间超过指定的时间，就会触发清理，默认为 7 天。<ul>
+<li>log.retention.hours &#x3D; 168</li>
+</ul>
+</li>
+<li>根据 topic 存储的数据大小，当 topic 所占的日志文件大小大于一定的阈值，则删除最久的消息。（默认关闭，需手动开启参数）</li>
+</ul>
+<h1 id="Kafka-的高性能如何保证？"><a href="#Kafka-的高性能如何保证？" class="headerlink" title="Kafka 的高性能如何保证？"></a>Kafka 的高性能如何保证？</h1><p><strong>先介绍一下 Kafka 的整体架构，然后可以扯出前两点：</strong></p>
+<h2 id="broker-集群"><a href="#broker-集群" class="headerlink" title="broker 集群"></a>broker 集群</h2><p>Kafka 中的 broker 集群使消息分散在多台服务器中，每个 topic 的 partition 分布在不同的 broker 中，系统的吞吐量高。</p>
+<h2 id="磁盘的顺序读写"><a href="#磁盘的顺序读写" class="headerlink" title="磁盘的顺序读写"></a>磁盘的顺序读写</h2><p>在 Kafka 中，一个 topic 对应多个 partition，每个 partition 又有多个 replica 副本，每个副本都对用一个 log 日志文件，这个日志文件被切分为多个子日志文件，这些子日志文件对应着磁盘上的日志文件、两个索引文件以及其他文件。如图：</p>
+<p><img src="/2024/08/06/Kafka/5.png" alt="image.png"></p>
+<p>在 log 中追加消息是<strong>顺序写入</strong>的，<strong>因此磁盘的读写为顺序读写，效率比随机读写高得多</strong>。</p>
+<h2 id="页缓存技术"><a href="#页缓存技术" class="headerlink" title="页缓存技术"></a>页缓存技术</h2><p>在读取磁盘数据的时候，会在内存设置一段页缓存区域，从而避免了对物理磁盘的I&#x2F;O操作。如果页缓存区域没有命中数据，则会去磁盘里查找数据并将数据存入页缓存当中。</p>
+<h2 id="零拷贝"><a href="#零拷贝" class="headerlink" title="零拷贝"></a>零拷贝</h2><p>Kafka中存在大量的网络数据持久化到磁盘（Producer到Broker）和磁盘文件通过网络发送（Broker到Consumer）的过程。这一过程的性能直接影响Kafka的整体吞吐量。</p>
+<p>在传统模式下，<strong>将磁盘文件通过网络发送</strong>需要先将文件数据读入内存，然后通过Socket将内存中的数据发送出去。 这一过程需要<strong>四次拷贝和四次上下文切换</strong>。<br>Linux 2.4+内核通过<strong>sendfile</strong>系统调用，提供了零拷贝（CPU 拷贝）。只有两次上下文切换，大大提高了性能。</p>
+<h2 id="分批发送"><a href="#分批发送" class="headerlink" title="分批发送"></a>分批发送</h2><p>生产者发送消息时支持批量发送消息，将多条消息积累到一个批次中，然后一次性发送给Kafka Broker，这样可以减少网络I&#x2F;O次数，显著提升吞吐量。</p>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+  </entry>
+  <entry>
     <title>JVM</title>
     <url>/2024/08/05/JVM%E7%AF%87/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h1 id="JVM的组成："><a href="#JVM的组成：" class="headerlink" title="JVM的组成："></a>JVM的组成：</h1><h2 id="JVM-概述-⭐"><a href="#JVM-概述-⭐" class="headerlink" title="JVM 概述(⭐)"></a>JVM 概述(⭐)</h2><h3 id="JVM是什么？"><a href="#JVM是什么？" class="headerlink" title="JVM是什么？"></a>JVM是什么？</h3><p><strong>jvm(Java Virtual Machine)，</strong>是Java程序的运行环境（java二进制字节码的运行环境）。</p>
@@ -624,119 +737,6 @@
 </ul>
 </li>
 </ul>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Kafka</title>
-    <url>/2024/08/06/Kafka/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h1 id="Kafka的基本概念"><a href="#Kafka的基本概念" class="headerlink" title="Kafka的基本概念"></a>Kafka的基本概念</h1><p>Kafka是一个<strong>基于 Zookeeper 的分布式消息流平台</strong>，也是一款开源的<strong>基于发布订阅模式的消息引擎系统</strong>。</p>
-<p>Kafka 的消息队列一般分为两种模式：<strong>点对点模式</strong>和<strong>发布订阅模式</strong>。</p>
-<p><img src="/2024/08/06/Kafka/1.png"></p>
-<p>如果一个生产者或者多个生产者产生的消息能够被多个消费者同时消费的情况，这样的消息队列成为发布订阅模式的消息队列。</p>
-<p><img src="/2024/08/06/Kafka/2.jpg"></p>
-<p><strong>Kafka 的系统架构图</strong></p>
-<p><img src="/2024/08/06/Kafka/3.jpg"></p>
-<p><strong>Kafka 的基本术语</strong></p>
-<ul>
-<li><strong>消息</strong>：Kafka 中的数据单元被称为<strong>消息</strong>，也被称为记录，可以把它看作数据库表中某一行的记录。</li>
-<li><strong>批次</strong>：为了提高效率， 消息会<strong>分批次</strong>写入 Kafka，批次就代指的是一组消息。</li>
-<li><strong>主题</strong>：消息的种类称为 <strong>主题</strong>（Topic）,可以说一个主题代表了一类消息，相当于是对消息进行分类。</li>
-<li><strong>分区</strong>：主题可以被分为若干个分区（partition），同一个主题中的分区可以不在一个机器上，有可能会部署在多个机器上，由此来实现 kafka 的<strong>伸缩性</strong>。</li>
-<li><strong>生产者</strong>：向主题发布消息的客户端应用程序称为<strong>生产者</strong>（Producer），生产者用于持续不断的向某个主题发送消息。</li>
-<li><strong>消费者</strong>：订阅主题消息的客户端程序称为<strong>消费者</strong>（Consumer），消费者用于处理生产者产生的消息。</li>
-<li><strong>消费者群组</strong>：生产者与消费者的关系就如同餐厅中的厨师和顾客之间的关系一样，一个厨师对应多个顾客，也就是一个生产者对应多个消费者，<strong>消费者群组</strong>（Consumer Group）指的就是由一个或多个消费者组成的群体。</li>
-<li><strong>偏移量</strong>：<strong>偏移量</strong>（Consumer Offset）是一种元数据，它是一个不断递增的整数值，用来记录消费者发生重平衡时的位置，以便用来恢复数据。</li>
-<li><strong>broker:</strong> 一个独立的 Kafka 服务器就被称为 <strong>broker</strong>，broker 接收来自生产者的消息，为消息设置偏移量，并提交消息到磁盘保存。</li>
-<li><strong>broker 集群</strong>：broker 是<strong>集群</strong> 的组成部分，broker 集群由一个或多个 broker 组成，每个集群都有一个 broker 同时充当了<strong>集群控制器</strong>的角色（自动从集群的活跃成员中选举出来）。</li>
-<li><strong>副本</strong>：Kafka 中消息的备份又叫做 副本（Replica），副本的数量是可以配置的，Kafka 定义了两类副本：领导者副本（Leader Replica） 和 追随者副本（Follower Replica），前者对外提供服务，后者只是被动跟随。</li>
-<li><strong>重平衡</strong>：Rebalance。消费者组内某个消费者实例挂掉后，其他消费者实例自动重新分配订阅主题分区的过程。Rebalance 是 Kafka 消费者端实现高可用的重要手段。</li>
-</ul>
-<p><strong>Kafka 的特性</strong></p>
-<ul>
-<li><strong>高吞吐、低延迟</strong>：kakfa 最大的特点就是收发消息非常快，kafka 每秒可以处理几十万条消息，它的最低延迟只有几毫秒。</li>
-<li><strong>高伸缩性</strong>：每个主题(topic) 包含多个分区(partition)，主题中的分区可以分布在不同的主机(broker)中。</li>
-<li><strong>持久性、可靠性</strong>：Kafka 能够允许数据的持久化存储，消息被持久化到磁盘，并支持<strong>数据备份</strong>防止数据丢失，Kafka 底层的数据存储是基于 Zookeeper 存储的，Zookeeper 我们知道它的数据能够持久存储。</li>
-<li><strong>容错性</strong>：允许集群中的节点失败，某个节点宕机，Kafka 集群能够正常工作。</li>
-<li><strong>高并发</strong>：支持数千个客户端同时读写。</li>
-</ul>
-<h2 id="Kafka-的优缺点："><a href="#Kafka-的优缺点：" class="headerlink" title="Kafka 的优缺点："></a>Kafka 的优缺点：</h2><p><strong>优点：</strong></p>
-<ul>
-<li><strong>异步：</strong><ul>
-<li>某些非必要的业务逻辑以<strong>同步</strong>的方式运行，将耗费大量时间。<strong>在使用消息队列后，将发送的消息写入消息队列，非必要的业务逻辑以异步的方式运行，这样总耗时就只有发送消息和响应消息的时间了，大大提升了响应给用户的速度。</strong></li>
-</ul>
-</li>
-<li><strong>解耦：</strong><ul>
-<li>在未使用消息队列的系统中，系统间耦合性太强，上游系统需要考虑下游系统的消息可靠性问题。<strong>在使用消息队列后，将下游需要的消息push到消息队列中，需要消息的系统自己从消息队列中订阅；如果某个系统不需要这条数据了，就取消对 MQ 消息的订阅即可，上游系统不需要做任何修改，也不需要考虑下游消费失败的情况。</strong></li>
-</ul>
-</li>
-<li><strong>削峰：</strong><ul>
-<li>在未使用消息队列的系统中，系统面对突发大流量会导致系统崩溃。<strong>在使用消息队列后，下游系统按照数据库能处理的并发量，从消息队列中慢慢拉取消息。在大多数生产系统的业务场景中，短暂的高峰期的消息积压是允许的。这样就可以用有限的机器资源承载高并发请求。</strong></li>
-</ul>
-</li>
-</ul>
-<p><strong>缺点：</strong></p>
-<ul>
-<li><strong>系统可用性降低：</strong><ul>
-<li>系统每增加一个组件，必然导致可用性降低（中间件宕机会导致整个系统的崩溃）。Kafka 通过 <strong>broker 集群 + replica 副本机制</strong> 保证可用性。</li>
-</ul>
-</li>
-<li><strong>系统复杂性增加：</strong><ul>
-<li>保证消息的可靠传输。（消息不丢失）</li>
-<li>保证消息的幂等性。（不被重复消费）</li>
-<li>保证消息消费的顺序性。</li>
-</ul>
-</li>
-</ul>
-<h1 id="Kafka是如何保证消息不丢失的？（Kafka-如何保证消息的可靠传输？）"><a href="#Kafka是如何保证消息不丢失的？（Kafka-如何保证消息的可靠传输？）" class="headerlink" title="Kafka是如何保证消息不丢失的？（Kafka 如何保证消息的可靠传输？）"></a>Kafka是如何保证消息不丢失的？（Kafka 如何保证消息的可靠传输？）</h1><p>一条消息从产生，到发送到kafka保存，到被取出消费，有三个阶段可能会出现丢失的情况，即生产者端、broker端、消费者端。 下面分别概述解决办法：</p>
-<p><strong>生产者端丢失数据：</strong><br>为了提高效率，生产者发送消息到 Kafka 的时候，通常采用<strong>异步发送</strong>的方式，即发送完了之后会立即返回不会阻塞，但此时并不能保证消息一定发送成功了，有可能出现消息丢失的问题。</p>
-<p><strong>解决办法：使用重载的 send 方法。</strong><br>普通的 send 方法可以将消息发送出去，但是对发送出去的消息没有掌控能力，无法得知消息是否到达了 Kafka，是一种不可靠的发送方式。<br>而重载的 send 方法，其里面有一个参数为回调函数 callback，有了这个回调函数，一旦出现消息提交失败等异常情况，就可以有针对性地进行处理，如进行消息的重发等。</p>
-<p><strong>broker端丢失数据：</strong><br>数据发送到消息队列之后，由于 broker 端出的问题导致消息丢失。</p>
-<p><strong>解决办法：发送确认机制 acks。</strong><br>broker 端有三种确认机制，如下图：</p>
-<p><img src="/2024/08/06/Kafka/4.png" alt="image.png"></p>
-<p>通常情况下默认采用 acks&#x3D;1 的机制，只要 leader 接收到数据，就会给发送端返回确认消息。只有在 leader 接收到数据之后，还没来得及同步给 follower 就挂掉了才会导致数据的丢失，但是这种情况概率极小，无特殊场景下一般采用这种机制。</p>
-<p><strong>消费者端丢失数据：</strong><br>消费者端是通过 offset 偏移量来对消息进行消费的，默认是每隔 5 秒钟自动提交已经消费的偏移量 offset，如果消费端在消费消息的过程中挂掉了，而这条消息被自动提交了，那么就相当于丢了一条消息。</p>
-<p><strong>解决办法：关闭自动提交 offset 机制。</strong><br>让消费端在处理完消息之后手动提交 offset，这样就可以保证消息不丢失了。</p>
-<p>但是此时还可能会出现<strong>重复消费</strong>的问题，比如说刚处理完这条消息，在提交 offset 的前一瞬间挂掉了，那么下次这条消息还会被再消费一次，这里就设计到<strong>保证幂等性</strong>的问题了，不再赘述。</p>
-<h1 id="Kafka-如何保证消费的顺序性？"><a href="#Kafka-如何保证消费的顺序性？" class="headerlink" title="Kafka 如何保证消费的顺序性？"></a>Kafka 如何保证消费的顺序性？</h1><p><strong>造成 Kafka 消息无序的原因</strong></p>
-<p>Kafka 的设计目标是提供<strong>高吞吐量和低延迟</strong>，而不是强制保证全局有序性，所以Kafka使用多分区的概念，并且<strong>只保证单分区有序</strong>（offset）。</p>
-<p><strong>解决办法</strong></p>
-<ul>
-<li><strong>单分区策略</strong>：一个 topic 只有一个 partition，但是这样子做毫无并发度可言，失去了 Kafka 的意义。</li>
-<li><strong>基于 key 的消息分配策略</strong>：生产者在发送消息时，指定分区号或者根据业务设置相同的 key（Kafka 默认按照 key 的 hashcode 值寻找分区）。</li>
-</ul>
-<h1 id="Kafka-的高可用性如何保证？"><a href="#Kafka-的高可用性如何保证？" class="headerlink" title="Kafka 的高可用性如何保证？"></a>Kafka 的高可用性如何保证？</h1><p>由 <strong>broker 集群 + replica 副本机制</strong> 保证</p>
-<p>对<strong>Kafka 的整体架构</strong>的基本认识：一个 Kafka 集群由多个 broker 实例组成，每个 broker 实例中有不同的 topic，每个 topic 又划分为多个 partition，这些 partition 可以存在于不同的 broker 中。这就是一个天然的分布式消息队列，也就是说<strong>一个 topic 的数据是分散在多个机器上的</strong>。</p>
-<p>如果某一个 broker 节点宕机了，那么这上面的 partition 就相当于消失了。</p>
-<p>Kafka 为了保证高可用性，提供了 <strong>replica 副本机制</strong>，每个 partition 的数据都会同步到不同的 broker 中，形成数据的多个 replica 副本。这些 replica 副本会选举一个 leader，其余的为 follower，消息的生产和消费都和 leader 打交道。 如果 leader 节点宕机的话，会通过选举策略选举一个新的 leader。</p>
-<ul>
-<li>生产数据的时候，leader 会将数据同步给 follower，并通过<strong>acks 确认机制</strong>返回给生产者。（acks 可以取 0、1、all 分别代表不同的确认机制，具体可以看上面） </li>
-<li>消费数据的时候，也只会从 leader 那里取数据。（如果可以从 follower 那里取还需要保证一致性，非常麻烦）</li>
-</ul>
-<p>follower 副本分为两类：</p>
-<ul>
-<li><strong>ISR（in-sync-replica）副本</strong>：该副本是通过同步复制的方式与 leader 交互的，一致性更高。</li>
-<li><strong>普通副本</strong>：该副本通过异步复制的方式与 leader 进行交互，一致性一般。</li>
-</ul>
-<p>因此，当 leader 挂掉之后，<strong>优先从一致性高的 ISR 副本中选举中 leader</strong>。</p>
-<h1 id="Kafka-的数据清理机制"><a href="#Kafka-的数据清理机制" class="headerlink" title="Kafka 的数据清理机制"></a>Kafka 的数据清理机制</h1><ul>
-<li>根据消息的保留时间，当消息保存的时间超过指定的时间，就会触发清理，默认为 7 天。<ul>
-<li>log.retention.hours &#x3D; 168</li>
-</ul>
-</li>
-<li>根据 topic 存储的数据大小，当 topic 所占的日志文件大小大于一定的阈值，则删除最久的消息。（默认关闭，需手动开启参数）</li>
-</ul>
-<h1 id="Kafka-的高性能如何保证？"><a href="#Kafka-的高性能如何保证？" class="headerlink" title="Kafka 的高性能如何保证？"></a>Kafka 的高性能如何保证？</h1><p><strong>先介绍一下 Kafka 的整体架构，然后可以扯出前两点：</strong></p>
-<h2 id="broker-集群"><a href="#broker-集群" class="headerlink" title="broker 集群"></a>broker 集群</h2><p>Kafka 中的 broker 集群使消息分散在多台服务器中，每个 topic 的 partition 分布在不同的 broker 中，系统的吞吐量高。</p>
-<h2 id="磁盘的顺序读写"><a href="#磁盘的顺序读写" class="headerlink" title="磁盘的顺序读写"></a>磁盘的顺序读写</h2><p>在 Kafka 中，一个 topic 对应多个 partition，每个 partition 又有多个 replica 副本，每个副本都对用一个 log 日志文件，这个日志文件被切分为多个子日志文件，这些子日志文件对应着磁盘上的日志文件、两个索引文件以及其他文件。如图：</p>
-<p><img src="/2024/08/06/Kafka/5.png" alt="image.png"></p>
-<p>在 log 中追加消息是<strong>顺序写入</strong>的，<strong>因此磁盘的读写为顺序读写，效率比随机读写高得多</strong>。</p>
-<h2 id="页缓存技术"><a href="#页缓存技术" class="headerlink" title="页缓存技术"></a>页缓存技术</h2><p>在读取磁盘数据的时候，会在内存设置一段页缓存区域，从而避免了对物理磁盘的I&#x2F;O操作。如果页缓存区域没有命中数据，则会去磁盘里查找数据并将数据存入页缓存当中。</p>
-<h2 id="零拷贝"><a href="#零拷贝" class="headerlink" title="零拷贝"></a>零拷贝</h2><p>Kafka中存在大量的网络数据持久化到磁盘（Producer到Broker）和磁盘文件通过网络发送（Broker到Consumer）的过程。这一过程的性能直接影响Kafka的整体吞吐量。</p>
-<p>在传统模式下，<strong>将磁盘文件通过网络发送</strong>需要先将文件数据读入内存，然后通过Socket将内存中的数据发送出去。 这一过程需要<strong>四次拷贝和四次上下文切换</strong>。<br>Linux 2.4+内核通过<strong>sendfile</strong>系统调用，提供了零拷贝（CPU 拷贝）。只有两次上下文切换，大大提高了性能。</p>
-<h2 id="分批发送"><a href="#分批发送" class="headerlink" title="分批发送"></a>分批发送</h2><p>生产者发送消息时支持批量发送消息，将多条消息积累到一个批次中，然后一次性发送给Kafka Broker，这样可以减少网络I&#x2F;O次数，显著提升吞吐量。</p>
 ]]></content>
       <categories>
         <category>Java</category>
@@ -1292,76 +1292,6 @@
 ]]></content>
   </entry>
   <entry>
-    <title>操作系统常见面试题</title>
-    <url>/2024/08/06/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%AF%87/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h1 id="进程和线程的区别"><a href="#进程和线程的区别" class="headerlink" title="进程和线程的区别"></a>进程和线程的区别</h1><ul>
-<li><strong>根本区别：</strong>进程是操作系统<strong>资源分配</strong>的基本单位，而线程是处理器<strong>任务调度和执行</strong>的基本单位。  </li>
-<li><strong>资源开销</strong>：  <ul>
-<li>每个进程都有独立的内存空间，进程间切换需要保存和恢复进程的状态，因此进程上下文切换的开销较大。  </li>
-<li>线程间共享进程的内存空间，线程的上下文切换开销较小。</li>
-</ul>
-</li>
-<li><strong>通信与同步</strong>：  <ul>
-<li>由于进程间相互隔离，进程间的通信需要通过一些特殊机制，如<strong>管道、消息队列、信号量</strong>等。</li>
-<li>由于线程共享进程的内存空间，因此它们可以直接访问共享数据，通信更方便。</li>
-</ul>
-</li>
-<li><strong>安全性：</strong><ul>
-<li>由于进程间相互隔离，一个进程的崩溃不会影响到其他进程的运行。</li>
-<li>由于线程共享内存空间，一个线程的崩溃可能会影响到整个进程的运行。</li>
-</ul>
-</li>
-</ul>
-<h1 id="死锁是什么？如何解决？"><a href="#死锁是什么？如何解决？" class="headerlink" title="死锁是什么？如何解决？"></a>死锁是什么？如何解决？</h1><h2 id="死锁："><a href="#死锁：" class="headerlink" title="死锁："></a><strong>死锁：</strong></h2><p>由于多个进程对资源进行抢夺，造成了这些进程同时阻塞，互相等待对方释放资源的这么一种僵局的状态。</p>
-<h2 id="死锁产生的必要条件："><a href="#死锁产生的必要条件：" class="headerlink" title="死锁产生的必要条件："></a><strong>死锁产生的必要条件：</strong></h2><ul>
-<li><strong>互斥条件：</strong> 多个线程不能同时使用同一个资源。</li>
-<li><strong>持有并等待条件：</strong> 当前线程持有了资源A，想去申请资源B，而资源B已经被其他线程所持有，当前线程就会在持有资源A的状态下阻塞。</li>
-<li><strong>不可剥夺条件：</strong> 线程持有的资源在使用完之前不会被其他线程所抢占。</li>
-<li><strong>环路等待条件</strong>：两个线程获取资源的顺序构成了环形链。</li>
-</ul>
-<h2 id="死锁的预防："><a href="#死锁的预防：" class="headerlink" title="死锁的预防："></a><strong>死锁的预防：</strong></h2><ul>
-<li><strong>破坏互斥条件：</strong> 将互斥资源改为共享资源。</li>
-<li><strong>破坏持有并等待条件：</strong> 使进程在执行前一次性申请到所需的所有资源。</li>
-<li><strong>破坏不可剥夺条件：</strong> 将获取资源的方式改为抢占式的。</li>
-<li><strong>破坏循环等待条件：</strong> 使用资源有序分配法，规定进程获取资源的顺序以破坏死锁环路。</li>
-</ul>
-<h2 id="死锁的避免："><a href="#死锁的避免：" class="headerlink" title="死锁的避免："></a>死锁的避免：</h2><p>当一个进程申请使用资源的时候，<strong>银行家算法</strong> 通过先 <strong>试探</strong> 分配给该进程资源，然后通过 <strong>安全性算法</strong> 判断分配后系统是否处于安全状态，若不安全则试探分配作废，让该进程继续等待，若能够进入到安全的状态，则就 <strong>真的分配资源给该进程</strong>。</p>
-<h2 id="死锁的检测与解除："><a href="#死锁的检测与解除：" class="headerlink" title="死锁的检测与解除："></a>死锁的检测与解除：</h2><ul>
-<li>Java可以使用jstack查看进程信息，jstack会在最后给出进程的分析信息。</li>
-<li>使用图形化工具<strong>jconsole，</strong>用于对JVM中内存，线程和类等的监控，其下有<strong>检测死锁</strong>功能。</li>
-</ul>
-<p>通过死锁检测程序检测是否发生了死锁，若发生了死锁，应设法解除当前的死锁状态：</p>
-<ul>
-<li><strong>立即结束所有进程的执行，重新启动操作系统。</strong></li>
-<li><strong>逐个撤销涉及死锁的进程，回收其资源直至死锁解除。</strong></li>
-</ul>
-<h1 id="进程间的通信方式"><a href="#进程间的通信方式" class="headerlink" title="进程间的通信方式"></a>进程间的通信方式</h1><ul>
-<li><strong>管道：</strong>管道的实质是一个<strong>内核缓冲区</strong>，进程以<strong>先进先出</strong>的方式从缓冲区存取数据：管道一端的进程顺序地将进程数据写入缓冲区，另一端的进程则顺序地读取数据。<ul>
-<li><strong>pipe匿名管道：</strong>用于<strong>具有亲缘关系的进程</strong>之间的通信，例如父进程和子进程，它通过pipe()系统调用来创建并打开。</li>
-<li><strong>FIFO命名管道：</strong>命名管道的名字对应于一个<strong>磁盘索引节点</strong>，有了这个文件名，<strong>任何进程都有权限对它进行访问</strong>。Linux中通过系统调用makefifo()来创建一个命名管道。</li>
-</ul>
-</li>
-</ul>
-<p><strong>管道的通信效率较低，因此不适合进程间频繁地交换数据。</strong></p>
-<ul>
-<li><strong>消息队列：</strong><ul>
-<li><strong>是保存在内核中的消息链表，</strong> 用户进程可以向消息队列添加消息，也可以向消息队列读取消息。 </li>
-<li><strong>消息体</strong>是用户<strong>自定义</strong>的数据类型，与管道通信相比，其优势是不需要按照队列次序，可以根据自定义条件接收特定类型的消息。</li>
-<li>消息队列的生命周期随内核，进程结束了也不会消失。</li>
-</ul>
-</li>
-</ul>
-<p><strong>消息队列不适合大数据的传输，因为在内核中每个消息体都有一个最大长度的限制。且消息队列通信过程中，存在用户态与内核态之间的数据拷贝开销。</strong></p>
-<ul>
-<li><strong>共享内存：</strong>各进程<strong>取出一块虚拟地址空间来，映射到相同的物理内存中，</strong>这样这个进程写入的东西，另外一个进程马上就能看到了，都不需要拷贝来拷贝去，大大<strong>提高进程间通信的速度</strong>。</li>
-<li><strong>信号量：</strong>信号量其实是一个<strong>整型计数器</strong>，主要用于实现<strong>进程间的互斥与同步</strong>，解决共享内存产生的<strong>访问数据冲突</strong>问题。主要包括两种操作：等待（wait）和释放（signal）。</li>
-</ul>
-]]></content>
-      <categories>
-        <category>操作系统</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Java基础</title>
     <url>/2024/08/02/%E5%9F%BA%E7%A1%80%E7%AF%87/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h1 id="java语言有哪些优点和缺点"><a href="#java语言有哪些优点和缺点" class="headerlink" title="java语言有哪些优点和缺点?"></a>java语言有哪些优点和缺点?</h1><h2 id="优点："><a href="#优点：" class="headerlink" title="优点："></a>优点：</h2><ul>
@@ -1594,6 +1524,76 @@
 ]]></content>
       <categories>
         <category>Java</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>操作系统常见面试题</title>
+    <url>/2024/08/06/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%AF%87/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h1 id="进程和线程的区别"><a href="#进程和线程的区别" class="headerlink" title="进程和线程的区别"></a>进程和线程的区别</h1><ul>
+<li><strong>根本区别：</strong>进程是操作系统<strong>资源分配</strong>的基本单位，而线程是处理器<strong>任务调度和执行</strong>的基本单位。  </li>
+<li><strong>资源开销</strong>：  <ul>
+<li>每个进程都有独立的内存空间，进程间切换需要保存和恢复进程的状态，因此进程上下文切换的开销较大。  </li>
+<li>线程间共享进程的内存空间，线程的上下文切换开销较小。</li>
+</ul>
+</li>
+<li><strong>通信与同步</strong>：  <ul>
+<li>由于进程间相互隔离，进程间的通信需要通过一些特殊机制，如<strong>管道、消息队列、信号量</strong>等。</li>
+<li>由于线程共享进程的内存空间，因此它们可以直接访问共享数据，通信更方便。</li>
+</ul>
+</li>
+<li><strong>安全性：</strong><ul>
+<li>由于进程间相互隔离，一个进程的崩溃不会影响到其他进程的运行。</li>
+<li>由于线程共享内存空间，一个线程的崩溃可能会影响到整个进程的运行。</li>
+</ul>
+</li>
+</ul>
+<h1 id="死锁是什么？如何解决？"><a href="#死锁是什么？如何解决？" class="headerlink" title="死锁是什么？如何解决？"></a>死锁是什么？如何解决？</h1><h2 id="死锁："><a href="#死锁：" class="headerlink" title="死锁："></a><strong>死锁：</strong></h2><p>由于多个进程对资源进行抢夺，造成了这些进程同时阻塞，互相等待对方释放资源的这么一种僵局的状态。</p>
+<h2 id="死锁产生的必要条件："><a href="#死锁产生的必要条件：" class="headerlink" title="死锁产生的必要条件："></a><strong>死锁产生的必要条件：</strong></h2><ul>
+<li><strong>互斥条件：</strong> 多个线程不能同时使用同一个资源。</li>
+<li><strong>持有并等待条件：</strong> 当前线程持有了资源A，想去申请资源B，而资源B已经被其他线程所持有，当前线程就会在持有资源A的状态下阻塞。</li>
+<li><strong>不可剥夺条件：</strong> 线程持有的资源在使用完之前不会被其他线程所抢占。</li>
+<li><strong>环路等待条件</strong>：两个线程获取资源的顺序构成了环形链。</li>
+</ul>
+<h2 id="死锁的预防："><a href="#死锁的预防：" class="headerlink" title="死锁的预防："></a><strong>死锁的预防：</strong></h2><ul>
+<li><strong>破坏互斥条件：</strong> 将互斥资源改为共享资源。</li>
+<li><strong>破坏持有并等待条件：</strong> 使进程在执行前一次性申请到所需的所有资源。</li>
+<li><strong>破坏不可剥夺条件：</strong> 将获取资源的方式改为抢占式的。</li>
+<li><strong>破坏循环等待条件：</strong> 使用资源有序分配法，规定进程获取资源的顺序以破坏死锁环路。</li>
+</ul>
+<h2 id="死锁的避免："><a href="#死锁的避免：" class="headerlink" title="死锁的避免："></a>死锁的避免：</h2><p>当一个进程申请使用资源的时候，<strong>银行家算法</strong> 通过先 <strong>试探</strong> 分配给该进程资源，然后通过 <strong>安全性算法</strong> 判断分配后系统是否处于安全状态，若不安全则试探分配作废，让该进程继续等待，若能够进入到安全的状态，则就 <strong>真的分配资源给该进程</strong>。</p>
+<h2 id="死锁的检测与解除："><a href="#死锁的检测与解除：" class="headerlink" title="死锁的检测与解除："></a>死锁的检测与解除：</h2><ul>
+<li>Java可以使用jstack查看进程信息，jstack会在最后给出进程的分析信息。</li>
+<li>使用图形化工具<strong>jconsole，</strong>用于对JVM中内存，线程和类等的监控，其下有<strong>检测死锁</strong>功能。</li>
+</ul>
+<p>通过死锁检测程序检测是否发生了死锁，若发生了死锁，应设法解除当前的死锁状态：</p>
+<ul>
+<li><strong>立即结束所有进程的执行，重新启动操作系统。</strong></li>
+<li><strong>逐个撤销涉及死锁的进程，回收其资源直至死锁解除。</strong></li>
+</ul>
+<h1 id="进程间的通信方式"><a href="#进程间的通信方式" class="headerlink" title="进程间的通信方式"></a>进程间的通信方式</h1><ul>
+<li><strong>管道：</strong>管道的实质是一个<strong>内核缓冲区</strong>，进程以<strong>先进先出</strong>的方式从缓冲区存取数据：管道一端的进程顺序地将进程数据写入缓冲区，另一端的进程则顺序地读取数据。<ul>
+<li><strong>pipe匿名管道：</strong>用于<strong>具有亲缘关系的进程</strong>之间的通信，例如父进程和子进程，它通过pipe()系统调用来创建并打开。</li>
+<li><strong>FIFO命名管道：</strong>命名管道的名字对应于一个<strong>磁盘索引节点</strong>，有了这个文件名，<strong>任何进程都有权限对它进行访问</strong>。Linux中通过系统调用makefifo()来创建一个命名管道。</li>
+</ul>
+</li>
+</ul>
+<p><strong>管道的通信效率较低，因此不适合进程间频繁地交换数据。</strong></p>
+<ul>
+<li><strong>消息队列：</strong><ul>
+<li><strong>是保存在内核中的消息链表，</strong> 用户进程可以向消息队列添加消息，也可以向消息队列读取消息。 </li>
+<li><strong>消息体</strong>是用户<strong>自定义</strong>的数据类型，与管道通信相比，其优势是不需要按照队列次序，可以根据自定义条件接收特定类型的消息。</li>
+<li>消息队列的生命周期随内核，进程结束了也不会消失。</li>
+</ul>
+</li>
+</ul>
+<p><strong>消息队列不适合大数据的传输，因为在内核中每个消息体都有一个最大长度的限制。且消息队列通信过程中，存在用户态与内核态之间的数据拷贝开销。</strong></p>
+<ul>
+<li><strong>共享内存：</strong>各进程<strong>取出一块虚拟地址空间来，映射到相同的物理内存中，</strong>这样这个进程写入的东西，另外一个进程马上就能看到了，都不需要拷贝来拷贝去，大大<strong>提高进程间通信的速度</strong>。</li>
+<li><strong>信号量：</strong>信号量其实是一个<strong>整型计数器</strong>，主要用于实现<strong>进程间的互斥与同步</strong>，解决共享内存产生的<strong>访问数据冲突</strong>问题。主要包括两种操作：等待（wait）和释放（signal）。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>操作系统</category>
       </categories>
   </entry>
   <entry>
