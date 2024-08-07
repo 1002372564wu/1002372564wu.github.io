@@ -261,6 +261,7 @@
 <h2 id="分批发送"><a href="#分批发送" class="headerlink" title="分批发送"></a>分批发送</h2><p>生产者发送消息时支持批量发送消息，将多条消息积累到一个批次中，然后一次性发送给Kafka Broker，这样可以减少网络I&#x2F;O次数，显著提升吞吐量。</p>
 ]]></content>
       <categories>
+        <category>技术</category>
         <category>Java</category>
       </categories>
   </entry>
@@ -286,6 +287,7 @@
 <p><strong>运行结果：</strong><br><img src="/2024/08/06/Java8%E6%96%B0%E7%89%B9%E6%80%A7/3.png" alt="image.png"></p>
 ]]></content>
       <categories>
+        <category>技术</category>
         <category>Java</category>
       </categories>
   </entry>
@@ -374,6 +376,7 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//返回同步状态的当前值</span></span><br><span class="line"><span class="keyword">protected</span> <span class="keyword">final</span> <span class="type">int</span> <span class="title function_">getState</span><span class="params">()</span> &#123;</span><br><span class="line">     <span class="keyword">return</span> state;</span><br><span class="line">&#125;</span><br><span class="line"> <span class="comment">// 设置同步状态的值</span></span><br><span class="line"><span class="keyword">protected</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title function_">setState</span><span class="params">(<span class="type">int</span> newState)</span> &#123;</span><br><span class="line">     state = newState;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//原子地（CAS操作）将同步状态值设置为给定值update如果当前同步状态的值等于expect（期望值）</span></span><br><span class="line"><span class="keyword">protected</span> <span class="keyword">final</span> <span class="type">boolean</span> <span class="title function_">compareAndSetState</span><span class="params">(<span class="type">int</span> expect, <span class="type">int</span> update)</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> unsafe.compareAndSwapInt(<span class="built_in">this</span>, stateOffset, expect, update);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
+        <category>技术</category>
         <category>Java</category>
       </categories>
   </entry>
@@ -879,6 +882,7 @@
 </ul>
 ]]></content>
       <categories>
+        <category>技术</category>
         <category>Java</category>
       </categories>
   </entry>
@@ -1145,6 +1149,7 @@
 <h3 id="ThreadLocal-的弊端："><a href="#ThreadLocal-的弊端：" class="headerlink" title="ThreadLocal 的弊端："></a>ThreadLocal 的弊端：</h3><p><strong>内存泄漏：</strong> 如果我们使用线程池创建的线程，那么该线程很长一段时间都不会消失，而ThreadLocalMap中的value值属于强引用，不会被垃圾回收，而key是弱引用，此时就会产生<strong>内存泄漏</strong>的问题。</p>
 ]]></content>
       <categories>
+        <category>技术</category>
         <category>Java</category>
       </categories>
   </entry>
@@ -1483,6 +1488,7 @@
 </ul>
 ]]></content>
       <categories>
+        <category>技术</category>
         <category>Java</category>
       </categories>
   </entry>
@@ -2213,6 +2219,7 @@
 </ul>
 ]]></content>
       <categories>
+        <category>技术</category>
         <category>Java</category>
       </categories>
   </entry>
