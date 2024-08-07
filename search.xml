@@ -30,7 +30,7 @@
   </entry>
   <entry>
     <title>永福实习</title>
-    <url>/2024/08/07/%E6%B0%B8%E7%A6%8F%E4%BF%A1%E6%81%AF%E7%A7%91%E6%8A%80%E5%85%AC%E5%8F%B8%E5%AE%9E%E4%B9%A0/</url>
+    <url>/2024/08/07/%E6%B0%B8%E7%A6%8F%E5%AE%9E%E4%B9%A0/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h1 id="1、海纳特电项目"><a href="#1、海纳特电项目" class="headerlink" title="1、海纳特电项目"></a>1、海纳特电项目</h1><p>这个项目是一个老项目，我主要负责新增或者维护一些功能接口。</p>
 <h2 id="1-1-工商业光伏项目模块"><a href="#1-1-工商业光伏项目模块" class="headerlink" title="1.1 工商业光伏项目模块"></a>1.1 工商业光伏项目模块</h2><h3 id="1-1-1-下载模板"><a href="#1-1-1-下载模板" class="headerlink" title="1.1.1 下载模板"></a>1.1.1 下载模板</h3><p>提供一个下载 excel 模板的接口，如图：<img src="https://cdn.nlark.com/yuque/0/2024/png/40419809/1714984987482-400dfc3f-a124-4021-a167-24e7ff73bff3.png#averageHue=%23c0de92&clientId=u58338f4a-2504-4&from=paste&height=919&id=uf426b6f4&originHeight=919&originWidth=1920&originalType=binary&ratio=1&rotation=0&showTitle=false&size=154974&status=done&style=none&taskId=u415a73e3-d894-4154-a7ff-614c8f718b3&title=&width=1920" alt="image.png"><br>代码逻辑比较简单，在对应的 <strong>controller</strong> 中加一个方法即可：</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@ApiOperation(value = &quot;下载模板&quot;)</span></span><br><span class="line"><span class="meta">@PostMapping(&quot;/download/template&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">downloadTemplate</span><span class="params">(HttpServletResponse response)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">    response.setContentType(<span class="string">&quot;application/vnd.ms-excel&quot;</span>);</span><br><span class="line">    response.setHeader(<span class="string">&quot;Content-Disposition&quot;</span>, <span class="string">&quot;attachment;filename*=utf-8&#x27;&#x27;工商业光伏项目模板.xlsx&quot;</span>);</span><br><span class="line">    IOUtils.copyLarge(templateResource.getInputStream(), response.getOutputStream());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -150,6 +150,10 @@
 </ul>
 <p>当用户访问”基础库建设”模块时，后端会查询总表，返回一个 list 集合，该集合记录了所有子目录的信息，也包括这些目录的中文字段信息。（即刚刚添加的非数据库字段），接着会调用本地的 getTree 方法将集合转换成树结构，供前端显示。<br>剩下的子表开发就比较简单了，每个子表建立相对应的数据库表，使用 mybatis-plus 提供的代码生成器生成对应的 controller、service、mapper 以及对应的实体类 Entity，再编写相应的 crud 代码即可。</p>
 ]]></content>
+      <categories>
+        <category>实习</category>
+        <category>永福实习</category>
+      </categories>
   </entry>
   <entry>
     <title>Kafka</title>
