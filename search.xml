@@ -137,9 +137,6 @@
 <p>在传统模式下，<strong>将磁盘文件通过网络发送</strong>需要先将文件数据读入内存，然后通过Socket将内存中的数据发送出去。 这一过程需要<strong>四次拷贝和四次上下文切换</strong>。<br>Linux 2.4+内核通过<strong>sendfile</strong>系统调用，提供了零拷贝（CPU 拷贝）。只有两次上下文切换，大大提高了性能。</p>
 <h2 id="分批发送"><a href="#分批发送" class="headerlink" title="分批发送"></a>分批发送</h2><p>生产者发送消息时支持批量发送消息，将多条消息积累到一个批次中，然后一次性发送给Kafka Broker，这样可以减少网络I&#x2F;O次数，显著提升吞吐量。</p>
 ]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
   </entry>
   <entry>
     <title>java8新特性</title>
