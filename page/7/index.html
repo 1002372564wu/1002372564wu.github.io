@@ -188,7 +188,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/08/06/Java8%E6%96%B0%E7%89%B9%E6%80%A7/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/08/06/Kafka/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/jay.jpg">
@@ -202,7 +202,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2024/08/06/Java8%E6%96%B0%E7%89%B9%E6%80%A7/" class="post-title-link" itemprop="url">java8新特性</a>
+            <a href="/2024/08/06/Kafka/" class="post-title-link" itemprop="url">Kafka</a>
         </h2>
 
         <div class="post-meta">
@@ -213,14 +213,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2024-08-06 14:32:49" itemprop="dateCreated datePublished" datetime="2024-08-06T14:32:49+08:00">2024-08-06</time>
+              <time title="创建时间：2024-08-06 14:37:57" itemprop="dateCreated datePublished" datetime="2024-08-06T14:37:57+08:00">2024-08-06</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-08-07 17:05:55" itemprop="dateModified" datetime="2024-08-07T17:05:55+08:00">2024-08-07</time>
+                <time title="修改时间：2024-08-07 17:06:04" itemprop="dateModified" datetime="2024-08-07T17:06:04+08:00">2024-08-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -242,14 +242,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>5.7k</span>
+              <span>4.4k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>5 分钟</span>
+              <span>4 分钟</span>
             </span>
 
         </div>
@@ -261,23 +261,111 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Lambda-表达式"><a href="#Lambda-表达式" class="headerlink" title="Lambda 表达式"></a>Lambda 表达式</h1><p>使用 Lambda 表达式可以使代码变的更加简洁紧凑，Lambda 表达式是一个匿名函数，java 8 允许把函数作为参数传递进方法中。<br>过去给方法传动态参数的唯一方法是使用<strong>内部类</strong>。比如：</p>
-<p><strong>runnable 接口：</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="title class_">Thread</span>(<span class="keyword">new</span> <span class="title class_">Runnable</span>() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;The runable now is using!&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">&#125;).start();</span><br><span class="line"><span class="comment">//用lambda</span></span><br><span class="line"><span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; System.out.println(<span class="string">&quot;It&#x27;s a lambda function!&quot;</span>)).start();</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p><strong>comparator 接口：</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Integer&gt; strings = Arrays.asList(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>);</span><br><span class="line"></span><br><span class="line">Collections.sort(strings, <span class="keyword">new</span> <span class="title class_">Comparator</span>&lt;Integer&gt;() &#123;</span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">compare</span><span class="params">(Integer o1, Integer o2)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> o1 - o2;&#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">//Lambda</span></span><br><span class="line">Collections.sort(strings, (Integer o1, Integer o2) -&gt; o1 - o2);</span><br><span class="line"><span class="comment">//分解开</span></span><br><span class="line">Comparator&lt;Integer&gt; comparator = (Integer o1, Integer o2) -&gt; o1 - o2;</span><br><span class="line">Collections.sort(strings, comparator);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h1 id="Stream-流"><a href="#Stream-流" class="headerlink" title="Stream 流"></a>Stream 流</h1><p>java 新增了<strong>java.util.stream</strong>包，它和之前的流大同小异。之前接触最多的是资源流，比如java.io.FileInputStream，通过流把文件从一个地方输入到另一个地方，它只是内容搬运工，对文件内容不做任何_CRUD_。</p>
-<p>Stream依然不存储数据，不同的是它可以检索(Retrieve)和逻辑处理集合数据、包括<strong>筛选、排序、统计、计数</strong>等。可以想象成是 Sql 语句。</p>
-<p><strong>Stream 流通过简单的链式编程，使得它可以方便地对遍历处理后的数据进行再处理。一个 Stream 只能操作一次，操作完就关闭了，继续使用这个 stream 会报错。</strong></p>
-<h2 id="流的并行处理"><a href="#流的并行处理" class="headerlink" title="流的并行处理"></a>流的并行处理</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">test1</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">int</span> <span class="variable">total</span> <span class="operator">=</span> <span class="number">100_000_000</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        System.out.println(String.format(<span class="string">&quot;本计算机的核数：%d&quot;</span>, Runtime.getRuntime().availableProcessors()));</span><br><span class="line">        <span class="comment">// 产生1000w个随机数(1 ~ 100)，组成列表</span></span><br><span class="line">        <span class="type">Random</span> <span class="variable">random</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Random</span>();</span><br><span class="line">        List&lt;Integer&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;(total);</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;total; i++)&#123;</span><br><span class="line">            list.add(random.nextInt(<span class="number">100</span>));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="type">long</span> <span class="variable">prevTime</span> <span class="operator">=</span> getCurrentTime();</span><br><span class="line">        list.stream().reduce((a,b) -&gt; a+b).ifPresent(System.out::println);</span><br><span class="line">        System.out.println(String.format(<span class="string">&quot;单线程计算耗时：%d&quot;</span>, getCurrentTime() - prevTime));</span><br><span class="line"></span><br><span class="line">        prevTime = getCurrentTime();</span><br><span class="line">        <span class="comment">// 只需要加上 .parallel() 就能多线程并行处理流</span></span><br><span class="line">        list.stream().parallel().reduce((a, b) -&gt; a + b).ifPresent(System.out::println);</span><br><span class="line">        System.out.println(String.format(<span class="string">&quot;多线程计算耗时：%d&quot;</span>, getCurrentTime() - prevTime));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">long</span> <span class="title function_">getCurrentTime</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> System.currentTimeMillis();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>运行结果：</strong><br><img src="/2024/08/06/Java8%E6%96%B0%E7%89%B9%E6%80%A7/1.png" alt="image.png"></p>
-<h2 id="stream-流的使用"><a href="#stream-流的使用" class="headerlink" title="stream 流的使用"></a>stream 流的使用</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@description</span>: Java8新特性测试</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span>: Jay</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@create</span>: 2024-05-13 20:32</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Java8</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        List&lt;String&gt; list = Arrays.asList(<span class="string">&quot;Wmyskxz&quot;</span>, <span class="string">&quot;Is&quot;</span>, <span class="string">&quot;myLearning&quot;</span>, <span class="string">&quot;Java8&quot;</span>, <span class="string">&quot;In&quot;</span>, <span class="string">&quot;Action&quot;</span>);</span><br><span class="line">        <span class="comment">//forEach遍历</span></span><br><span class="line">        list.stream().forEach(System.out::println);</span><br><span class="line">        System.out.println(<span class="string">&quot;--------------------------------------&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//Filter过滤</span></span><br><span class="line">        list.stream().filter(o -&gt; o.startsWith(<span class="string">&quot;I&quot;</span>)).forEach(System.out::println);</span><br><span class="line">        list.stream().filter(o -&gt; o.contains(<span class="string">&quot;my&quot;</span>)).forEach(System.out::println);</span><br><span class="line">        System.out.println(<span class="string">&quot;--------------------------------------&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//map映射</span></span><br><span class="line">        list.stream().map(String::toUpperCase).forEach(System.out::println);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//count计数</span></span><br><span class="line">        <span class="type">long</span> <span class="variable">i</span> <span class="operator">=</span> list.stream().filter(o -&gt; o.startsWith(<span class="string">&quot;I&quot;</span>)).count();</span><br><span class="line">        System.out.println(i);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//Reduce规约操作,将 stream 中的多个元素规约为一个元素</span></span><br><span class="line">        list.stream().reduce((o1,o2) -&gt; o1+<span class="string">&quot;---&quot;</span>+o2).ifPresent(System.out::println);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p><strong>运行结果：</strong><br><img src="/2024/08/06/Java8%E6%96%B0%E7%89%B9%E6%80%A7/2.png" alt="image.png"></p>
-<h1 id="Date-Time-API"><a href="#Date-Time-API" class="headerlink" title="Date-Time API"></a>Date-Time API</h1><h2 id="java-util-Date-既包含日期又包含时间，而-java-time-把它们进行了分离"><a href="#java-util-Date-既包含日期又包含时间，而-java-time-把它们进行了分离" class="headerlink" title="java.util.Date 既包含日期又包含时间，而 java.time 把它们进行了分离"></a>java.util.Date 既包含日期又包含时间，而 java.time 把它们进行了分离</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.text.SimpleDateFormat;</span><br><span class="line"><span class="keyword">import</span> java.time.LocalDate;</span><br><span class="line"><span class="keyword">import</span> java.time.LocalDateTime;</span><br><span class="line"><span class="keyword">import</span> java.time.LocalTime;</span><br><span class="line"><span class="keyword">import</span> java.time.format.DateTimeFormatter;</span><br><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@description</span>: Java8关于时间的新特性</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span>: Jay</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@create</span>: 2024-05-13 20:58</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Java8_java_time</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">oldFormat</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="type">Date</span> <span class="variable">now</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Date</span>();</span><br><span class="line">        <span class="comment">//format yyyy-MM-dd</span></span><br><span class="line">        <span class="type">SimpleDateFormat</span> <span class="variable">sdf</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SimpleDateFormat</span>(<span class="string">&quot;yyyy-MM-dd&quot;</span>);</span><br><span class="line">        <span class="type">String</span> <span class="variable">date</span>  <span class="operator">=</span> sdf.format(now);</span><br><span class="line">        System.out.println(String.format(<span class="string">&quot;date format : %s&quot;</span>, date));</span><br><span class="line"></span><br><span class="line">        <span class="comment">//format HH:mm:ss</span></span><br><span class="line">        <span class="type">SimpleDateFormat</span> <span class="variable">sdft</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SimpleDateFormat</span>(<span class="string">&quot;HH:mm:ss&quot;</span>);</span><br><span class="line">        <span class="type">String</span> <span class="variable">time</span> <span class="operator">=</span> sdft.format(now);</span><br><span class="line">        System.out.println(String.format(<span class="string">&quot;time format : %s&quot;</span>, time));</span><br><span class="line"></span><br><span class="line">        <span class="comment">//format yyyy-MM-dd HH:mm:ss</span></span><br><span class="line">        <span class="type">SimpleDateFormat</span> <span class="variable">sdfdt</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SimpleDateFormat</span>(<span class="string">&quot;yyyy-MM-dd HH:mm:ss&quot;</span>);</span><br><span class="line">        <span class="type">String</span> <span class="variable">datetime</span> <span class="operator">=</span> sdfdt.format(now);</span><br><span class="line">        System.out.println(String.format(<span class="string">&quot;dateTime format : %s&quot;</span>, datetime));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">newFormat</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="comment">//format yyyy-MM-dd</span></span><br><span class="line">        <span class="type">LocalDate</span> <span class="variable">date</span> <span class="operator">=</span> LocalDate.now();</span><br><span class="line">        System.out.println(String.format(<span class="string">&quot;date format : %s&quot;</span>, date));</span><br><span class="line"></span><br><span class="line">        <span class="comment">//format HH:mm:ss</span></span><br><span class="line">        <span class="type">LocalTime</span> <span class="variable">time</span> <span class="operator">=</span> LocalTime.now().withNano(<span class="number">0</span>);</span><br><span class="line">        System.out.println(String.format(<span class="string">&quot;time format : %s&quot;</span>, time));</span><br><span class="line"></span><br><span class="line">        <span class="comment">//format yyyy-MM-dd HH:mm:ss</span></span><br><span class="line">        <span class="type">LocalDateTime</span> <span class="variable">dateTime</span> <span class="operator">=</span> LocalDateTime.now();</span><br><span class="line">        <span class="type">DateTimeFormatter</span> <span class="variable">dateTimeFormatter</span> <span class="operator">=</span> DateTimeFormatter.ofPattern(<span class="string">&quot;yyyy-MM-dd HH:mm:ss&quot;</span>);</span><br><span class="line">        <span class="type">String</span> <span class="variable">dateTimeStr</span> <span class="operator">=</span> dateTime.format(dateTimeFormatter);</span><br><span class="line">        System.out.println(String.format(<span class="string">&quot;dateTime format : %s&quot;</span>, dateTimeStr));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        oldFormat();</span><br><span class="line">        newFormat();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="获取指定日期"><a href="#获取指定日期" class="headerlink" title="获取指定日期"></a>获取指定日期</h2><p>Java8 之前获取特定一个日期也很麻烦，比如获取本月最后一天，第一天。</p>
-<p>Java8 之后：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">getDayNew</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">LocalDate</span> <span class="variable">today</span> <span class="operator">=</span> LocalDate.now();</span><br><span class="line">        <span class="comment">//获取当前月第一天：</span></span><br><span class="line">        <span class="type">LocalDate</span> <span class="variable">firstDayOfThisMonth</span> <span class="operator">=</span> today.with(TemporalAdjusters.firstDayOfMonth());</span><br><span class="line">        System.out.println(String.format(<span class="string">&quot;firstDayOfThisMonth : %s&quot;</span>, firstDayOfThisMonth));</span><br><span class="line">        <span class="comment">// 取本月最后一天</span></span><br><span class="line">        <span class="type">LocalDate</span> <span class="variable">lastDayOfThisMonth</span> <span class="operator">=</span> today.with(TemporalAdjusters.lastDayOfMonth());</span><br><span class="line">        System.out.println(String.format(<span class="string">&quot;lastDayOfThisMonth : %s&quot;</span>, lastDayOfThisMonth));</span><br><span class="line">        <span class="comment">//取下一天：</span></span><br><span class="line">        <span class="type">LocalDate</span> <span class="variable">nextDay</span> <span class="operator">=</span> lastDayOfThisMonth.plusDays(<span class="number">1</span>);</span><br><span class="line">        System.out.println(String.format(<span class="string">&quot;nextDay : %s&quot;</span>, nextDay));</span><br><span class="line">        <span class="comment">//当年最后一天</span></span><br><span class="line">        <span class="type">LocalDate</span> <span class="variable">lastday</span> <span class="operator">=</span> today.with(TemporalAdjusters.lastDayOfYear());</span><br><span class="line">        System.out.println(String.format(<span class="string">&quot;lastday : %s&quot;</span>, lastday));</span><br><span class="line">        <span class="comment">//2024年最后一个周日，如果用Calendar是不得烦死。</span></span><br><span class="line">        <span class="type">LocalDate</span> <span class="variable">lastMondayOf2024</span> <span class="operator">=</span> LocalDate.parse(<span class="string">&quot;2024-12-31&quot;</span>).with(TemporalAdjusters.lastInMonth(DayOfWeek.SUNDAY));</span><br><span class="line">        System.out.println(String.format(<span class="string">&quot;lastMondayOf2024 : %s&quot;</span>, lastMondayOf2024));</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p><strong>运行结果：</strong><br><img src="/2024/08/06/Java8%E6%96%B0%E7%89%B9%E6%80%A7/3.png" alt="image.png"></p>
+          <h1 id="Kafka的基本概念"><a href="#Kafka的基本概念" class="headerlink" title="Kafka的基本概念"></a>Kafka的基本概念</h1><p>Kafka是一个<strong>基于 Zookeeper 的分布式消息流平台</strong>，也是一款开源的<strong>基于发布订阅模式的消息引擎系统</strong>。</p>
+<p>Kafka 的消息队列一般分为两种模式：<strong>点对点模式</strong>和<strong>发布订阅模式</strong>。</p>
+<p><img src="/2024/08/06/Kafka/1.png"></p>
+<p>如果一个生产者或者多个生产者产生的消息能够被多个消费者同时消费的情况，这样的消息队列成为发布订阅模式的消息队列。</p>
+<p><img src="/2024/08/06/Kafka/2.jpg"></p>
+<p><strong>Kafka 的系统架构图</strong></p>
+<p><img src="/2024/08/06/Kafka/3.jpg"></p>
+<p><strong>Kafka 的基本术语</strong></p>
+<ul>
+<li><strong>消息</strong>：Kafka 中的数据单元被称为<strong>消息</strong>，也被称为记录，可以把它看作数据库表中某一行的记录。</li>
+<li><strong>批次</strong>：为了提高效率， 消息会<strong>分批次</strong>写入 Kafka，批次就代指的是一组消息。</li>
+<li><strong>主题</strong>：消息的种类称为 <strong>主题</strong>（Topic）,可以说一个主题代表了一类消息，相当于是对消息进行分类。</li>
+<li><strong>分区</strong>：主题可以被分为若干个分区（partition），同一个主题中的分区可以不在一个机器上，有可能会部署在多个机器上，由此来实现 kafka 的<strong>伸缩性</strong>。</li>
+<li><strong>生产者</strong>：向主题发布消息的客户端应用程序称为<strong>生产者</strong>（Producer），生产者用于持续不断的向某个主题发送消息。</li>
+<li><strong>消费者</strong>：订阅主题消息的客户端程序称为<strong>消费者</strong>（Consumer），消费者用于处理生产者产生的消息。</li>
+<li><strong>消费者群组</strong>：生产者与消费者的关系就如同餐厅中的厨师和顾客之间的关系一样，一个厨师对应多个顾客，也就是一个生产者对应多个消费者，<strong>消费者群组</strong>（Consumer Group）指的就是由一个或多个消费者组成的群体。</li>
+<li><strong>偏移量</strong>：<strong>偏移量</strong>（Consumer Offset）是一种元数据，它是一个不断递增的整数值，用来记录消费者发生重平衡时的位置，以便用来恢复数据。</li>
+<li><strong>broker:</strong> 一个独立的 Kafka 服务器就被称为 <strong>broker</strong>，broker 接收来自生产者的消息，为消息设置偏移量，并提交消息到磁盘保存。</li>
+<li><strong>broker 集群</strong>：broker 是<strong>集群</strong> 的组成部分，broker 集群由一个或多个 broker 组成，每个集群都有一个 broker 同时充当了<strong>集群控制器</strong>的角色（自动从集群的活跃成员中选举出来）。</li>
+<li><strong>副本</strong>：Kafka 中消息的备份又叫做 副本（Replica），副本的数量是可以配置的，Kafka 定义了两类副本：领导者副本（Leader Replica） 和 追随者副本（Follower Replica），前者对外提供服务，后者只是被动跟随。</li>
+<li><strong>重平衡</strong>：Rebalance。消费者组内某个消费者实例挂掉后，其他消费者实例自动重新分配订阅主题分区的过程。Rebalance 是 Kafka 消费者端实现高可用的重要手段。</li>
+</ul>
+<p><strong>Kafka 的特性</strong></p>
+<ul>
+<li><strong>高吞吐、低延迟</strong>：kakfa 最大的特点就是收发消息非常快，kafka 每秒可以处理几十万条消息，它的最低延迟只有几毫秒。</li>
+<li><strong>高伸缩性</strong>：每个主题(topic) 包含多个分区(partition)，主题中的分区可以分布在不同的主机(broker)中。</li>
+<li><strong>持久性、可靠性</strong>：Kafka 能够允许数据的持久化存储，消息被持久化到磁盘，并支持<strong>数据备份</strong>防止数据丢失，Kafka 底层的数据存储是基于 Zookeeper 存储的，Zookeeper 我们知道它的数据能够持久存储。</li>
+<li><strong>容错性</strong>：允许集群中的节点失败，某个节点宕机，Kafka 集群能够正常工作。</li>
+<li><strong>高并发</strong>：支持数千个客户端同时读写。</li>
+</ul>
+<h2 id="Kafka-的优缺点："><a href="#Kafka-的优缺点：" class="headerlink" title="Kafka 的优缺点："></a>Kafka 的优缺点：</h2><p><strong>优点：</strong></p>
+<ul>
+<li><strong>异步：</strong><ul>
+<li>某些非必要的业务逻辑以<strong>同步</strong>的方式运行，将耗费大量时间。<strong>在使用消息队列后，将发送的消息写入消息队列，非必要的业务逻辑以异步的方式运行，这样总耗时就只有发送消息和响应消息的时间了，大大提升了响应给用户的速度。</strong></li>
+</ul>
+</li>
+<li><strong>解耦：</strong><ul>
+<li>在未使用消息队列的系统中，系统间耦合性太强，上游系统需要考虑下游系统的消息可靠性问题。<strong>在使用消息队列后，将下游需要的消息push到消息队列中，需要消息的系统自己从消息队列中订阅；如果某个系统不需要这条数据了，就取消对 MQ 消息的订阅即可，上游系统不需要做任何修改，也不需要考虑下游消费失败的情况。</strong></li>
+</ul>
+</li>
+<li><strong>削峰：</strong><ul>
+<li>在未使用消息队列的系统中，系统面对突发大流量会导致系统崩溃。<strong>在使用消息队列后，下游系统按照数据库能处理的并发量，从消息队列中慢慢拉取消息。在大多数生产系统的业务场景中，短暂的高峰期的消息积压是允许的。这样就可以用有限的机器资源承载高并发请求。</strong></li>
+</ul>
+</li>
+</ul>
+<p><strong>缺点：</strong></p>
+<ul>
+<li><strong>系统可用性降低：</strong><ul>
+<li>系统每增加一个组件，必然导致可用性降低（中间件宕机会导致整个系统的崩溃）。Kafka 通过 <strong>broker 集群 + replica 副本机制</strong> 保证可用性。</li>
+</ul>
+</li>
+<li><strong>系统复杂性增加：</strong><ul>
+<li>保证消息的可靠传输。（消息不丢失）</li>
+<li>保证消息的幂等性。（不被重复消费）</li>
+<li>保证消息消费的顺序性。</li>
+</ul>
+</li>
+</ul>
+<h1 id="Kafka是如何保证消息不丢失的？（Kafka-如何保证消息的可靠传输？）"><a href="#Kafka是如何保证消息不丢失的？（Kafka-如何保证消息的可靠传输？）" class="headerlink" title="Kafka是如何保证消息不丢失的？（Kafka 如何保证消息的可靠传输？）"></a>Kafka是如何保证消息不丢失的？（Kafka 如何保证消息的可靠传输？）</h1><p>一条消息从产生，到发送到kafka保存，到被取出消费，有三个阶段可能会出现丢失的情况，即生产者端、broker端、消费者端。 下面分别概述解决办法：</p>
+<p><strong>生产者端丢失数据：</strong><br>为了提高效率，生产者发送消息到 Kafka 的时候，通常采用<strong>异步发送</strong>的方式，即发送完了之后会立即返回不会阻塞，但此时并不能保证消息一定发送成功了，有可能出现消息丢失的问题。</p>
+<p><strong>解决办法：使用重载的 send 方法。</strong><br>普通的 send 方法可以将消息发送出去，但是对发送出去的消息没有掌控能力，无法得知消息是否到达了 Kafka，是一种不可靠的发送方式。<br>而重载的 send 方法，其里面有一个参数为回调函数 callback，有了这个回调函数，一旦出现消息提交失败等异常情况，就可以有针对性地进行处理，如进行消息的重发等。</p>
+<p><strong>broker端丢失数据：</strong><br>数据发送到消息队列之后，由于 broker 端出的问题导致消息丢失。</p>
+<p><strong>解决办法：发送确认机制 acks。</strong><br>broker 端有三种确认机制，如下图：</p>
+<p><img src="/2024/08/06/Kafka/4.png" alt="image.png"></p>
+<p>通常情况下默认采用 acks&#x3D;1 的机制，只要 leader 接收到数据，就会给发送端返回确认消息。只有在 leader 接收到数据之后，还没来得及同步给 follower 就挂掉了才会导致数据的丢失，但是这种情况概率极小，无特殊场景下一般采用这种机制。</p>
+<p><strong>消费者端丢失数据：</strong><br>消费者端是通过 offset 偏移量来对消息进行消费的，默认是每隔 5 秒钟自动提交已经消费的偏移量 offset，如果消费端在消费消息的过程中挂掉了，而这条消息被自动提交了，那么就相当于丢了一条消息。</p>
+<p><strong>解决办法：关闭自动提交 offset 机制。</strong><br>让消费端在处理完消息之后手动提交 offset，这样就可以保证消息不丢失了。</p>
+<p>但是此时还可能会出现<strong>重复消费</strong>的问题，比如说刚处理完这条消息，在提交 offset 的前一瞬间挂掉了，那么下次这条消息还会被再消费一次，这里就设计到<strong>保证幂等性</strong>的问题了，不再赘述。</p>
+<h1 id="Kafka-如何保证消费的顺序性？"><a href="#Kafka-如何保证消费的顺序性？" class="headerlink" title="Kafka 如何保证消费的顺序性？"></a>Kafka 如何保证消费的顺序性？</h1><p><strong>造成 Kafka 消息无序的原因</strong></p>
+<p>Kafka 的设计目标是提供<strong>高吞吐量和低延迟</strong>，而不是强制保证全局有序性，所以Kafka使用多分区的概念，并且<strong>只保证单分区有序</strong>（offset）。</p>
+<p><strong>解决办法</strong></p>
+<ul>
+<li><strong>单分区策略</strong>：一个 topic 只有一个 partition，但是这样子做毫无并发度可言，失去了 Kafka 的意义。</li>
+<li><strong>基于 key 的消息分配策略</strong>：生产者在发送消息时，指定分区号或者根据业务设置相同的 key（Kafka 默认按照 key 的 hashcode 值寻找分区）。</li>
+</ul>
+<h1 id="Kafka-的高可用性如何保证？"><a href="#Kafka-的高可用性如何保证？" class="headerlink" title="Kafka 的高可用性如何保证？"></a>Kafka 的高可用性如何保证？</h1><p>由 <strong>broker 集群 + replica 副本机制</strong> 保证</p>
+<p>对<strong>Kafka 的整体架构</strong>的基本认识：一个 Kafka 集群由多个 broker 实例组成，每个 broker 实例中有不同的 topic，每个 topic 又划分为多个 partition，这些 partition 可以存在于不同的 broker 中。这就是一个天然的分布式消息队列，也就是说<strong>一个 topic 的数据是分散在多个机器上的</strong>。</p>
+<p>如果某一个 broker 节点宕机了，那么这上面的 partition 就相当于消失了。</p>
+<p>Kafka 为了保证高可用性，提供了 <strong>replica 副本机制</strong>，每个 partition 的数据都会同步到不同的 broker 中，形成数据的多个 replica 副本。这些 replica 副本会选举一个 leader，其余的为 follower，消息的生产和消费都和 leader 打交道。 如果 leader 节点宕机的话，会通过选举策略选举一个新的 leader。</p>
+<ul>
+<li>生产数据的时候，leader 会将数据同步给 follower，并通过<strong>acks 确认机制</strong>返回给生产者。（acks 可以取 0、1、all 分别代表不同的确认机制，具体可以看上面） </li>
+<li>消费数据的时候，也只会从 leader 那里取数据。（如果可以从 follower 那里取还需要保证一致性，非常麻烦）</li>
+</ul>
+<p>follower 副本分为两类：</p>
+<ul>
+<li><strong>ISR（in-sync-replica）副本</strong>：该副本是通过同步复制的方式与 leader 交互的，一致性更高。</li>
+<li><strong>普通副本</strong>：该副本通过异步复制的方式与 leader 进行交互，一致性一般。</li>
+</ul>
+<p>因此，当 leader 挂掉之后，<strong>优先从一致性高的 ISR 副本中选举中 leader</strong>。</p>
+<h1 id="Kafka-的数据清理机制"><a href="#Kafka-的数据清理机制" class="headerlink" title="Kafka 的数据清理机制"></a>Kafka 的数据清理机制</h1><ul>
+<li>根据消息的保留时间，当消息保存的时间超过指定的时间，就会触发清理，默认为 7 天。<ul>
+<li>log.retention.hours &#x3D; 168</li>
+</ul>
+</li>
+<li>根据 topic 存储的数据大小，当 topic 所占的日志文件大小大于一定的阈值，则删除最久的消息。（默认关闭，需手动开启参数）</li>
+</ul>
+<h1 id="Kafka-的高性能如何保证？"><a href="#Kafka-的高性能如何保证？" class="headerlink" title="Kafka 的高性能如何保证？"></a>Kafka 的高性能如何保证？</h1><p><strong>先介绍一下 Kafka 的整体架构，然后可以扯出前两点：</strong></p>
+<h2 id="broker-集群"><a href="#broker-集群" class="headerlink" title="broker 集群"></a>broker 集群</h2><p>Kafka 中的 broker 集群使消息分散在多台服务器中，每个 topic 的 partition 分布在不同的 broker 中，系统的吞吐量高。</p>
+<h2 id="磁盘的顺序读写"><a href="#磁盘的顺序读写" class="headerlink" title="磁盘的顺序读写"></a>磁盘的顺序读写</h2><p>在 Kafka 中，一个 topic 对应多个 partition，每个 partition 又有多个 replica 副本，每个副本都对用一个 log 日志文件，这个日志文件被切分为多个子日志文件，这些子日志文件对应着磁盘上的日志文件、两个索引文件以及其他文件。如图：</p>
+<p><img src="/2024/08/06/Kafka/5.png" alt="image.png"></p>
+<p>在 log 中追加消息是<strong>顺序写入</strong>的，<strong>因此磁盘的读写为顺序读写，效率比随机读写高得多</strong>。</p>
+<h2 id="页缓存技术"><a href="#页缓存技术" class="headerlink" title="页缓存技术"></a>页缓存技术</h2><p>在读取磁盘数据的时候，会在内存设置一段页缓存区域，从而避免了对物理磁盘的I&#x2F;O操作。如果页缓存区域没有命中数据，则会去磁盘里查找数据并将数据存入页缓存当中。</p>
+<h2 id="零拷贝"><a href="#零拷贝" class="headerlink" title="零拷贝"></a>零拷贝</h2><p>Kafka中存在大量的网络数据持久化到磁盘（Producer到Broker）和磁盘文件通过网络发送（Broker到Consumer）的过程。这一过程的性能直接影响Kafka的整体吞吐量。</p>
+<p>在传统模式下，<strong>将磁盘文件通过网络发送</strong>需要先将文件数据读入内存，然后通过Socket将内存中的数据发送出去。 这一过程需要<strong>四次拷贝和四次上下文切换</strong>。<br>Linux 2.4+内核通过<strong>sendfile</strong>系统调用，提供了零拷贝（CPU 拷贝）。只有两次上下文切换，大大提高了性能。</p>
+<h2 id="分批发送"><a href="#分批发送" class="headerlink" title="分批发送"></a>分批发送</h2><p>生产者发送消息时支持批量发送消息，将多条消息积累到一个批次中，然后一次性发送给Kafka Broker，这样可以减少网络I&#x2F;O次数，显著提升吞吐量。</p>
 
       
     </div>
@@ -299,7 +387,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -376,13 +464,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-count">18</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -424,18 +512,18 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">119k</span>
+    <span title="站点总字数">128k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">1:48</span>
+    <span title="站点阅读时长">1:56</span>
 </div>
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共64.6k字</span>
+  <span class="post-count">博客全站共68.3k字</span>
 </div>
 
 
