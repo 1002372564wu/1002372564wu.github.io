@@ -188,7 +188,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/08/05/Redis%E7%AF%87/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/08/05/JVM%E7%AF%87/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/jay.jpg">
@@ -202,7 +202,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2024/08/05/Redis%E7%AF%87/" class="post-title-link" itemprop="url">Redis</a>
+            <a href="/2024/08/05/JVM%E7%AF%87/" class="post-title-link" itemprop="url">JVM</a>
         </h2>
 
         <div class="post-meta">
@@ -213,14 +213,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2024-08-05 08:47:38" itemprop="dateCreated datePublished" datetime="2024-08-05T08:47:38+08:00">2024-08-05</time>
+              <time title="创建时间：2024-08-05 10:52:03" itemprop="dateCreated datePublished" datetime="2024-08-05T10:52:03+08:00">2024-08-05</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-08-07 17:07:34" itemprop="dateModified" datetime="2024-08-07T17:07:34+08:00">2024-08-07</time>
+                <time title="修改时间：2024-08-07 17:05:27" itemprop="dateModified" datetime="2024-08-07T17:05:27+08:00">2024-08-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -232,7 +232,7 @@
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E6%9C%AF/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
+                  <a href="/categories/%E6%8A%80%E6%9C%AF/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
                 </span>
             </span>
 
@@ -242,14 +242,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>7.5k</span>
+              <span>11k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>7 分钟</span>
+              <span>10 分钟</span>
             </span>
 
         </div>
@@ -261,230 +261,335 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Redis常见数据类型及其应用场景（⭐）"><a href="#Redis常见数据类型及其应用场景（⭐）" class="headerlink" title="Redis常见数据类型及其应用场景（⭐）"></a>Redis常见数据类型及其应用场景（⭐）</h1><pre><code>    Redis 中比较常见的数据类型有：String（字符串）、List（列表）、Set（集合）、Hash（散列）、Zset（有序集合）。 
-</code></pre>
+          <h1 id="JVM的组成："><a href="#JVM的组成：" class="headerlink" title="JVM的组成："></a>JVM的组成：</h1><h2 id="JVM-概述-⭐"><a href="#JVM-概述-⭐" class="headerlink" title="JVM 概述(⭐)"></a>JVM 概述(⭐)</h2><h3 id="JVM是什么？"><a href="#JVM是什么？" class="headerlink" title="JVM是什么？"></a>JVM是什么？</h3><p><strong>jvm(Java Virtual Machine)，</strong>是Java程序的运行环境（java二进制字节码的运行环境）。</p>
 <ul>
-<li><p><strong>String</strong>：一般用于存储一些常规数据，如Session、Token、序列化后的对象，还可以用来实现分布式锁。</p>
-</li>
-<li><p><strong>Hash</strong>：适合用于存储对象信息。</p>
-</li>
-<li><p><strong>List</strong>：底层为一个双向链表，支持从左右两边获取元素以及弹出元素，可以使用range命令查看范围内的元素。 List可用作消息队列，但一般不推荐使用。</p>
-</li>
-<li><p><strong>Set</strong>：无序集合，集合内元素没有顺序且唯一。 基于set可以轻易的实现交集、并集、差集的操作，因此Set常用于实现共同关注、共同好友等功能。</p>
-</li>
-<li><p><strong>Zset</strong>：类似于Set，只是每个元素加了一个score字段，元素会根据score的大小进行排序，并且可以根据score值进行范围查询。常用于实现排行榜等功能。</p>
-<pre><code>还有特殊的数据类型：
-</code></pre>
-</li>
-<li><p><strong>BitMap</strong> ：底层是一个由0、1组成的二进制串，常用命令：setbit key offset value；getbit key offset； 通常用于用户签到等场景：key为[当前年份：用户id]，offset为[当前天数]。</p>
-</li>
-<li><p><strong>HyperLogLog</strong> ：能够使用极少的内存来统计巨量的数据，如统计百万级访问量网页的用户点击次数。在 Redis 中实现的 HyperLogLog，只需要12K内存就能统计2^64个数据。 但是计数存在一定的误差，标准误差为 0.81% 。</p>
-</li>
-<li><p><strong>Geospatial</strong>：主要用于存储地理位置信息，通过 GEO 我们可以轻松实现两个位置距离的计算、获取指定位置附近的元素等功能。</p>
+<li><strong>优点：</strong><ul>
+<li>一次编写，到处运行。(jvm屏蔽了各种操作系统)</li>
+<li>自动内存管理，垃圾回收机制。</li>
+</ul>
 </li>
 </ul>
-<h1 id="Redis有什么优点和缺点？"><a href="#Redis有什么优点和缺点？" class="headerlink" title="Redis有什么优点和缺点？"></a>Redis有什么优点和缺点？</h1><p><strong>优点：</strong></p>
+<h3 id="JVM由哪些部分组成，运行流程是什么？"><a href="#JVM由哪些部分组成，运行流程是什么？" class="headerlink" title="JVM由哪些部分组成，运行流程是什么？"></a>JVM由哪些部分组成，运行流程是什么？</h3><p><img src="/2024/08/05/JVM%E7%AF%87/1.png"><br><strong>JVM 的主要组成部分  :</strong></p>
 <ul>
-<li><strong>速度快</strong>：Redis是基于内存的，并且是单线程的，还采用了IO多路复用模型。</li>
-<li><strong>支持丰富的数据类型。</strong></li>
-<li><strong>提供了持久化策略</strong>：RDB和AOF等持久化策略。</li>
-<li><strong>提供高并发和高可用的Redis集群</strong>。</li>
+<li><strong>ClassLoader（类加载器）</strong></li>
+<li><strong>Runtime Data Area（运行时数据区，内存分区）</strong></li>
+<li><strong>Execution Engine（执行引擎）</strong></li>
+<li><strong>Native Method Library（本地库接口）</strong></li>
 </ul>
-<p><strong>缺点：</strong></p>
+<p><strong>运行流程：</strong></p>
 <ul>
-<li>Redis是内存数据库，存储的数据量有限，需要制定数据过期策略定期删除数据。</li>
+<li><strong>类加载器</strong>把Java字节码文件加载进内存中。</li>
+<li><strong>运行时数据区</strong>分为堆、栈、方法区、程序计数器等，各自存储各个类型的数据。</li>
+<li><strong>执行引擎</strong>将字节码翻译为底层系统指令，再交由CPU执行去执行，此时需要调用其他语言的<strong>本地库接口</strong>来实现整个程序的功能。</li>
 </ul>
-<h1 id="什么是缓存穿透-怎么解决-（⭐）"><a href="#什么是缓存穿透-怎么解决-（⭐）" class="headerlink" title="什么是缓存穿透 ? 怎么解决 ?（⭐）"></a>什么是缓存穿透 ? 怎么解决 ?（⭐）</h1><pre><code>    缓存穿透是指客户端请求的数据在缓存中和数据库中都不存在，这样缓存就形同虚设（只有数据库查到了，才会让redis缓存，但现在的问题是查不到），会频繁的去访问数据库。
-  
-</code></pre>
-<p> <strong>解决方案：</strong></p>
+<h2 id="什么是程序计数器？"><a href="#什么是程序计数器？" class="headerlink" title="什么是程序计数器？"></a>什么是程序计数器？</h2><p><strong>程序计数器</strong>是<strong>线程私有</strong>的，用于记录正在执行的<strong>字节码指令的地址</strong>。<br>        java虚拟机对于多线程任务是通过线程轮流切换并分配线程执行时间来完成的。如果当前被执行的这个线程所分配的执行时间用完了【挂起】，处理器会切换到另外的一个线程上执行。当这个线程的执行时间用完了，接着处理器就会又来执行被挂起的这个线程。 <strong>为了使线程切换后能恢复到正确的执行位置，每条线程都需要有一个独立的程序计数器，各线程之间计数器互不影响，独立存储。</strong><br>        程序计数器是唯一一个不会出现 OutOfMemoryError 的内存区域，它的生命周期随着线程的创建而创建，随着线程的结束而死亡。</p>
+<h2 id="介绍一下Java的堆-⭐"><a href="#介绍一下Java的堆-⭐" class="headerlink" title="介绍一下Java的堆(⭐)"></a>介绍一下Java的堆(⭐)</h2><ul>
+<li><strong>堆是线程共享的区域</strong>：主要用来保存<strong>对象实例</strong>，<strong>数组</strong>等，当堆中没有内存空间可分配给实例，也无法再扩展时，则抛出<strong>OutOfMemoryError</strong>异常。</li>
+<li><strong>组成：年轻代+老年代：</strong><ul>
+<li><strong>年轻代</strong>被划分为三部分，Eden区和两个大小严格相同的Survivor区。</li>
+<li><strong>老年代</strong>主要保存生命周期长的对象，一般是一些老的对象。</li>
+</ul>
+</li>
+<li>Jdk1.7和1.8的区别：<ul>
+<li>1.7中有有一个<strong>永久代（方法区）</strong>，存储的是类信息、静态变量、常量、编译后的代码。</li>
+<li>1.8移除了永久代，把数据存储到了<strong>本地内存的元空间</strong>中，<strong>防止内存溢出</strong>。</li>
+</ul>
+</li>
+</ul>
+<h2 id="虚拟机栈-⭐"><a href="#虚拟机栈-⭐" class="headerlink" title="虚拟机栈(⭐)"></a>虚拟机栈(⭐)</h2><h3 id="什么是虚拟机栈？"><a href="#什么是虚拟机栈？" class="headerlink" title="什么是虚拟机栈？"></a>什么是虚拟机栈？</h3><ul>
+<li>每个线程运行时所需要的内存，称为虚拟机栈。</li>
+<li>每个栈由多个栈帧（frame）组成，对应着每次方法调用时所占用的内存。</li>
+<li>每个线程只能有一个活动栈帧，对应着当前正在执行的那个方法。</li>
+</ul>
+<h3 id="垃圾回收是否涉及栈内存？"><a href="#垃圾回收是否涉及栈内存？" class="headerlink" title="垃圾回收是否涉及栈内存？"></a>垃圾回收是否涉及栈内存？</h3><p>不涉及，<strong>垃圾回收</strong>主要指就是<strong>堆内存</strong>，当栈帧弹栈以后，内存就会释放。</p>
+<h3 id="栈帧内存分配越大越好吗？"><a href="#栈帧内存分配越大越好吗？" class="headerlink" title="栈帧内存分配越大越好吗？"></a>栈帧内存分配越大越好吗？</h3><p>未必，默认的栈内存通常为1024k 。栈内存不变下，栈帧过大会导致线程数变少。</p>
+<h3 id="方法内的局部变量是否线程安全？"><a href="#方法内的局部变量是否线程安全？" class="headerlink" title="方法内的局部变量是否线程安全？"></a>方法内的局部变量是否线程安全？</h3><ul>
+<li>如果方法内局部变量没有逃离方法的作用范围，它是线程安全的。</li>
+<li>如果局部变量逃离了方法的作用范围(如出现在<strong>形参</strong>或<strong>返回值</strong>)，需要考虑线程安全。</li>
+</ul>
+<h3 id="什么情况下会导致栈内存溢出？"><a href="#什么情况下会导致栈内存溢出？" class="headerlink" title="什么情况下会导致栈内存溢出？"></a>什么情况下会导致栈内存溢出？</h3><ul>
+<li><strong>栈帧过多</strong>导致栈内存溢出，如：递归调用</li>
+<li><strong>栈帧过大</strong>导致栈内存溢出。</li>
+</ul>
+<h3 id="堆栈的区别是什么？"><a href="#堆栈的区别是什么？" class="headerlink" title="堆栈的区别是什么？"></a>堆栈的区别是什么？</h3><ul>
+<li><strong>栈内存</strong>一般会用来存储<strong>局部变量</strong>和<strong>方法调用</strong>，但<strong>堆内存</strong>是用来存储<strong>Java对象</strong>和<strong>数组</strong>的。堆有GC垃圾回收，而栈没有。</li>
+<li><strong>栈内存</strong>是<strong>线程私有</strong>的，而<strong>堆内存</strong>是<strong>线程共享</strong>的。</li>
+<li><strong>两者异常错误不同，栈内存或者堆内存不足都会抛出异常</strong>：   <ul>
+<li>栈空间不足：java.lang.StackOverFlowError。      </li>
+<li>堆空间不足：java.lang.OutOfMemoryError。</li>
+</ul>
+</li>
+</ul>
+<h2 id="介绍一下方法区-⭐"><a href="#介绍一下方法区-⭐" class="headerlink" title="介绍一下方法区(⭐)"></a>介绍一下方法区(⭐)</h2><h3 id="方法区概述"><a href="#方法区概述" class="headerlink" title="方法区概述"></a>方法区概述</h3><ul>
+<li><strong>方法区</strong>(Method Area)是各个<strong>线程共享</strong>的内存区域。</li>
+<li>主要存储类<strong>的信息、运行时常量池。</strong></li>
+<li>虚拟机启动的时候创建，关闭虚拟机时释放。</li>
+<li>如果方法区域中的内存无法满足分配请求，则会抛出OutOfMemoryError: Metaspace。</li>
+</ul>
+<p><strong>永久代</strong>是 <strong>JDK 1.8 之前</strong>的方法区实现，<strong>JDK 1.8 <strong>及以后方法区的实现变成了</strong>元空间</strong>。永久代在堆中，而元空间在本地内存，发生OOM的概率比永久代小。<br><img src="/2024/08/05/JVM%E7%AF%87/2.png"></p>
+<h3 id="运行时常量池"><a href="#运行时常量池" class="headerlink" title="运行时常量池"></a>运行时常量池</h3><ul>
+<li><strong>常量池</strong>：可以看作是一张表，虚拟机指令根据这张常量表找到要执行的类名、方法名、参数类型、字面量等信息</li>
+<li>当类被加载，它的常量池信息就会放入运行时常量池，并把里面的符号地址变为真实地址。</li>
+</ul>
+<h2 id="直接内存"><a href="#直接内存" class="headerlink" title="直接内存"></a>直接内存</h2><p><strong>直接内存</strong>不受 JVM 内存回收管理，属于操作系统的内存，常见于 NIO 操作时，用于数据缓冲区，NIO读写性能比IO高。两者区别见下图：<br><img src="/2024/08/05/JVM%E7%AF%87/3.png"><br><img src="/2024/08/05/JVM%E7%AF%87/4.png"><br> <strong>传统阻塞IO</strong> <strong>的数据传输要走两次缓存区，而NIO只需走一次。</strong></p>
+<h1 id="类加载器："><a href="#类加载器：" class="headerlink" title="类加载器："></a>类加载器：</h1><h2 id="什么是类加载器，类加载器有哪些-⭐"><a href="#什么是类加载器，类加载器有哪些-⭐" class="headerlink" title="什么是类加载器，类加载器有哪些?(⭐)"></a>什么是类加载器，类加载器有哪些?(⭐)</h2><p><img src="/2024/08/05/JVM%E7%AF%87/5.png"><br><strong>类加载器</strong>（ClassLoader ）的主要作用就是将<strong>类的字节码文件</strong>加载到<strong>JVM</strong> 中 ，从而让 Java 程序能够启动起来。类加载器根据各自加载范围的不同，划分为<strong>四种类加载器</strong>：</p>
 <ul>
-<li><strong>缓存空对象</strong>：如果该数据在缓存和数据库中都不存在，就缓存一个空值到redis中，并且超时时间设置得短一点，如2分钟，以防占用太多redis空间。</li>
-<li><strong>布隆过滤</strong>：布隆过滤器是由初始值都为 0 的位图数组和若干个个哈希函数组成的数据结构，通常用于从海量数据中判断某数字是否存在，应用场景如缓存穿透、垃圾邮件过滤。布隆过滤器会通过若干个哈希函数计算数据的哈希值并取模，在位图中对应位置设为1。客户端的所有请求都会先通过该过滤器进行过滤，由于哈希的性质，若该过滤器都查不到数据，则直接返回错误信息；若查到了则放行，但也不一定存在该数据(存在哈希冲突)。</li>
-</ul>
-<h1 id="什么是缓存击穿-怎么解决-（⭐）"><a href="#什么是缓存击穿-怎么解决-（⭐）" class="headerlink" title="什么是缓存击穿? 怎么解决 ?（⭐）"></a>什么是缓存击穿? 怎么解决 ?（⭐）</h1><pre><code>    缓存击穿也叫热点Key问题，一个热点的Key，有大并发集中对其进行访问，突然间这个Key失效了，导致大并发全部打在数据库上，导致数据库压力剧增。
-</code></pre>
-<p><strong>解决方案：</strong></p>
-<ul>
-<li><strong>互斥锁</strong>：只有拿到锁才可以查询数据库，降低了在同一时刻打在数据库上的请求。<ul>
-<li>优点：强一致性。</li>
-<li>缺点：性能差。</li>
+<li>启动类加载器(BootStrap ClassLoader)：<ul>
+<li><strong>该类用来加载 Java 的核心类，并不继承 ClassLoader 类</strong>，其是由 C++ 编写实现。</li>
 </ul>
 </li>
-<li><strong>逻辑过期</strong>：①在缓存中多设置一个逻辑过期字段，而不真正设置过期时间。②查询时，通过过期字段来判断当前key是否过期。③<strong>若过期，则另外开一个线程去数据库查询并同步缓存数据，当前线程则返回旧数据。</strong><ul>
-<li>优点：性能高，具有高可用性。</li>
-<li>缺点：无法保证数据绝对一致。</li>
+<li>扩展类加载器(ExtClassLoader)：<ul>
+<li>该类是ClassLoader的子类，主要加载JAVA_HOME&#x2F;jre&#x2F;lib&#x2F;ext目录中的类库。</li>
 </ul>
 </li>
-</ul>
-<h1 id="什么是缓存雪崩-怎么解决-（⭐）"><a href="#什么是缓存雪崩-怎么解决-（⭐）" class="headerlink" title="什么是缓存雪崩? 怎么解决 ?（⭐）"></a>什么是缓存雪崩? 怎么解决 ?（⭐）</h1><pre><code>    缓存雪崩是指在同一时间段，大量缓存的key同时失效，或者Redis服务宕机，导致大量请求到达数据库。
-</code></pre>
-<p><strong>解决方案：</strong></p>
-<ul>
-<li>给不同的Key的TTL添加随机值，让其在不同时间段分批失效。</li>
-<li>利用Redis集群提高服务的可用性。（哨兵模式，集群模式）</li>
-<li>给缓存业务添加降级限流策略。（保底策略）</li>
-<li>给业务添加多级缓存。（可以理解为穿了好几件防弹衣）。</li>
-</ul>
-<h1 id="mysql如何与redis进行同步？（⭐）"><a href="#mysql如何与redis进行同步？（⭐）" class="headerlink" title="mysql如何与redis进行同步？（⭐）"></a>mysql如何与redis进行同步？（⭐）</h1><p>业务中有优惠券秒杀功能，要求实时性比较高，因此采用读写锁保证redis和mysql的强一致性。 主要采用redisson实现的读写锁，读的时候添加共享锁（读锁），保证读读不互斥，读写互斥；更新数据的时候添加排他锁（写锁），读读、读写都互斥。 这样可以防止写数据的时候其他线程读数据，避免了脏数据。</p>
-<blockquote>
-<p><strong>缓存的更新策略：当用户修改数据时，应该先删缓存还是先修改数据库？</strong></p>
-<ul>
-<li><strong>先删缓存</strong>：修改数据库的途中，有别的线程来访问该数据就会把脏数据读入缓存。</li>
-<li><strong>先更新数据库</strong>：删完缓存还没提交事务的这段时间空隙，有别的线程来访问数据也会访问到脏数据并读入内存，但是发生的机率较小。</li>
-</ul>
-</blockquote>
-<p><strong>延时双删：</strong> 延时双删也是分布式系统中保持redis和mysql一致性的常用策略，但不具有强一致性。</p>
-<ul>
-<li><strong>延时双删：当前为写操作时，先删除redis中的缓存，再更新数据库，短暂延时之后再次删除redis中的缓存。</strong><ul>
-<li>为什么要两次删除redis缓存？<ul>
-<li>防止数据库还没更新完，有别的线程读取了数据库的脏数据，并更新redis缓存。</li>
+<li>应用类加载器(AppClassLoader)：<ul>
+<li>该类是ClassLoader的子类，主要用于加载classPath下的类，也就是加载开发者自己编写的Java类。</li>
 </ul>
 </li>
-<li>为什么要延时删除？<ul>
-<li>数据库一般是主从模式，需要给主节点一些时间同步数据到从节点中。</li>
+<li>自定义类加载器：<ul>
+<li>开发者自定义类继承ClassLoader，实现自定义类加载规则。</li>
 </ul>
 </li>
 </ul>
-</li>
-</ul>
-<h1 id="redis做为缓存，数据的持久化是怎么做的？（⭐）"><a href="#redis做为缓存，数据的持久化是怎么做的？（⭐）" class="headerlink" title="redis做为缓存，数据的持久化是怎么做的？（⭐）"></a>redis做为缓存，数据的持久化是怎么做的？（⭐）</h1><pre><code>    Redis是内存数据库，宕机后数据会消失，需要提供持久化策略。在Redis中提供了两种数据持久化的方式：RDB 和 AOF。
-</code></pre>
-<ul>
-<li><strong>RDB（Redis DataBase）</strong>：是一个快照文件，它把redis内存存储的数据写到磁盘上，当redis 宕机恢复数据的时候，方便从 RDB 的快照文件中恢复数据。<ul>
-<li><strong>优点</strong>：RDB是二进制压缩文件，占用空间小，便于传输，恢复数据速度较快。</li>
-<li><strong>缺点</strong>：两次RDB期间有空档期，此期间若Redis宕机了可能会造成数据的丢失。</li>
-<li><strong>创建RDB文件的两个命令</strong>：<ul>
-<li><strong>SAVE</strong>：会阻塞Redis服务器进程，直到RDB文件创建完毕为止。</li>
-<li><strong>BGSAVE</strong>：会派生出一个子进程负责创建RDB文件，父进程继续处理命令请求。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><strong>AOF（append only file）</strong>：当redis操作写命令的时候，都会存储这个文件中，当redis实例宕机恢复数据的时候，会从这个文件中再次执行一遍命令来恢复数据。（AOF会记录过程，RDB只管结果）<ul>
-<li><strong>优点</strong>：数据的完整性较高。</li>
-<li><strong>缺点</strong>：文件较大，恢复速度较慢。</li>
-</ul>
-</li>
-<li><strong>RDB-AOF混合持久化</strong>：该模式会将生成相应的RDB数据，写入AOF文件中，重写后的新 AOF 文件前半段是 RDB 格式的全量数据，后半段是 AOF 格式的增量数据。这样用户可以同时获得RDB持久化和AOF持久化的优点。</li>
-</ul>
-<h1 id="Redis的数据过期策略有哪些-（⭐）"><a href="#Redis的数据过期策略有哪些-（⭐）" class="headerlink" title="Redis的数据过期策略有哪些 ?（⭐）"></a>Redis的数据过期策略有哪些 ?（⭐）</h1><p>Redis的过期删除策略：惰性删除 + 定期删除两种策略进行配合使用。</p>
-<ul>
-<li><strong>惰性删除</strong>：设置该key过期时间后，不去管它，当需要该key时，再检查其是否过期，如果过期，我们就删掉它，反之返回该key。<ul>
-<li>优点：对CPU友好，只在使用该key时才进行过期检查，对于很多用不到的key不用浪费时间进行过期检查。</li>
-<li>缺点：对内存不友好，过期的key将一直存在于内存中不会释放。</li>
-</ul>
-</li>
-<li><strong>定期删除：</strong> 每隔一段时间，我们就对一些key进行检查，删除里面过期的key。<ul>
-<li>优点：可以通过限制删除操作执行的时长来减少对 CPU性能的影响。</li>
-<li>缺点：这个操作时长难以把控。</li>
-</ul>
-</li>
-</ul>
-<h1 id="redis的数据淘汰策略"><a href="#redis的数据淘汰策略" class="headerlink" title="redis的数据淘汰策略"></a>redis的数据淘汰策略</h1><p><strong>Redis支持8种不同策略来选择要删除的key：</strong></p>
-<ul>
-<li><strong>noeviction</strong>： 不淘汰任何key，但是内存满时不允许写入新数据，默认就是这种策略。</li>
-<li><strong>volatile-ttl</strong>： 对设置了TTL的key，比较key的剩余TTL值，TTL越小越先被淘汰。</li>
-<li><strong>allkeys-random</strong>：对全体key ，随机进行淘汰。</li>
-<li><strong>volatile-random</strong>：对设置了TTL的key ，随机进行淘汰。</li>
-<li><strong>allkeys-lru</strong>： 对全体key，基于LRU算法进行淘汰。</li>
-<li><strong>volatile-lru</strong>： 对设置了TTL的key，基于LRU算法进行淘汰。</li>
-<li><strong>allkeys-lfu</strong>： 对全体key，基于LFU算法进行淘汰。</li>
-<li><strong>volatile-lfu</strong>： 对设置了TTL的key，基于LFU算法进行淘汰。</li>
-</ul>
-<h2 id="LRU和LFU两种策略："><a href="#LRU和LFU两种策略：" class="headerlink" title="LRU和LFU两种策略："></a>LRU和LFU两种策略：</h2><ul>
-<li><strong>LRU（Least Recently Used）：</strong> 最近最少使用。用当前时间减去最后一次访问时间，这个值越大则淘汰优先级越高。</li>
-<li><strong>LFU（Least Frequently Used）：</strong> 最少频率使用。会统计每个key的访问频率，值越小淘汰优先级越高。</li>
-</ul>
-<h2 id="数据库有1000万数据-Redis只能缓存20w数据-如何保证Redis中数据都是热点数据"><a href="#数据库有1000万数据-Redis只能缓存20w数据-如何保证Redis中数据都是热点数据" class="headerlink" title="数据库有1000万数据 ,Redis只能缓存20w数据, 如何保证Redis中数据都是热点数据 ?"></a>数据库有1000万数据 ,Redis只能缓存20w数据, 如何保证Redis中数据都是热点数据 ?</h2><p>使用<strong>allkeys-lru</strong>(最近最少使用)淘汰策略，留下来的都是经常访问的热点数据。</p>
-<h2 id="Redis的内存用完了会发生什么？"><a href="#Redis的内存用完了会发生什么？" class="headerlink" title="Redis的内存用完了会发生什么？"></a>Redis的内存用完了会发生什么？</h2><p>看数据淘汰策略是什么，如果是默认的配置（ noeviction ），会直接报错。</p>
-<h1 id="Redis分布式锁的实现"><a href="#Redis分布式锁的实现" class="headerlink" title="Redis分布式锁的实现"></a>Redis分布式锁的实现</h1><p>   项目中的 <strong>优惠券秒杀抢单功能</strong> 存在<strong>超卖问题</strong>，可以使用<strong>Synchronized</strong>锁解决。但如果是在集群模式下， 多台服务器会对应多个jvm， <strong>synchronized</strong>锁可以锁住单台服务器的多线程，多台服务器就锁不住了，此时需要有一个多服务器共享的锁监视器，即<strong>分布式锁</strong>。<br>   Redis实现<strong>分布式锁</strong>主要利用Redis的<strong>setnx命令(SET if not exists)</strong> ，该命令需要<strong>设置锁的过期时间</strong>，以<strong>防止服务宕机从而导致锁永远无法释放</strong>的问题。这个过期时间设置长了会影响性能，设置短了又可能会提前释放锁导致线程安全问题，这就需要<strong>合理的控制锁的有效时长</strong>。</p>
-<h2 id="Redisson实现分布式锁如何合理的控制锁的有效时长？"><a href="#Redisson实现分布式锁如何合理的控制锁的有效时长？" class="headerlink" title="Redisson实现分布式锁如何合理的控制锁的有效时长？"></a>Redisson实现分布式锁如何合理的控制锁的有效时长？</h2><p>   于是我们使用采用<strong>redisson</strong>实现的<strong>分布式锁</strong>，底层是<strong>setnx和lua脚本</strong>（保证原子性）。在redisson的分布式锁中，提供了一个<strong>WatchDog(看门狗）机制：一个线程获取锁成功以后，会定期给锁续期（默认每10s续期一次）。</strong></p>
-<h2 id="Redisson的这个锁，可以重入吗？"><a href="#Redisson的这个锁，可以重入吗？" class="headerlink" title="Redisson的这个锁，可以重入吗？"></a>Redisson的这个锁，可以重入吗？</h2><p>   <strong>可重入，这样做是为了避免死锁的产生</strong>。多个锁重入需要判断是否是同一线程，<strong>在redis中进行存储的时候使用的hash结构，来存储线程信息和重入的次数：大key可以按照自己的业务进行定制，其中小key是当前线程的唯一标识，value是当前线程重入的次数。</strong></p>
-<h2 id="Redisson锁能解决主从数据一致的问题吗？"><a href="#Redisson锁能解决主从数据一致的问题吗？" class="headerlink" title="Redisson锁能解决主从数据一致的问题吗？"></a>Redisson锁能解决主从数据一致的问题吗？</h2><p>   不能解决，但可以使用redisson提供的红锁来解决，但是使用红锁性能太低了，如果业务中非要保证数据的强一致性，建议采用zookeeper实现的分布式锁。</p>
-<h1 id="Redis的集群方案（⭐）"><a href="#Redis的集群方案（⭐）" class="headerlink" title="Redis的集群方案（⭐）"></a>Redis的集群方案（⭐）</h1><p>Redis中提供的集群方案总共有三种：<strong>主从集群</strong>、<strong>哨兵模式</strong>、<strong>Redis</strong> <strong>分片集群。</strong></p>
-<h2 id="主从集群"><a href="#主从集群" class="headerlink" title="主从集群"></a>主从集群</h2><p>单节点Redis的并发能力是有上限的，要<strong>进一步提高Redis的并发能力</strong>，可以搭建<strong>主从集群</strong>，实现<strong>读写分离</strong>。一般都是<strong>一主多从，主节点负责写数据，从节点负责读数据</strong>，主节点写入数据之后，需要把数据同步到从节点中。<br>主从同步数据的流程：分为<strong>全量同步</strong>和<strong>增量同步</strong>。</p>
-<ul>
-<li><strong>全量同步：</strong> 从节点第一次与主节点建立连接的时候使用全量同步。<ul>
-<li>从节点请求主节点<strong>同步数据</strong>，从节点会携带自己的<strong>replication</strong> <strong>id</strong>和<strong>offset</strong>偏移量。	</li>
-<li>主节点判断是否是第一次请求，主要判断依据就是，主节点与从节点是否是同一个replication id，如果不是，就说明是第一次同步，那主节点就会把自己replication id和offset发送给从节点，让从节点与主节点的信息保持一致。 </li>
-<li>此时主节点会执行bgsave生成rdb文件，同时将此时收到的写命令缓存起来，将 rdb 文件发送给从节点去同步，接着将缓存中的写命令也发送给从节点同步。（<strong>同步数据的过程中，主节点和从节点都是正常工作的，并且从节点是基于旧数据对外提供服务的</strong>）</li>
-</ul>
-</li>
-<li><strong>增量同步：</strong><ul>
-<li>从节点请求主节点同步数据，主节点还是判断是不是第一次请求，不是第一次就获取从节点的offset值，然后主节点从命令日志中获取offset值之后的数据，发送给从节点进行数据同步。</li>
-</ul>
-</li>
-</ul>
-<h2 id="哨兵模式"><a href="#哨兵模式" class="headerlink" title="哨兵模式"></a>哨兵模式</h2><p>Redis提供了<strong>哨兵（Sentinel）机制</strong>来实现主从集群的自动故障恢复。哨兵的结构和作用如下：</p>
-<ul>
-<li><strong>监测</strong>：Sentinel 会基于心跳机制不断检查master和slave是否按预期工作：<ul>
-<li>主观下线：如果某sentinel节点发现某实例未在规定时间响应，则认为该实例主观下线。</li>
-<li>客观下线：若超过一半的sentinel都认为该实例主观下线，则该实例客观下线。</li>
-</ul>
-</li>
-<li><strong>选主</strong>：如果master故障，Sentinel会将一个slave提升为master。当故障实例恢复后也以新的master为主。 下面是哨兵选举的规则：<ul>
-<li>首先判断主与从节点断开时间长短，如断开时间太长则不选举该从节点。</li>
-<li>然后判断从节点的slave-priority值，越小优先级越高。</li>
-<li>如果优先值相等，则判断从节点的offset值，越大优先级越高</li>
-</ul>
-</li>
-<li><strong>通知</strong>：Sentinel充当Redis客户端的服务发现来源，当集群发生故障转移时，会将最新信息推送给Redis的客户端。</li>
-</ul>
-<h2 id="Redis-哨兵模式的数据丢失问题："><a href="#Redis-哨兵模式的数据丢失问题：" class="headerlink" title="Redis 哨兵模式的数据丢失问题："></a>Redis 哨兵模式的数据丢失问题：</h2><p><strong>异步复制导致的数据丢失：</strong><br>由于主从复制的过程是异步的，所以可能有部分数据还没复制到从节点，主节点就宕机了，此时这部分数据就会丢失。<br><strong>脑裂导致的数据丢失：</strong><br>脑裂是由于网络等原因，使得哨兵无法心跳感知到主节点，于是通过选举的方式产生了一个新的主节点，于是就有了两个主节点，这样会导致客户端在老主节点那更新数据，新的主节点无法同步更新数据。<br><strong>解决方案：</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">min-slaves-to-write 1</span><br><span class="line">min-slaves-max-lag 10</span><br></pre></td></tr></table></figure>
+<h2 id="双亲委派模型-⭐"><a href="#双亲委派模型-⭐" class="headerlink" title="双亲委派模型(⭐)"></a>双亲委派模型(⭐)</h2><p><strong>该机制的核心思想是，当一个类需要被加载时，首先委托给其父类加载器，如果父类加载器无法加载，则由当前类加载器自己尝试加载。</strong><br>除了启动类加载器外，其他所有类加载器都需要继承抽象类<strong>ClassLoader</strong>，这个抽象类中定义了三个关键方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">ClassLoader</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//每个类加载器都有个父加载器</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> ClassLoader parent;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> Class&lt;?&gt; loadClass(String name) &#123;</span><br><span class="line">  </span><br><span class="line">        <span class="comment">//查找一下这个类是不是已经加载过了</span></span><br><span class="line">        Class&lt;?&gt; c = findLoadedClass(name);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//如果没有加载过</span></span><br><span class="line">        <span class="keyword">if</span>( c == <span class="literal">null</span> )&#123;</span><br><span class="line">          <span class="comment">//先委派给父加载器去加载，注意这是个递归调用</span></span><br><span class="line">          <span class="keyword">if</span> (parent != <span class="literal">null</span>) &#123;</span><br><span class="line">              c = parent.loadClass(name);</span><br><span class="line">          &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">              <span class="comment">// 如果父加载器为空，查找Bootstrap加载器是不是加载过了</span></span><br><span class="line">              c = findBootstrapClassOrNull(name);</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 如果父加载器没加载成功，调用自己的findClass去加载</span></span><br><span class="line">        <span class="keyword">if</span> (c == <span class="literal">null</span>) &#123;</span><br><span class="line">            c = findClass(name);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> c；</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">protected</span> Class&lt;?&gt; findClass(String name)&#123;</span><br><span class="line">       <span class="comment">//1. 根据传入的类名name，到在特定目录下去寻找类文件，把.class文件读入内存</span></span><br><span class="line">          ...</span><br><span class="line">          </span><br><span class="line">       <span class="comment">//2. 调用defineClass将字节数组转成Class对象</span></span><br><span class="line">       <span class="keyword">return</span> defineClass(buf, off, len)；</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 将字节码数组解析成一个Class对象，用native方法实现</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">final</span> Class&lt;?&gt; defineClass(<span class="type">byte</span>[] b, <span class="type">int</span> off, <span class="type">int</span> len)&#123;</span><br><span class="line">       ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <ul>
-<li>配置参数：要求至少有 1 个从节点，数据复制和同步的延迟不能超过 10 秒。如果所有的 slave，数据复制和同步的延迟都超过了 10 秒钟，那么这个时候，master 就不会再接收任何请求了。 这样就能<strong>将发生的数据丢失降低到可控范围之内</strong>。</li>
+<li>JVM 的类加载器是分层次的，它们有父子关系，而<strong>这个关系不是继承维护，而是组合，每个类加载器都持有一个 parent 字段，指向父加载器</strong>。</li>
+<li><strong>loadClass 方法的主要职责就是实现双亲委派机制</strong>：首先检查这个类是不是已经被加载过了，如果加载过了直接返回，否则委派给父加载器加载，这是一个递归调用，<strong>一层一层向上委派，最顶层的类加载器（启动类加载器）无法加载该类时，再一层一层向下委派给子类加载器加载</strong>。</li>
 </ul>
-<h1 id="怎么保证Redis的高并发高可用？"><a href="#怎么保证Redis的高并发高可用？" class="headerlink" title="怎么保证Redis的高并发高可用？"></a>怎么保证Redis的高并发高可用？</h1><p>首先可以搭建<strong>主从集群(解决高并发)<strong>，再加上使用redis中的</strong>哨兵模式(解决高可用)<strong>，</strong>哨兵模式可以实现主从集群的自动故障恢复</strong>，里面就包含了对主从服务的<strong>监控、自动故障恢复、通知</strong>；<br>        如果master故障，Sentinel会将一个slave提升为master。 当故障实例恢复后也以新的master为主；同时Sentinel也充当Redis客户端的服务发现来源，当集群发生故障转移时，会将最新信息推送给Redis的客户端，所以一般项目都会采用哨兵的模式来保证redis的高并发高可用。</p>
-<h1 id="redis的分片集群"><a href="#redis的分片集群" class="headerlink" title="redis的分片集群"></a>redis的分片集群</h1><p>主从和哨兵可以解决高可用、高并发读的问题。但是依然有两个问题没有解决： <strong>海量数据存储</strong>问题 和 <strong>高并发写</strong>的问题。<br><strong>分片集群的作用：</strong></p>
+<h3 id="为什么采用双亲委派机制？"><a href="#为什么采用双亲委派机制？" class="headerlink" title="为什么采用双亲委派机制？"></a>为什么采用双亲委派机制？</h3><ul>
+<li><strong>唯一性：</strong>防止加载同一个类，通过委托询问上级是否已经加载过该.class，如果加载过了，则不需要重新加载。保证了数据安全。</li>
+<li><strong>安全性：</strong> 保证类库 API 不会被修改，即使被修改了也不会被加载。</li>
+</ul>
+<h3 id="如何破坏双亲委派机制？"><a href="#如何破坏双亲委派机制？" class="headerlink" title="如何破坏双亲委派机制？"></a>如何破坏双亲委派机制？</h3><p>如果想不遵循双亲委派的类加载顺序，需要自定义类加载器，并重写findClass和loadClass方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TestClassLoader</span> <span class="keyword">extends</span> <span class="title class_">ClassLoader</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">TestClassLoader</span><span class="params">(ClassLoader parent)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>(parent);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> Class&lt;?&gt; findClass(String name) <span class="keyword">throws</span> ClassNotFoundException &#123;</span><br><span class="line">        <span class="comment">// 1、获取class文件二进制字节数组</span></span><br><span class="line">        <span class="type">byte</span>[] data = <span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            System.out.println(name);</span><br><span class="line">            <span class="type">String</span> <span class="variable">namePath</span> <span class="operator">=</span> name.replaceAll(<span class="string">&quot;\\.&quot;</span>, <span class="string">&quot;\\\\&quot;</span>);</span><br><span class="line">            <span class="type">String</span> <span class="variable">classFile</span> <span class="operator">=</span> <span class="string">&quot;C:\\study\\myStudy\\ZooKeeperLearning\\zkops\\target\\classes\\&quot;</span> + namePath + <span class="string">&quot;.class&quot;</span>;</span><br><span class="line">            <span class="type">ByteArrayOutputStream</span> <span class="variable">baos</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ByteArrayOutputStream</span>();</span><br><span class="line">            <span class="type">FileInputStream</span> <span class="variable">fis</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(<span class="keyword">new</span> <span class="title class_">File</span>(classFile));</span><br><span class="line">            <span class="type">byte</span>[] bytes = <span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1024</span>];</span><br><span class="line">            <span class="type">int</span> <span class="variable">len</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">while</span> ((len = fis.read(bytes)) != -<span class="number">1</span>) &#123;</span><br><span class="line">                baos.write(bytes, <span class="number">0</span>, len);</span><br><span class="line">            &#125;</span><br><span class="line">            data = baos.toByteArray();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (FileNotFoundException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 2、字节码加载到 JVM 的方法区，</span></span><br><span class="line">        <span class="comment">// 并在 JVM 的堆区建立一个java.lang.Class对象的实例</span></span><br><span class="line">        <span class="comment">// 用来封装 Java 类相关的数据和方法</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.defineClass(name, data, <span class="number">0</span>, data.length);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Class&lt;?&gt; loadClass(String name) <span class="keyword">throws</span> ClassNotFoundException&#123;</span><br><span class="line">        Class&lt;?&gt; clazz = <span class="literal">null</span>;</span><br><span class="line">        <span class="comment">// 直接自己加载</span></span><br><span class="line">        clazz = <span class="built_in">this</span>.findClass(name);</span><br><span class="line">        <span class="keyword">if</span> (clazz != <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> clazz;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 自己加载不了，再调用父类loadClass，保持双亲委托模式</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">super</span>.loadClass(name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="类装载的执行过程-⭐"><a href="#类装载的执行过程-⭐" class="headerlink" title="类装载的执行过程(⭐)"></a>类装载的执行过程(⭐)</h2><p>类从加载到虚拟机中开始，直到卸载为止，它的整个生命周期包括了7 个阶段：<br><img src="/2024/08/05/JVM%E7%AF%87/6.png" alt="image.png"></p>
 <ul>
-<li>集群中有多个master，每个master保存不同数据。（解决海量数据存储和高并发写的问题）</li>
-<li>每个master都可以有多个slave节点。(解决高并发读的问题)</li>
-<li>master之间通过ping监测彼此健康状态。</li>
-<li>客户端请求可以访问集群任意节点，最终都会被转发到正确节点。(路由)</li>
+<li><strong>加载</strong> : 通过class的<strong>全限定类名</strong>，把该类的代码数据加载到内存中。</li>
+<li><strong>链接</strong>：<ul>
+<li>**验证 **: 验证类是否符合JVM规范，安全性检查。</li>
+<li><strong>准备(⭐)</strong> : 为类变量(静态变量)分配内存并设置类变量初始值（jvm的初始值）。（<strong>如果静态变量被final修饰的话，那么会被赋值为用户设置的初始值</strong>）</li>
+<li><strong>解析</strong> : 把常量池中的符号引用转换为直接引用。<ul>
+<li><strong>符号引用</strong>：以一组符号来描述所引用的目标。</li>
+<li><strong>直接引用</strong>：可以理解为一个内存地址，或者一个偏移量。如果有了直接引用，那引用的目标必定已经在虚拟机的内存中存在。</li>
 </ul>
-<h2 id="Redis分片集群中数据是怎么存储和读取的？"><a href="#Redis分片集群中数据是怎么存储和读取的？" class="headerlink" title="Redis分片集群中数据是怎么存储和读取的？"></a><strong>Redis分片集群中数据是怎么存储和读取的？</strong></h2><ul>
-<li>Redis 分片集群引入了<strong>哈希槽</strong>的概念，Redis 集群有 16384 个哈希槽。</li>
-<li>将16384个插槽分配到不同的<strong>master</strong>节点。</li>
-<li>读写数据：<strong>根据key的有效部分计算哈希值</strong>，<strong>对16384取余</strong>。（有效部分，如果key前面有大括号，大括号的内容就是有效部分，如果没有，则以key本身做为有效部分）<strong>余数做为插槽，寻找插槽所在的节点</strong>。</li>
+</li>
 </ul>
-<h1 id="Redis-为什么是单线程的？为什么性能快？（⭐）"><a href="#Redis-为什么是单线程的？为什么性能快？（⭐）" class="headerlink" title="Redis 为什么是单线程的？为什么性能快？（⭐）"></a>Redis 为什么是单线程的？为什么性能快？（⭐）</h1><p>Redis <strong>单线程</strong>并不是说 Redis 服务器就只有一个线程，而是指<strong>在处理客户端请求（如增删改查）的时候只有一个线程</strong>，但其实在其他操作的时候是有可能多个线程的，比如说持久化。<strong>Redis</strong>执行<strong>BGSAVE</strong>指令，进行快照持久化时，就会<strong>fork</strong>出一个子进程，然后子进程去创建快照，完成持久化操作。</p>
-<p><strong>为什么 Redis 采用单线程？</strong> </p>
-<p>通常在<strong>涉及到频繁 I&#x2F;O 操作的时候可以采用多线程</strong>，<strong>（磁盘I&#x2F;O是一个比较耗时的操作，所以对于需要进行磁盘I&#x2F;O的程序，我们可以使用多线程，在某个线程进行I&#x2F;O时，CPU切换到当前程序的其他线程执行，以此减少CPU的等待时间）</strong> 以提高 CPU 的利用率，<strong>但是 Redis 是基于内存的，不涉及到什么IO操作，使用多线程并不能有效提升效率</strong>，相反，使用多线程还需要考虑高并发情况下的线程安全问题，以及各种不必要的上下文切换，影响效率。</p>
-<p><strong>Redis 为什么快？</strong></p>
+</li>
+<li><strong>初始化(⭐)</strong> : 直到初始化阶段，Java虚拟机才真正开始执行类中编写的Java程序代码。此阶段会对类的<strong>静态变量，静态代码块、成员变量</strong>等执行初始化操作(开发人员设置的初始值)。<ul>
+<li><strong>初始化顺序：静态变量-&gt;静态代码块-&gt;成员变量-&gt;构造函数</strong></li>
+</ul>
+</li>
+<li>**使用 **: JVM 开始从入口方法开始执行用户的程序代码。</li>
+<li><strong>卸载</strong> : 当用户程序代码执行完毕后，JVM便开始销毁创建的Class对象。<blockquote>
+<p><strong>ps：非静态变量属于对象，不属于类，类加载的几个阶段都只针对类变量。</strong></p>
+</blockquote>
+</li>
+</ul>
+<h2 id="一个对象从创建到回收在内存中经历了哪些过程？"><a href="#一个对象从创建到回收在内存中经历了哪些过程？" class="headerlink" title="一个对象从创建到回收在内存中经历了哪些过程？"></a>一个对象从创建到回收在内存中经历了哪些过程？</h2><ol>
+<li><strong>检查类是否加载：</strong> 当需要创建一个类的实例对象时，需要先判断该类是否被成功加载过了，若没有加载，要先进行类的加载，如果加载过了，会在堆区有一个类的class对象，方法区会有类的相关元数据信息。</li>
+<li><strong>分配内存：</strong> 类加载成功后，jvm就能够确定对象的大小了，然后jvm会在堆内存划分一块对象大小的内存空间出来，分配给新生对象。jvm分配内存有两种方式：<ol>
+<li><strong>指针碰撞法：</strong> 当堆中内存较规整的时候，会维护一个内存指针，通过移动指针的方式给对象分配内存空间。</li>
+<li><strong>空闲列表：</strong> 当堆中内存较为凌乱，会维护一个空闲列表，当对象需要分配内存时，从空闲列表中找到一块足够对象大小的内存，分给新生对象。这种方式可能会产生一些<strong>内存碎片</strong>。<ol>
+<li><strong>当多个线程同时分配内存时，这里会有线程安全问题。解决办法有两种：</strong><ol>
+<li><strong>cas+重试机制：</strong> 就是通过cas操作移动指针，只有一个线程可以移动成功，移动失败的线程重试，直到成功为止。</li>
+<li><strong>本地线程分配缓冲(TLAB)：</strong> 当线程开启时，就为每个线程分配一块较大的空间，然后线程内部创建对象的时候，就从自己的空间分配，当自己的空间分配完了再从堆中分配内存。</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><strong>初始化：</strong> 就是对分配的这一块内存初始化为零值，也就是给实例对象的成员变量赋值为零值，引用类型为null，int类型赋值为0等等操作。</li>
+<li><strong>设置对象头：</strong> 对象分为 <strong>对象头，实例数据区，对齐填充位</strong>。设置对象头，就是设置对象头中对象的hashcode，分代年龄，锁状态，类元数据指针等信息。<ol>
+<li><strong>对象头：</strong> 对象头分为mark word，Klass pointer 两个字段，mark word 保存了对象的hashcode 值，分代年龄，锁状态等信息。</li>
+<li><strong>实例数据区：</strong> 保存对象成员变量的值，引用类型的话保存的是内存地址。</li>
+<li><strong>对齐填充位：</strong> 填充占用的内存的大小，使其为8字节的整数倍。</li>
+</ol>
+</li>
+<li><strong>执行初始化方法：</strong> 给对象的成员变量设置程序员指定值的初始值，并且会执行构造方法。</li>
+</ol>
+<h1 id="垃圾回收："><a href="#垃圾回收：" class="headerlink" title="垃圾回收："></a>垃圾回收：</h1><h2 id="对象什么时候可以被垃圾器回收-？-⭐"><a href="#对象什么时候可以被垃圾器回收-？-⭐" class="headerlink" title="对象什么时候可以被垃圾器回收 ？(⭐)"></a>对象什么时候可以被垃圾器回收 ？(⭐)</h2><p>如果没有任何的引用指向该对象了，那么这个对象现在就是垃圾，如果定位了垃圾，则有可能会被垃圾回收器回收。</p>
+<p><strong>定位垃圾</strong>的方式：</p>
 <ul>
-<li>Redis是基于C语言编写，是基于内存操作，执行速度非常快。</li>
-<li>采用单线程，避免不必要的上下文切换，多线程还需要考虑线程安全问题。</li>
-<li>使用了I&#x2F;O多路复用模型，非阻塞IO。</li>
-</ul>
-<h1 id="I-O多路复用模型"><a href="#I-O多路复用模型" class="headerlink" title="I&#x2F;O多路复用模型"></a>I&#x2F;O多路复用模型</h1><p>Redis是纯内存操作，执行速度非常快，它的<strong>性能瓶颈是网络延迟和内存，而不是执行速度</strong>，<strong>I&#x2F;O多路复用模型主要就是实现了高效的网络请求。</strong></p>
-<ul>
-<li><strong>阻塞IO：用户区进程在“内核区准备数据”和“拷贝数据”两个阶段都处于阻塞状态。</strong></li>
-<li><strong>非阻塞IO：第一个阶段是非阻塞，第二阶段阻塞。虽然是非阻塞，但都是忙等，没有提高性能，还会使CPU空转，使用率暴涨。</strong></li>
-<li><strong>IO多路复用：是利用单个线程来同时监听多个Socket ，并在某个Socket可读、可写时得到通知，从而避免无效的等待，充分利用CPU资源。</strong><ul>
-<li><strong>监听Socket的方式：</strong><ul>
-<li><strong>select：</strong> 轮询监听各个Socket，监听个数上限为1024。</li>
-<li><strong>poll：</strong> 也要轮询监听，但是监听上限大于select方法。</li>
-<li><strong>epoll：</strong> 不必轮询监听，当socket准备好了通知一下即可。</li>
+<li><strong>引用计数法</strong>：给对象中添加一个引用计数器，每被引用一次计数器就+1，反之-1。引用数为0时代表该对象可被回收。（缺点：循环引用时会出现内存泄漏）</li>
+<li><strong>可达性分析算法</strong>：通过一系列的称为 “GC Roots”（肯定不能当做垃圾回收的对象） 的对象作为起点，从这些节点开始向下搜索，节点所走过的路径称为引用链，当一个对象到 GC Roots 没有任何引用链相连的话，则证明此对象是不可用的，需要被回收。<ul>
+<li><strong>可以作为GC Root的对象：</strong><ul>
+<li>虚拟机栈(栈帧中的局部变量表)中引用的对象</li>
+<li>本地方法栈(Native 方法)中引用的对象</li>
+<li>方法区中类静态属性引用的对象</li>
+<li>方法区中常量引用的对象</li>
+<li>所有被同步锁持有的对象</li>
+<li>JNI（Java Native Interface）引用的对象</li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-<p>redis使用<strong>I&#x2F;O多路复用</strong>结合<strong>事件的处理器</strong>来应对多个Socket请求，</p>
-<ul>
-<li><strong>连接应答处理器</strong></li>
-<li><strong>命令回复处理器</strong>，在Redis6.0之后，为了提升更好的性能，使用了多线程来处理回复事件</li>
-<li><strong>命令请求处理器</strong>，在Redis6.0之后，将命令的转换使用了多线程，增加命令转换速度，在命令执行的时候，依然是单线程。</li>
+<h2 id="JVM-垃圾回收算法-⭐"><a href="#JVM-垃圾回收算法-⭐" class="headerlink" title="JVM 垃圾回收算法(⭐)"></a>JVM 垃圾回收算法(⭐)</h2><ul>
+<li><strong>标记清除算法</strong>：先根据可达性分析算法得出的垃圾进行标记，再对这些标记为可回收的内容进行垃圾回收。<ul>
+<li><strong>缺点</strong>：<strong>通过标记清除算法清理出来的内存，碎片化较为严重。</strong></li>
 </ul>
-<p><img src="/2024/08/05/Redis%E7%AF%87/1.png"></p>
-<h1 id="什么是大Key问题？如何解决？"><a href="#什么是大Key问题？如何解决？" class="headerlink" title="什么是大Key问题？如何解决？"></a>什么是大Key问题？如何解决？</h1><p>BigKey的具体表现是Redis中的key对应的value很大，占用的redis空间比较大，本质上是大value问题。在读取大key的时候，由于读取的内容较多，占用较大的带宽，造成网络带宽的阻塞。 解决方案：</p>
+</li>
+<li><strong>标记整理算法</strong>：和上述类似，在清理完垃圾之后，会对存活对象进行整理，从而<strong>解决了碎片化的问题。</strong><ul>
+<li><strong>缺点</strong>：<strong>对象需要移动，效率较低。</strong></li>
+</ul>
+</li>
+<li><strong>复制算法</strong>：将原有的内存空间一分为二，每次只用其中的一块,正在使用的对象复制到另一个内存空间中，然后将该内存空间清空，交换两个内存的角色，完成垃圾的回收。<strong>无碎片、效率较高。</strong><ul>
+<li><strong>缺点</strong>：<strong>内存使用率低。</strong></li>
+</ul>
+</li>
+</ul>
+<h2 id="分代收集算法-⭐"><a href="#分代收集算法-⭐" class="headerlink" title="分代收集算法(⭐)"></a>分代收集算法(⭐)</h2><p>根据对象存活周期的不同将内存分为几块。一般将 Java <strong>堆</strong> 分为 <strong>新生代</strong> 和<strong>老年代</strong>，这样我们就可以根据各个年代的特点选择合适的垃圾收集算法。<br><img src="/2024/08/05/JVM%E7%AF%87/7.png"><br>在<strong>新生代</strong>中，每次收集都会有大量对象死去，所以可以选择 <strong>”标记-复制“</strong> 算法，只需要付出少量对象的复制成本就可以完成每次垃圾收集。而<strong>老年代</strong>的对象存活几率是比较高的，而且没有额外的空间对它进行分配担保，所以我们必须选择 <strong>“标记-清除”</strong> 或 <strong>“标记-整理”</strong> 算法进行垃圾收集。<br><strong>对象回收分代回收的过程：</strong></p>
 <ul>
-<li><strong>针对BigKey进行拆分：</strong> 将大key拆分成多个小key的键值对，读取的时候使用mget批量读取。</li>
-<li><strong>压缩对应BigKey的value</strong>：可以通过序列化等方法对value进行压缩，使其变为较小的value。</li>
-<li><strong>清理无效的数据</strong>：主要是针对像是<strong>list</strong>和<strong>set</strong>这种类型，在使用的过程中，<strong>list</strong>和<strong>set</strong>中对应的内容不断增加，需要定时的对list和set进行清理。</li>
+<li>新创建的对象首先会分配到伊甸园。</li>
+<li>当伊甸园内存不足，标记伊甸园和幸存区from中的存活对象。</li>
+<li>使用复制算法将存活对象复制到to中，然后释放from和eden的内存。</li>
+<li>一段时间后eden内存又不足，标记eden和to中存活的对象，复制到from中。</li>
+<li>当幸存区对象熬过几次回收(15次)，晋身至老年代中。(幸存区内存不足或大对象会提前晋身)</li>
+</ul>
+<h3 id="MinorGC、-Mixed-GC-、-FullGC的区别是什么？"><a href="#MinorGC、-Mixed-GC-、-FullGC的区别是什么？" class="headerlink" title="MinorGC、 Mixed GC 、 FullGC的区别是什么？"></a><strong>MinorGC、 Mixed GC 、 FullGC的区别是什么？</strong></h3><ul>
+<li><p><strong>MinorGC</strong>： 发生在新生代的垃圾回收，暂停时间短（ STW ）。</p>
+</li>
+<li><p><strong>FullGC</strong> ： 新生代 + 老年代完整垃圾回收，暂停时间长（ STW ），应尽力避免。</p>
+<blockquote>
+<p>触发FullGC的两种情况：<br>①在 MinorGC之前，会判断老年代中是否容得下新生代的对象，容不下会触发FullGC。<br>②在MinorGC之后老年代发生OOM。</p>
+</blockquote>
+</li>
+<li><p><strong>Mixed GC</strong>： 新生代 + 老年代部分区域的垃圾回收， G1 收集器特有 。</p>
+<blockquote>
+<p>STW （ Stop-The-World ）：暂停所有应用程序线程，等待垃圾回收的完成 。</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="JVM-垃圾回收器-⭐"><a href="#JVM-垃圾回收器-⭐" class="headerlink" title="JVM 垃圾回收器(⭐)"></a>JVM 垃圾回收器(⭐)</h2><ul>
+<li><strong>串行垃圾收集器</strong>：垃圾回收时，只有一个线程在工作，并且java应用中的所有线程都要暂停（ STW ），等待垃圾回收的完成，<strong>适用于单机模式的虚拟机</strong>。<ul>
+<li><strong>Serial</strong>：作用于新生代，采用复制算法。</li>
+<li><strong>Serial Old</strong>： 作用于老年代，采用标记 - 整理算法。</li>
+</ul>
+</li>
+<li><strong>并行垃圾收集器</strong>：（ JDK8 默认使用此垃圾回收器）<ul>
+<li><strong>ParNew收集器</strong>：是<strong>Serial收集器的多线程并行版本</strong>，除了<strong>同时使用多条线程进行垃圾收集</strong>之外，其余的行为与Serial收集器完全一致。（除serial之外唯一能和CMS配合的）</li>
+<li><strong>Parallel Scavenge收集器</strong>：新生代收集器，基于<strong>标记-复制算法</strong>实现，<strong>和ParNew非常相似，区别在于该收集器更加关注吞吐量</strong>（高效利用CPU）。</li>
+<li><strong>Parallel Old收集器</strong>：是Parallel Scavenge收集器的老年代版本，支持多线程并发收集，基于标记-整理算法实现。</li>
+</ul>
+</li>
+<li><strong>CMS收集器：</strong>主要作用于老年代<strong>，</strong>以获取<strong>最短回收停顿时间</strong>为目标的收集器，给用户带来良好的交互体验。<ul>
+<li>基于<strong>标记-清除算法</strong>实现，整个过程分四个步骤：<strong>初始标记</strong>和<strong>重新标记</strong>耗时较短，需要<strong>STW</strong>暂停其他线程；而整个过程中耗时最长的<strong>并发标记</strong>和<strong>并发清除</strong>阶段中，垃圾收集器线程可以与用户线程并行工作。<ol>
+<li>初始标记：标记GCRoots能直接关联到的对象，速度很快。</li>
+<li>并发标记：标记GC Roots的间接关联对象，这个过程耗时较长但不需要停顿用户线程，可以与垃圾收集线程一起并发运行。</li>
+<li>重新标记：修正并发标记期间，因用户程序继续运作而导致标记产生变动。</li>
+<li>并发清除：清理删除掉标记阶段判断的已经死亡的对象，由于不需要移动存活对象，所以这个阶段也是可以与用户线程同时并发的。</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>G1收集器：<ul>
+<li>应用于新生代和老年代，JDK9之后默认使用的收集器。</li>
+<li>将java堆划分成多个区域，每个区域都可以充当 eden，survivor，old， humongous，其中 humongous 专为大对象准备。</li>
+<li>采用标记复制算法，兼顾响应时间和吞吐量。</li>
+<li><strong>分为四个阶段：</strong><ul>
+<li><strong>初始标记</strong>：标记一下GC Roots能直接关联到的对象，这个阶段需要停顿线程，但耗时很短。</li>
+<li><strong>并发标记</strong>：从GC Root开始对堆中对象进行可达性分析，递归扫描整个堆里的对象图，找出要回收的对象，这阶段耗时较长，但可与用户程序并发执行。</li>
+<li><strong>最终标记</strong>：需要对用户线程做一个短暂的暂停，解决上一阶段的漏标问题。</li>
+<li><strong>筛选回收</strong>：对各个Region的回收价值和成本进行排序，根据用户所期望的停顿时间来制定回收计划，可以自由选择任意多个Region构成回收集，然后把这些Region中的存活对象复制到空的Region中，再清理掉整个旧Region的全部空间。这里的操作涉及存活对象的移动，是必须暂停用户线程，由多条收集器线程并行完成的。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><strong>停顿时间越短就越适合需要与用户交互或需要保证服务响应质量的程序，良好的响应速度能提升用户体验；而高吞吐量则可以最高效率地利用处理器资源，尽快完成程序的运算任务，主要适合在后台运算而不需要太多交互的分析任务。</strong></p>
+</blockquote>
+<h2 id="强引用、软引用、弱引用、虚引用的区别？"><a href="#强引用、软引用、弱引用、虚引用的区别？" class="headerlink" title="强引用、软引用、弱引用、虚引用的区别？"></a>强引用、软引用、弱引用、虚引用的区别？</h2><ul>
+<li><strong>强引用</strong>：最传统的“引用”的定义，只要强引用关系还存在，<strong>垃圾收集器就永远不会回收掉被强引用的对象</strong>。</li>
+<li><strong>软引用</strong>：如果内存空间足够，垃圾回收器就不会回收它，<strong>如果内存空间不足了，才会回收这些对象的内存</strong>。</li>
+<li><strong>弱引用</strong>：强度比软引用更弱，当垃圾回收器开始工作时，无论内存空间是否充足都会对弱引用对象进行回收。</li>
+<li><strong>虚引用</strong>：虚引用并不会决定对象的生命周期。如果一个对象仅持有虚引用，那么它就和没有任何引用一样，在任何时候都可能被垃圾回收。<strong>主要用来跟踪对象被垃圾回收器回收的活动</strong>。</li>
+</ul>
+<h1 id="jvm实践："><a href="#jvm实践：" class="headerlink" title="jvm实践："></a>jvm实践：</h1><h2 id="JVM调优的参数可以在哪里设置参数值？"><a href="#JVM调优的参数可以在哪里设置参数值？" class="headerlink" title="JVM调优的参数可以在哪里设置参数值？"></a>JVM调优的参数可以在哪里设置参数值？</h2><ul>
+<li><strong>war包部署在tomcat中设置 修改TOMCAT_HOME&#x2F;bin&#x2F;catalina.sh文件</strong></li>
+<li><strong>jar包部署在启动参数设置 java -Xms512m -Xmx1024m -jar xxxx.jar</strong></li>
+</ul>
+<h2 id="JVM调优的参数都有哪些？（⭐）"><a href="#JVM调优的参数都有哪些？（⭐）" class="headerlink" title="JVM调优的参数都有哪些？（⭐）"></a>JVM调优的参数都有哪些？（⭐）</h2><ul>
+<li><strong>设置堆空间大小</strong>：设置堆的初始大小和最大大小，为了防止垃圾收集器在初始大小、最大大小之间收缩堆而产生额外的时间，通常把最大、初始大小设置为相同的值。<ul>
+<li>-Xms：设置堆的初始化大小</li>
+<li>-Xmx：设置堆的最大大小</li>
+</ul>
+</li>
+<li><strong>虚拟机栈的大小</strong>：每个线程默认会开启1M的内存，用于存放栈帧、调用参数、局部变量等，但一般256K就够用。<ul>
+<li>-Xss   对每个线程stack大小的调整,-Xss128k</li>
+</ul>
+</li>
+<li><strong>年轻代中Eden区和两个Survivor区的大小比例：</strong><ul>
+<li>-XXSurvivorRatio&#x3D;8，表示年轻代中的分配比率：survivor:eden &#x3D; 2:8</li>
+</ul>
+</li>
+<li><strong>年轻代晋升老年代阈值：默认为15。</strong><ul>
+<li>-XX:MaxTenuringThreshold&#x3D;threshold</li>
+</ul>
+</li>
+<li><strong>设置垃圾回收收集器：</strong><ul>
+<li>-XX:+UseParallelGC</li>
+<li>-XX:+UseG1GC</li>
+</ul>
+</li>
+</ul>
+<h2 id="JVM-调优的工具"><a href="#JVM-调优的工具" class="headerlink" title="JVM 调优的工具"></a>JVM 调优的工具</h2><ul>
+<li><strong>命令工具：</strong><ul>
+<li><strong>jps</strong>：输出JVM中运行的进程状态信息。	</li>
+<li><strong>jstack</strong>：查看java进程内线程的堆栈信息。</li>
+<li><strong>jmap</strong>：用于生成堆转存快照。</li>
+<li><strong>jhat</strong>：用于分析jmap生成的堆转存快照。</li>
+<li><strong>jstat</strong>：是JVM统计监测工具。可以用来显示垃圾回收信息、类加载信息、新生代统计信息等。</li>
+</ul>
+</li>
+<li><strong>可视化工具：</strong><ul>
+<li><strong>jconsole</strong>： 对 jvm 的内存，线程，类进行监控，是一个基于 jmx 的 GUI 性能监控工具。<ul>
+<li>打开方式：java 安装目录 bin 目录下 直接启动 jconsole.exe 就行。</li>
+</ul>
+</li>
+<li><strong>VisualVM</strong>：故障处理工具，能够监控线程，内存情况，查看方法的CPU时间和内存中的对象，已被GC的对象，反向查看分配的堆栈。<ul>
+<li>打开方式：java 安装目录 bin目录下 直接启动 jvisualvm.exe就行。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Java内存泄露的排查思路"><a href="#Java内存泄露的排查思路" class="headerlink" title="Java内存泄露的排查思路"></a>Java内存泄露的排查思路</h2><p><strong>内存泄漏通常是指堆内存，通常是指一些大对象不被回收的情况。</strong></p>
+<ol>
+<li>通过jmap或设置jvm参数获取堆内存快照dump</li>
+<li>通过工具， VisualVM去分析dump文件，VisualVM可以加载离线的dump文件</li>
+<li>通过查看堆信息的情况，可以大概定位内存溢出是哪行代码出了问题</li>
+<li>找到对应的代码，通过阅读上下文的情况，进行修复即可</li>
+</ol>
+<h2 id="CPU飙高排查方案与思路（⭐）"><a href="#CPU飙高排查方案与思路（⭐）" class="headerlink" title="CPU飙高排查方案与思路（⭐）"></a>CPU飙高排查方案与思路（⭐）</h2><ol>
+<li>使用top命令查看占用cpu的情况，查看是哪一个进程占用cpu较高。</li>
+<li>使用ps命令查看进程中的线程信息。</li>
+<li>使用jstack命令查看进程中线程的信息，并定位到出问题的具体线程，最终定位问题。</li>
+</ol>
+<h2 id="什么是-OOM？如何分析及解决-OOM-问题-（⭐）"><a href="#什么是-OOM？如何分析及解决-OOM-问题-（⭐）" class="headerlink" title="什么是 OOM？如何分析及解决 OOM 问题?（⭐）"></a>什么是 OOM？如何分析及解决 OOM 问题?（⭐）</h2><h3 id="what？"><a href="#what？" class="headerlink" title="what？"></a>what？</h3><p>OOM，全称“Out Of Memory”，即内存溢出，来源于java.lang.OutOfMemoryError。当 JVM没有足够的内存来为对象分配空间并且垃圾回收器也已经没有空间可回收时，就会抛出这个error。<br><strong>最常见的OOM情况有以下三种：</strong></p>
+<ul>
+<li>java.lang.OutOfMemoryError: Java heap space ——&gt;java堆内存溢出，此种情况最常见，一般由于内存泄露或者堆的大小设置不当引起。对于内存泄露，需要通过内存监控软件查找程序中的泄露代码，而堆大小可以通过虚拟机参数-Xms,-Xmx等修改。</li>
+<li>java.lang.OutOfMemoryError: PermGen space ——&gt;java永久代溢出，即方法区溢出了，一般出现于大量Class或者jsp页面，或者采用cglib等反射机制的情况，因为上述情况会产生大量的Class信息存储于方法区。此种情况可以通过更改方法区的大小来解决，使用类似-XX:PermSize&#x3D;64m -XX:MaxPermSize&#x3D;256m的形式修改。另外，过多的常量尤其是字符串也会导致方法区溢出。</li>
+<li>java.lang.StackOverflowError ——&gt; 不会抛OOM error，但也是比较常见的Java内存溢出。JAVA虚拟机栈溢出，一般是由于程序中存在死循环或者深度递归调用造成的，栈大小设置太小也会出现此种溢出。可以通过虚拟机参数-Xss来设置栈的大小。</li>
+</ul>
+<h3 id="why"><a href="#why" class="headerlink" title="why?"></a>why?</h3><p>原因不外乎有两点：</p>
+<ul>
+<li>分配的内存少了：比如虚拟机本身可使用的内存（一般通过启动时的VM参数指定）太少。</li>
+<li>应用占用内存太多，并且用完没释放，浪费了。此时就会造成<strong>内存泄露</strong>甚至<strong>内存溢出</strong>。</li>
+</ul>
+<h3 id="How？"><a href="#How？" class="headerlink" title="How？"></a>How？</h3><p><strong>如何预防？</strong></p>
+<ul>
+<li><strong>及时释放资源，防止内存泄漏</strong><ul>
+<li>内存泄漏是导致OOM的一个重要原因。我们需要在代码中及时释放不再使用的内存，避免长时间占用内存资源。比如在Java中，使用finally块或try-with-resources语句，确保资源及时释放。</li>
+</ul>
+</li>
+<li><strong>调整内存配置</strong><ul>
+<li>针对不同的应用需求，合理配置内存参数。例如，在Java中，可以通过调整JVM的堆内存大小（-Xmx和-Xms参数）来满足应用的内存需求。</li>
+</ul>
+</li>
 </ul>
 
       
@@ -507,7 +612,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/11/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/13/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/11/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/13/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -584,13 +689,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-count">16</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -632,18 +737,18 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">109k</span>
+    <span title="站点总字数">116k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">1:39</span>
+    <span title="站点阅读时长">1:46</span>
 </div>
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共62.2k字</span>
+  <span class="post-count">博客全站共64k字</span>
 </div>
 
 

@@ -22,30 +22,40 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="Time will tell">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Michael-Jay">
-<meta property="og:url" content="http://example.com/page/2/index.html">
+  <meta name="description" content="二叉树的前序遍历二叉树前序遍历有两种方式，一种是递归法，还一种是用栈模拟迭代。 1234567891011public List&lt;Integer&gt; preorderTraversal(TreeNode root) &#123;        List&lt;Integer&gt; ans &#x3D; new ArrayList&lt;&gt;();        travelsal(ans,r">
+<meta property="og:type" content="article">
+<meta property="og:title" content="二叉树">
+<meta property="og:url" content="http://example.com/2024/08/08/%E4%BA%8C%E5%8F%89%E6%A0%91/index.html">
 <meta property="og:site_name" content="Michael-Jay">
-<meta property="og:description" content="Time will tell">
+<meta property="og:description" content="二叉树的前序遍历二叉树前序遍历有两种方式，一种是递归法，还一种是用栈模拟迭代。 1234567891011public List&lt;Integer&gt; preorderTraversal(TreeNode root) &#123;        List&lt;Integer&gt; ans &#x3D; new ArrayList&lt;&gt;();        travelsal(ans,r">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2024/08/08/%E4%BA%8C%E5%8F%89%E6%A0%91/1.png">
+<meta property="og:image" content="http://example.com/2024/08/08/%E4%BA%8C%E5%8F%89%E6%A0%91/2.png">
+<meta property="og:image" content="http://example.com/2024/08/08/%E4%BA%8C%E5%8F%89%E6%A0%91/3.png">
+<meta property="og:image" content="http://example.com/2024/08/08/%E4%BA%8C%E5%8F%89%E6%A0%91/4.png">
+<meta property="og:image" content="http://example.com/2024/08/08/%E4%BA%8C%E5%8F%89%E6%A0%91/5.png">
+<meta property="og:image" content="http://example.com/2024/08/08/%E4%BA%8C%E5%8F%89%E6%A0%91/6.png">
+<meta property="og:image" content="http://example.com/2024/08/08/%E4%BA%8C%E5%8F%89%E6%A0%91/7.png">
+<meta property="article:published_time" content="2024-08-08T07:08:13.589Z">
+<meta property="article:modified_time" content="2024-08-08T07:13:12.729Z">
 <meta property="article:author" content="吴华杰">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2024/08/08/%E4%BA%8C%E5%8F%89%E6%A0%91/1.png">
 
-<link rel="canonical" href="http://example.com/page/2/">
+<link rel="canonical" href="http://example.com/2024/08/08/%E4%BA%8C%E5%8F%89%E6%A0%91/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>Michael-Jay</title>
+  <title>二叉树 | Michael-Jay</title>
   
 
 
@@ -182,9 +192,10 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
-      
+
+    
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
@@ -200,10 +211,9 @@
       <meta itemprop="name" content="Michael-Jay">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/08/08/%E4%BA%8C%E5%8F%89%E6%A0%91/" class="post-title-link" itemprop="url">二叉树</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          二叉树
+        </h1>
 
         <div class="post-meta">
 			
@@ -230,7 +240,14 @@
                 </span>
             </span>
 
-          <br>
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
             <span class="post-meta-item" title="本文字数">
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
@@ -255,7 +272,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="二叉树的前序遍历"><a href="#二叉树的前序遍历" class="headerlink" title="二叉树的前序遍历"></a>二叉树的前序遍历</h1><p>二叉树前序遍历有两种方式，一种是<strong>递归法</strong>，还一种是用<strong>栈模拟迭代</strong>。</p>
+        <h1 id="二叉树的前序遍历"><a href="#二叉树的前序遍历" class="headerlink" title="二叉树的前序遍历"></a>二叉树的前序遍历</h1><p>二叉树前序遍历有两种方式，一种是<strong>递归法</strong>，还一种是用<strong>栈模拟迭代</strong>。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title function_">preorderTraversal</span><span class="params">(TreeNode root)</span> &#123;</span><br><span class="line">        List&lt;Integer&gt; ans = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        travelsal(ans,root);</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">travelsal</span><span class="params">(List&lt;Integer&gt; list, TreeNode node)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(node == <span class="literal">null</span>) <span class="keyword">return</span>;</span><br><span class="line">        list.add(node.val);</span><br><span class="line">        travelsal(list,node.left);</span><br><span class="line">        travelsal(list,node.right);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> List&lt;Integer&gt; <span class="title function_">preorderTraversal</span><span class="params">(TreeNode root)</span> &#123;</span><br><span class="line">        List&lt;Integer&gt; ans = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        LinkedList&lt;TreeNode&gt; stack = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;();</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="literal">null</span>) <span class="keyword">return</span> ans;</span><br><span class="line">        stack.push(root);</span><br><span class="line">        <span class="keyword">while</span>(stack.size() != <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="type">TreeNode</span> <span class="variable">node</span> <span class="operator">=</span> stack.pop();</span><br><span class="line">            ans.add(node.val);</span><br><span class="line">            <span class="comment">//此处要先放右孩子再放左孩子，因为栈是先进后出的。</span></span><br><span class="line">            <span class="keyword">if</span>(node.right != <span class="literal">null</span>) stack.push(node.right);</span><br><span class="line">            <span class="keyword">if</span>(node.left != <span class="literal">null</span>) stack.push(node.left);            </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h1 id="二叉树的中序遍历"><a href="#二叉树的中序遍历" class="headerlink" title="二叉树的中序遍历"></a>二叉树的中序遍历</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> List&lt;Integer&gt; <span class="title function_">inorderTraversal</span><span class="params">(TreeNode root)</span> &#123;</span><br><span class="line">        List&lt;Integer&gt; ans = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        traversal(ans,root);</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">traversal</span><span class="params">(List&lt;Integer&gt; ans, TreeNode node)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(node == <span class="literal">null</span>) <span class="keyword">return</span>;</span><br><span class="line">        traversal(ans,node.left);</span><br><span class="line">        ans.add(node.val);</span><br><span class="line">        traversal(ans,node.right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -286,7 +303,6 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> TreeNode <span class="title function_">buildTree</span><span class="params">(<span class="type">int</span>[] preorder, <span class="type">int</span>[] inorder)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(preorder.length == <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="type">TreeNode</span> <span class="variable">root</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">TreeNode</span>(preorder[<span class="number">0</span>]);</span><br><span class="line">        <span class="keyword">if</span>(preorder.length == <span class="number">1</span>) <span class="keyword">return</span> root;</span><br><span class="line">        <span class="comment">//找切割点</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">seg</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;inorder.length; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(inorder[i] == preorder[<span class="number">0</span>])&#123;</span><br><span class="line">                seg = i;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//切割数组</span></span><br><span class="line">        <span class="type">int</span>[] in_left = Arrays.copyOfRange(inorder,<span class="number">0</span>,seg);</span><br><span class="line">        <span class="type">int</span>[] in_right = Arrays.copyOfRange(inorder,seg+<span class="number">1</span>,inorder.length);</span><br><span class="line">        <span class="type">int</span>[] pre_left = Arrays.copyOfRange(preorder,<span class="number">1</span>,in_left.length+<span class="number">1</span>);</span><br><span class="line">        <span class="type">int</span>[] pre_right = Arrays.copyOfRange(preorder,in_left.length+<span class="number">1</span>,preorder.length);</span><br><span class="line">        <span class="comment">//递归</span></span><br><span class="line">        root.left = buildTree(pre_left,in_left);</span><br><span class="line">        root.right = buildTree(pre_right,in_right);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
-      
     </div>
 
     
@@ -294,20 +310,35 @@
     
 	
 	 
+       <div>
+		 <div>
+    
+        <div style="text-align:center;color: #00BFFF;font-size:18px;"><br>-------------------- 本文结束 <i class="fas fa-heart"></i> 感谢您的阅读！ -------------------</div>
+    
+</div>
+	   </div>
+     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/08/08/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" rel="prev" title="几种重要的排序算法">
+      <i class="fa fa-chevron-left"></i> 几种重要的排序算法
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
       </footer>
+    
   </article>
   
   
   
   
-
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
-  </nav>
 
 
 
@@ -369,6 +400,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86"><span class="nav-number">1.</span> <span class="nav-text">二叉树的前序遍历</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86"><span class="nav-number">2.</span> <span class="nav-text">二叉树的中序遍历</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86"><span class="nav-number">3.</span> <span class="nav-text">二叉树的后序遍历</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%82%E5%BA%8F%E9%81%8D%E5%8E%86"><span class="nav-number">4.</span> <span class="nav-text">二叉树的层序遍历</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BF%BB%E8%BD%AC%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="nav-number">5.</span> <span class="nav-text">翻转二叉树</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E5%A4%A7%E6%B7%B1%E5%BA%A6"><span class="nav-number">6.</span> <span class="nav-text">二叉树的最大深度</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E5%B0%8F%E6%B7%B1%E5%BA%A6"><span class="nav-number">7.</span> <span class="nav-text">二叉树的最小深度</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E8%8A%82%E7%82%B9%E4%B8%AA%E6%95%B0"><span class="nav-number">8.</span> <span class="nav-text">完全二叉树的节点个数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AF%B9%E7%A7%B0%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="nav-number">9.</span> <span class="nav-text">对称二叉树</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91"><span class="nav-number">10.</span> <span class="nav-text">不同的二叉搜索树</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%8E%E5%89%8D%E5%BA%8F%E4%B8%8E%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E5%BA%8F%E5%88%97%E6%9E%84%E9%80%A0%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="nav-number">11.</span> <span class="nav-text">从前序与中序遍历序列构造二叉树</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
