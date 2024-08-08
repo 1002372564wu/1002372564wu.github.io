@@ -188,7 +188,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/08/07/%E6%B0%B8%E7%A6%8F%E5%AE%9E%E4%B9%A0/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/08/08/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/jay.jpg">
@@ -202,7 +202,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2024/08/07/%E6%B0%B8%E7%A6%8F%E5%AE%9E%E4%B9%A0/" class="post-title-link" itemprop="url">永福</a>
+            <a href="/2024/08/08/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" class="post-title-link" itemprop="url">几种重要的排序算法</a>
         </h2>
 
         <div class="post-meta">
@@ -212,27 +212,21 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2024-08-07 16:09:34" itemprop="dateCreated datePublished" datetime="2024-08-07T16:09:34+08:00">2024-08-07</time>
+              <time title="创建时间：2024-08-08 14:57:47 / 修改时间：15:07:14" itemprop="dateCreated datePublished" datetime="2024-08-08T14:57:47+08:00">2024-08-08</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-08-08 10:52:08" itemprop="dateModified" datetime="2024-08-08T10:52:08+08:00">2024-08-08</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AE%9E%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">实习</span></a>
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AE%9E%E4%B9%A0/%E6%B0%B8%E7%A6%8F/" itemprop="url" rel="index"><span itemprop="name">永福</span></a>
+                  <a href="/categories/%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">排序算法</span></a>
                 </span>
             </span>
 
@@ -242,14 +236,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>12k</span>
+              <span>3.7k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>11 分钟</span>
+              <span>3 分钟</span>
             </span>
 
         </div>
@@ -261,140 +255,59 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="海纳特电项目"><a href="#海纳特电项目" class="headerlink" title="海纳特电项目"></a>海纳特电项目</h1><p>这个项目是一个老项目，我主要负责新增或者维护一些功能接口。</p>
-<h2 id="工商业光伏项目模块"><a href="#工商业光伏项目模块" class="headerlink" title="工商业光伏项目模块"></a>工商业光伏项目模块</h2><h3 id="下载模板"><a href="#下载模板" class="headerlink" title="下载模板"></a>下载模板</h3><p>提供一个下载 excel 模板的接口，如图：<img src="/2024/08/07/%E6%B0%B8%E7%A6%8F%E5%AE%9E%E4%B9%A0/1.png" alt="image.png"><br>代码逻辑比较简单，在对应的 <strong>controller</strong> 中加一个方法即可：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ApiOperation(value = &quot;下载模板&quot;)</span></span><br><span class="line"><span class="meta">@PostMapping(&quot;/download/template&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">downloadTemplate</span><span class="params">(HttpServletResponse response)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">    response.setContentType(<span class="string">&quot;application/vnd.ms-excel&quot;</span>);</span><br><span class="line">    response.setHeader(<span class="string">&quot;Content-Disposition&quot;</span>, <span class="string">&quot;attachment;filename*=utf-8&#x27;&#x27;工商业光伏项目模板.xlsx&quot;</span>);</span><br><span class="line">    IOUtils.copyLarge(templateResource.getInputStream(), response.getOutputStream());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <p>十种常见排序算法可以分类两大类别：<strong>比较类排序</strong>和<strong>非比较类排序</strong>。</p>
+<p><img src="/2024/08/08/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/1.png"></p>
+<p>常见的<strong>快速排序</strong>、<strong>归并排序</strong>、<strong>堆排序</strong>以及<strong>冒泡排序</strong>等都属于<strong>比较类排序算法</strong>。比较类排序是通过比较来决定元素间的相对次序，其时间复杂度不能突破 O(nlogn)。在冒泡排序之类的排序中，问题规模为 n，又因为需要比较 n 次，所以平均时间复杂度为 O(n²)。在<strong>归并排序</strong>、<strong>快速排序</strong>之类的排序中，问题规模通过<strong>分治法</strong>消减为 logn 次，所以时间复杂度平均 O(nlogn)。</p>
+<p><strong>非比较类排序</strong>不通过比较来决定元素间的相对次序，而是<strong>通过确定每个元素之前，应该有多少个元素来排序</strong>。非比较排序时间复杂度底，但由于非比较排序需要占用空间来确定唯一位置。所以对数据规模和数据分布有一定的要求。</p>
+<h1 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h1><p>冒泡排序是一种简单的排序算法。它<strong>重复地遍历要排序的序列，依次比较两个元素，如果它们的顺序错误就把它们交换过来</strong>。遍历序列的工作是重复地进行直到没有再需要交换为止，此时说明该序列已经排序完成。这个算法的名字由来是因为越小的元素会经由交换慢慢 “浮”到数列的顶端。</p>
+<p><img src="/2024/08/08/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/2.gif"><br><strong>实现代码：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 冒泡排序</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> arr</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> arr</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span>[] bubbleSort(<span class="type">int</span>[] arr) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">        <span class="type">boolean</span> <span class="variable">flag</span> <span class="operator">=</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; arr.length - i; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (arr[j] &gt; arr[j + <span class="number">1</span>]) &#123;</span><br><span class="line">                <span class="type">int</span> <span class="variable">tmp</span> <span class="operator">=</span> arr[j];</span><br><span class="line">                arr[j] = arr[j + <span class="number">1</span>];</span><br><span class="line">                arr[j + <span class="number">1</span>] = tmp;</span><br><span class="line">                </span><br><span class="line">                flag = <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (flag) &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> arr;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><strong>此处对代码做了一个小优化，加入了一个Flag变量，当原输入序列就是排序好的情况下，停止遍历，此时时间复杂度为O(n)。</strong><br><strong>算法分析：</strong></p>
+<ul>
+<li><strong>稳定性</strong>：稳定</li>
+<li><strong>时间复杂度：</strong> 最佳：O(n) , 最差：O(n2)，平均：O(n2)</li>
+<li><strong>空间复杂度：</strong> O(1)</li>
+</ul>
+<h1 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h1><p><strong>选择排序</strong>的思想更加朴实：首先在未排序序列中找到最小（大）元素，存放到排序序列的起始位置，然后，再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾。以此类推，直到所有元素均排序完毕。其时间复杂度永远都是O(n2)。</p>
+<p><img src="/2024/08/08/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/3.gif"><br><strong>实现代码：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 选择排序</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> arr</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> arr</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span>[] selectionSort(<span class="type">int</span>[] arr) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; arr.length - <span class="number">1</span>; i++) &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">minIndex</span> <span class="operator">=</span> i;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> i + <span class="number">1</span>; j &lt; arr.length; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (arr[j] &lt; arr[minIndex]) &#123;</span><br><span class="line">                minIndex = j;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (minIndex != i) &#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">tmp</span> <span class="operator">=</span> arr[i];</span><br><span class="line">            arr[i] = arr[minIndex];</span><br><span class="line">            arr[minIndex] = tmp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> arr;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <ul>
-<li><strong>方法参数：</strong><ul>
-<li>接收一个 response 参数，用于向客户端发送 HTTP 响应。</li>
+<li><strong>稳定性</strong>：不稳定</li>
+<li><strong>时间复杂度：</strong> 最佳：O(n2) , 最差：O(n2)，平均：O(n2)</li>
+<li><strong>空间复杂度：</strong> O(1)</li>
 </ul>
-<p>	</p>
-</li>
-<li><strong>方法体：</strong><ul>
-<li>设置相应的 contentType，表示下载的文件为 excel 文件。</li>
-<li>设置了Content-Disposition响应头部，指示客户端以附件形式下载文件。</li>
-<li>最后，通过IOUtils工具类将模板文件的输入流写入到HTTP响应的输出流中，从而实现文件下载。</li>
+<h1 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h1><p><strong>快速排序</strong>的基本思想：通过一趟排序将待排序列分隔成独立的两部分，其中一部分记录的元素均比另一部分的元素小，则可分别对这两部分子序列继续进行排序，以达到整个序列有序。</p>
+<p><strong>算法步骤：</strong></p>
+<ul>
+<li>从序列中<strong>随机</strong>挑出一个元素，做为 “基准”(<strong>pivot</strong>)；</li>
+<li>重新排列序列，将所有比基准值小的元素摆放在基准前面，所有比基准值大的摆在基准的后面（相同的数可以到任一边）。在这个操作结束之后，该基准就处于数列的中间位置。</li>
+<li>递归地把小于基准值元素的子序列和大于基准值元素的子序列进行快速排序。</li>
 </ul>
-</li>
-</ul>
-<h3 id="导入-excel-文件"><a href="#导入-excel-文件" class="headerlink" title="导入 excel 文件"></a>导入 excel 文件</h3><p>提供一个导入 excel 文件的接口，如下图：<br><img src="/2024/08/07/%E6%B0%B8%E7%A6%8F%E5%AE%9E%E4%B9%A0/2.png" alt="image.png"><br>直接看核心方法代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">importExcel</span><span class="params">(MultipartFile file)</span> &#123;</span><br><span class="line">    List&lt;PhotovoltaicEarlyStageExcelReq&gt; list;</span><br><span class="line">    List&lt;PhotovoltaicEarlyStage&gt; addData = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    List&lt;Project&gt; addData2 = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        list = ExcelUtils.readExcel(file.getInputStream(), PhotovoltaicEarlyStageExcelReq.class);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">JafException</span>(e.getMessage());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 进行校验和入库对象的转换</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; list.size(); i++) &#123;</span><br><span class="line">        <span class="type">PhotovoltaicEarlyStageExcelReq</span> <span class="variable">photovoltaicEarlyStageExcelReq</span> <span class="operator">=</span> list.get(i);</span><br><span class="line">        <span class="type">PhotovoltaicEarlyStage</span> <span class="variable">photovoltaicEarlyStage</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">PhotovoltaicEarlyStage</span>();</span><br><span class="line">        <span class="type">Project</span> <span class="variable">project</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Project</span>();</span><br><span class="line">        BeanUtil.copyProperties(photovoltaicEarlyStageExcelReq,photovoltaicEarlyStage);</span><br><span class="line">        <span class="comment">//赋值，除了“项目性质”字段</span></span><br><span class="line">        String[] ignoreProperties = &#123;<span class="string">&quot;nature&quot;</span>&#125;;</span><br><span class="line">        BeanUtil.copyProperties(photovoltaicEarlyStageExcelReq,project,ignoreProperties);</span><br><span class="line">        <span class="comment">//单独给“项目性质”字段赋值</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">nature</span> <span class="operator">=</span> photovoltaicEarlyStageExcelReq.getNature();</span><br><span class="line">        project.setNature(ProjectNatureEnum.getCodeByDesc(nature));</span><br><span class="line">        <span class="comment">//单独给“项目类型”字段赋值</span></span><br><span class="line">        project.setType(ProjectTypeEnum.GFXM.getCode());</span><br><span class="line">        <span class="comment">//检验项目名称是否为空</span></span><br><span class="line">        <span class="keyword">if</span>(StringUtils.isBlank(photovoltaicEarlyStageExcelReq.getName()))&#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">JafException</span>(String.format(RMsg.IMPORT_EXCEL_CHECK_DATA_ERROR, (i + <span class="number">1</span>), <span class="string">&quot;项目名称&quot;</span>, <span class="string">&quot;不能为空！&quot;</span>));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//根据项目名称获取电站信息,并校验电站信息是否存在</span></span><br><span class="line">        <span class="type">StationManage</span> <span class="variable">stationManage</span> <span class="operator">=</span> stationManageService.getDetailByProjectName(photovoltaicEarlyStageExcelReq.getName());</span><br><span class="line">        <span class="keyword">if</span> (Objects.isNull(stationManage)) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">JafException</span>(String.format(RMsg.IMPORT_EXCEL_CHECK_DATA_ERROR, (i + <span class="number">1</span>), <span class="string">&quot;项目对应的电站信息&quot;</span>, <span class="string">&quot;不存在！&quot;</span>));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        addData2.add(project);</span><br><span class="line">        addData.add(photovoltaicEarlyStage);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (CollectionUtils.isNotEmpty(addData)) &#123;</span><br><span class="line">        <span class="built_in">this</span>.saveBatch(addData);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(CollectionUtils.isNotEmpty(addData2))&#123;</span><br><span class="line">        projectService.saveBatch(addData2);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>实现代码：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">quick_sort</span><span class="params">(<span class="type">int</span> nums[], <span class="type">int</span> start, <span class="type">int</span> end)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(start &gt;= end) <span class="keyword">return</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">left</span> <span class="operator">=</span> start;</span><br><span class="line">        <span class="type">int</span> <span class="variable">right</span> <span class="operator">=</span> end;</span><br><span class="line">        <span class="type">int</span> <span class="variable">base</span> <span class="operator">=</span> nums[start];</span><br><span class="line">        <span class="keyword">while</span>(left &lt; right)&#123;</span><br><span class="line">            <span class="keyword">while</span>(left &lt; right &amp;&amp; nums[right] &gt;= base)&#123;</span><br><span class="line">                right--;</span><br><span class="line">            &#125;</span><br><span class="line">            nums[left] = nums[right];</span><br><span class="line">            <span class="keyword">while</span>(left &lt; right &amp;&amp; nums[left] &lt;= base)&#123;</span><br><span class="line">                left++;</span><br><span class="line">            &#125;</span><br><span class="line">            nums[right] = nums[left];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//此时left = right</span></span><br><span class="line">        nums[left] = base;</span><br><span class="line">        quick_sort(nums,start,left-<span class="number">1</span>);</span><br><span class="line">        quick_sort(nums,left+<span class="number">1</span>,end);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
 <ul>
-<li><strong>方法参数：</strong><ul>
-<li>file 参数用于接受用户提供的 excel 文件。</li>
+<li><strong>稳定性</strong>：不稳定</li>
+<li><strong>时间复杂度：</strong> 最佳：O(nlogn) , 最差：O(nlogn)，平均：O(nlogn)</li>
+<li><strong>空间复杂度：</strong> O(logn)</li>
 </ul>
-</li>
-<li><strong>方法体：</strong><ol>
-<li>首先创建一个 dto 实体类PhotovoltaicEarlyStageExcelReq，其字段和 excel 中的列名相对应。</li>
-<li>由于这个 excel 的字段涉及到两张表，即<strong>PhotovoltaicEarlyStage</strong> 和<strong>Project</strong> 实体类，因此分别创建对应的两个 list 集合，用于存最后需要保存到数据库的数据。</li>
-<li>使用ExcelUtils 的方法，将传进来的 excel 转成对应的 list 集合。</li>
-<li>遍历 list 集合，使用 BeanUtil 的 copyProperties 方法将 dto 中的数据转存至开头说的那两个实体类中，<strong>但是有些数据需要手动赋值，因为有些字段需要利用枚举将 code 转换成 name</strong>。将赋值完的实体加入对应的 list 集合中，即 b 操作对应的两个 list 集合。</li>
-<li>利用 saveBatch 方法将两个 list 集合保存至数据库中。</li>
+<h1 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h1><p><strong>堆排序(Heap Sort)<strong>是指利用</strong>堆</strong>这种数据结构所设计的一种排序算法。堆是一个近似完全二叉树的结构，并同时满足堆积的性质：即子结点的键值或索引总是小于(或者大于)它的父节点。堆的底层是一棵完全二叉树。而完全二叉树是一层一层按照进入的顺序排成的。按照这个特性，我们可以用数组来按照完全二叉树实现堆。</p>
+<p><strong>算法步骤：</strong></p>
+<ol>
+<li>构建初始堆，将待排序列构成一个大顶堆(或者小顶堆)，升序大顶堆，降序小顶堆；</li>
+<li>将堆顶元素与堆尾元素交换，并断开(从待排序列中移除)堆尾元素。</li>
+<li>重新构建堆。</li>
+<li>重复2~3，直到待排序列中只剩下一个元素(堆顶元素)。</li>
 </ol>
-</li>
-</ul>
-<h3 id="导出-excel-文件"><a href="#导出-excel-文件" class="headerlink" title="导出 excel 文件"></a>导出 excel 文件</h3><p>提供一个导出 excel 文件的接口，该接口将页面的所有数据导出至 excel 文件中，需要导出的数据稍微有点复杂，如下图：<img src="/2024/08/07/%E6%B0%B8%E7%A6%8F%E5%AE%9E%E4%B9%A0/3.png" alt="image.png"><br>这些数据包括三大块五张表：基础信息、往来单位、项目计划。基础信息包括三个表：PhotovoltaicEarlyStage、Project、User 表。往来单位包括一张表：OtherUnit。项目计划包括一张表：PhotovoltaicEarlyPlan。<br>这里导出时要注意：<strong>每一个项目计划都对应着 excel 的一条记录，也就是说有 16 个项目计划，就要有 16 条 excel 记录，这些记录的基础信息、往来单位字段都是一样的</strong>。<br><strong>因此导出数据的时候，每一个工商业光伏项目对应 m 个项目计划，有 n 个工商业光伏项目记录的话，一共就需要导出 n*m 条 excel 记录，所以代码逻辑是需要两层 for 循环的。</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">export</span><span class="params">(PhotovoltaicEarlyStagePageReq requestBody, HttpServletResponse response)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">    List&lt;PhotovoltaicEarlyStage&gt; list = list(<span class="built_in">this</span>.getQueryWrapper(requestBody));</span><br><span class="line">    List&lt;PhotovoltaicEarlyStage&gt; finalList = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span> (PhotovoltaicEarlyStage photovoltaicEarlyStage : list)&#123;</span><br><span class="line">        <span class="type">Project</span> <span class="variable">project</span> <span class="operator">=</span> projectService.getById(photovoltaicEarlyStage.getProjectId());</span><br><span class="line">        <span class="comment">//填充基础信息字段</span></span><br><span class="line">        photovoltaicEarlyStage.setProjectName(project.getName());</span><br><span class="line">        photovoltaicEarlyStage.setProjectCode(project.getCode());</span><br><span class="line">        <span class="type">Integer</span> <span class="variable">nature</span> <span class="operator">=</span> project.getNature();</span><br><span class="line">        photovoltaicEarlyStage.setProjectNatureName(ProjectNatureEnum.getDescByCode(nature));</span><br><span class="line">        userService.fillUserNameByList(list,PhotovoltaicEarlyStage::getProjectManagerUid,PhotovoltaicEarlyStage::setProjectManagerName);</span><br><span class="line">        userService.fillUserNameByList(list,PhotovoltaicEarlyStage::getAreaManagerUid,PhotovoltaicEarlyStage::setAreaManagerName);</span><br><span class="line">        <span class="comment">//填充往来单位字段</span></span><br><span class="line">        <span class="type">OtherUnit</span> <span class="variable">otherUnit</span> <span class="operator">=</span> otherUnitService.getById(photovoltaicEarlyStage.getStructuralSurveyUnitId());</span><br><span class="line">        <span class="keyword">if</span>(otherUnit!=<span class="literal">null</span>) photovoltaicEarlyStage.setStructuralSurveyUnitName(otherUnit.getName());</span><br><span class="line">        <span class="type">OtherUnit</span> <span class="variable">otherUnit1</span> <span class="operator">=</span> otherUnitService.getById(photovoltaicEarlyStage.getStructuralReviewUnitId());</span><br><span class="line">        <span class="keyword">if</span>(otherUnit1!=<span class="literal">null</span>) photovoltaicEarlyStage.setStructuralReviewUnitName(otherUnit1.getName());</span><br><span class="line">        <span class="type">OtherUnit</span> <span class="variable">otherUnit2</span> <span class="operator">=</span> otherUnitService.getById(photovoltaicEarlyStage.getDesignUnitId());</span><br><span class="line">        <span class="keyword">if</span>(otherUnit2!=<span class="literal">null</span>) photovoltaicEarlyStage.setDesignUnitName(otherUnit2.getName());</span><br><span class="line">        <span class="type">OtherUnit</span> <span class="variable">otherUnit3</span> <span class="operator">=</span> otherUnitService.getById(photovoltaicEarlyStage.getControlUnitId());</span><br><span class="line">        <span class="keyword">if</span>(otherUnit3!=<span class="literal">null</span>) photovoltaicEarlyStage.setControlUnitName(otherUnit3.getName());</span><br><span class="line">        <span class="type">OtherUnit</span> <span class="variable">otherUnit4</span> <span class="operator">=</span> otherUnitService.getById(photovoltaicEarlyStage.getConstructionUnitId());</span><br><span class="line">        <span class="keyword">if</span>(otherUnit4!=<span class="literal">null</span>) photovoltaicEarlyStage.setConstructionUnitName(otherUnit4.getName());</span><br><span class="line">        <span class="comment">//填充项目计划字段</span></span><br><span class="line">        List&lt;PhotovoltaicEarlyPlan&gt; list1 = photovoltaicEarlyPlanService.list(Wrappers.lambdaQuery(PhotovoltaicEarlyPlan.class).eq(PhotovoltaicEarlyPlan::getStageId, photovoltaicEarlyStage.getId()));</span><br><span class="line">        <span class="keyword">for</span> (PhotovoltaicEarlyPlan photovoltaicEarlyPlan : list1)&#123;</span><br><span class="line">            <span class="comment">//PhotovoltaicEarlyStage副本,防止原始PhotovoltaicEarlyStage被污染</span></span><br><span class="line">            <span class="type">PhotovoltaicEarlyStage</span> <span class="variable">photovoltaicEarlyStage1</span> <span class="operator">=</span> mapperFacade.map(photovoltaicEarlyStage,PhotovoltaicEarlyStage.class);</span><br><span class="line">            <span class="comment">//photovoltaicEarlyPlan对象部分字段 填充 到PhotovoltaicEarlyStage中</span></span><br><span class="line">            <span class="type">PhotovoltaicEarlyPlanTemplate</span> <span class="variable">photovoltaicEarlyPlanTemplate</span> <span class="operator">=</span> photovoltaicEarlyPlanTemplateService.getOne(Wrappers.lambdaQuery(PhotovoltaicEarlyPlanTemplate.class)</span><br><span class="line">                    .eq(PhotovoltaicEarlyPlanTemplate::getNodeCode, photovoltaicEarlyPlan.getNodeCode()));</span><br><span class="line">            photovoltaicEarlyStage1.setProjectNode(photovoltaicEarlyPlanTemplate.getProjectNode());</span><br><span class="line">            photovoltaicEarlyStage1.setPlanStartTime(photovoltaicEarlyPlan.getPlanStartTime());</span><br><span class="line">            photovoltaicEarlyStage1.setPlanEndTime(photovoltaicEarlyPlan.getPlanEndTime());</span><br><span class="line">            photovoltaicEarlyStage1.setActualStartTime(photovoltaicEarlyPlan.getActualStartTime());</span><br><span class="line">            photovoltaicEarlyStage1.setActualEndTime(photovoltaicEarlyPlan.getActualEndTime());</span><br><span class="line">            userService.fillUserNameByList(list1,PhotovoltaicEarlyPlan::getManagerUid,PhotovoltaicEarlyPlan::setManagerName);</span><br><span class="line">            photovoltaicEarlyStage1.setManager(photovoltaicEarlyPlan.getManagerName());</span><br><span class="line">            <span class="comment">//PhotovoltaicEarlyStage1对象加入finalList中</span></span><br><span class="line">            finalList.add(photovoltaicEarlyStage1);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    List&lt;PhotovoltaicEarlyStageExportExcelReq&gt; photovoltaicEarlyStageExportExcelReqs = mapperFacade.mapAsList(finalList, PhotovoltaicEarlyStageExportExcelReq.class);</span><br><span class="line">    ExcelUtils.exportExcelByClass(response,<span class="string">&quot;光伏项目&quot;</span>,photovoltaicEarlyStageExportExcelReqs, PhotovoltaicEarlyStageExportExcelReq.class);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>主要逻辑就是将需要导出的记录数据封装到一个 PhotovoltaicEarlyStage 实体类组成的 finalList 集合中，再调用mapperFacade 中的 mapAsList 方法将字段 copy 到一个由 dto 组成的集合中，这个 dto 是专门为了导出 excel 建立的 dto 实体类。最后再调用ExcelUtils 的exportExcelByClass 方法将集合中的数据导出到 excel 文件中。<br><strong>也可以使用 BeanUtil 的 copyPropertity 方法代替 mapperFacade ，其区别是：</strong><br><strong>copyPropertity 默认是浅拷贝，mapperFacade 默认是深拷贝。</strong><br><strong>几个犯错的地方：</strong></p>
-<ul>
-<li><p><strong>深拷贝浅拷贝问题：</strong>同一条光伏项目数据对应多条项目计划条目，这些条目的基础信息、往来单位字段都是一样的，但是项目计划的字段不一样，因此在第一层 for 循环后，需要将之前保存了基础信息等字段的实体类存一个副本，这里存副本的时候，我是用的直接赋值的方式，这种方式属于<strong>浅拷贝</strong>，<strong>拷贝的只是对象的内存地址，相当于栈中的两个引用指向了堆中的同一个对象</strong>，后面修改的时候就会对原始副本对象造成污染。后续我采用<strong>深拷贝</strong>的方式：mapperFacade.map 拷贝了原始副本，<strong>深拷贝的两个引用对应的就是堆中的两个不同的对象了，只是数据一样而已。</strong></p>
-</li>
-<li><p>在mapperFacade.mapAsList 的转换中出现的问题：</p>
-<ul>
-<li>出现原始 dto 的属性值没有移植到目标 dto 对象，原因是目标 dto 的类中没有加入@DATA注解。 因为mapAsList 底层也需要通过 set 方式进行数据移植的。</li>
-<li><strong>LocalDateTime 日期格式转换错误问题：</strong> 在调用 mapperFacade.mapAsList 将集合映射到另一个 dto 集合时，出现了日期格式转换错误问题，解决方法是：自定义一个转换器类，需要实现阿里巴巴的Converter<LocalDateTime>接口，然后在注解@ExcelProperty 中添加此转换器即可。</LocalDateTime></li>
-</ul>
-</li>
-<li><p><strong>空指针异常问题</strong>：经常出现一些字段报空指针异常错误，需要有判空操作。</p>
-</li>
-</ul>
-<h2 id="运维管理模块"><a href="#运维管理模块" class="headerlink" title="运维管理模块"></a>运维管理模块</h2><h3 id="巡检计划和巡检记录——增删改查操作"><a href="#巡检计划和巡检记录——增删改查操作" class="headerlink" title="巡检计划和巡检记录——增删改查操作"></a>巡检计划和巡检记录——增删改查操作</h3><p><strong>巡检指对设备（即电站）进行定期检查和维护的活动，以确保其正常运行和安全性。巡检记录是关联于巡检计划的，因此删除计划之前需要先判断有无对应的记录，有的话则无法删除（踩坑点）。</strong><br><img src="/2024/08/07/%E6%B0%B8%E7%A6%8F%E5%AE%9E%E4%B9%A0/4.png" alt="image.png"><br>包括巡检计划和巡检记录两个表，<strong>巡检记录</strong>中又内嵌一个<strong>巡检结果表</strong>，如下图：<br><img src="/2024/08/07/%E6%B0%B8%E7%A6%8F%E5%AE%9E%E4%B9%A0/5.png" alt="image.png"><br>因此在巡检记录实体类中添加一个非数据库字段：<strong>由巡检结果实体组成的 list 集合</strong>。同时巡检结果实体中需要有一个字段关联该巡检记录 id。<br>常规的增删改查就不多说了，说几个做的过程中需要注意的点：</p>
-<ul>
-<li><strong>关联问题</strong>：巡检记录是关联于巡检计划的，因此在删除巡检计划的时候，需要判断对应的巡检记录有没有删除，如果没有删除是不允许删除巡检计划的。</li>
-<li><strong>日期类字段问题</strong>：由于前端传过来的日期是字符串格式，后端是日期格式，两者不兼容，因此后端与前端交互的实体类中的日期字段需要添加<strong>日期转换格式</strong>的注解：	<ul>
-<li>日期类： @DateTimeFormat(pattern &#x3D; CommonConstants.DOMAIN_DATE_PATTERN)  </li>
-<li>日期+时间类： @JsonFormat(pattern &#x3D; CommonConstants.DOMAIN_TIME_PATTERN, timezone &#x3D; CommonConstants.DOMAIN_TIME_ZONE)</li>
-</ul>
-</li>
-<li>在巡检计划表中，电站名和负责人都是以 id 的形式存储的，因此<strong>在对应的实体类中需要添加两个非数据库字段，对应电站的名称和负责人的名称</strong>。电站的名称需要关联另外一张表查询，负责人名称需要调用用户中心的接口查询。</li>
-<li>类似于巡检状态这种下拉框的字段一般存于一个字典表 dim 中，表中用 int 类型存储，实体类中设置一个非数据库字段：巡检状态名称。 然后通过 dimservice 提供的接口将 int 转换成对应的名称。</li>
-<li>删除接口中，由于是批量删除，所以前端传过来的应该是一个 id 字符串组成的 list 集合，需要用 <strong>@RequestBody @ApiParam(value &#x3D; “ids”,required &#x3D; true) String[] ids</strong> 接收。</li>
-</ul>
-<h3 id="1-2-2-故障记录和故障维修记录——增删改查操作"><a href="#1-2-2-故障记录和故障维修记录——增删改查操作" class="headerlink" title="1.2.2 故障记录和故障维修记录——增删改查操作"></a>1.2.2 故障记录和故障维修记录——增删改查操作</h3><p><strong>这两个模块主要是记录了之前巡检发电站检查出来的故障，以及对应的故障维修记录。这里要注意的是：一条故障记录可能对应多条故障维修记录。</strong><br>常规的增删改查操作，就不详细记录了。</p>
-<h3 id="运维后发电对比"><a href="#运维后发电对比" class="headerlink" title="运维后发电对比"></a>运维后发电对比</h3><p><img src="/2024/08/07/%E6%B0%B8%E7%A6%8F%E5%AE%9E%E4%B9%A0/6.png" alt="image.png"></p>
-<h3 id="运维结算"><a href="#运维结算" class="headerlink" title="运维结算"></a>运维结算</h3><p><img src="/2024/08/07/%E6%B0%B8%E7%A6%8F%E5%AE%9E%E4%B9%A0/7.png" alt="image.png"><br><strong>在“查看详情” 功能接口中，涉及到一个分页查询</strong>，如下图：<br><img src="/2024/08/07/%E6%B0%B8%E7%A6%8F%E5%AE%9E%E4%B9%A0/8.png" alt="image.png"><br>一开始没看到是一个分页查询，就直接给前端返回了一个运维记录列表 result，后面发现需要返回一个分页类型 Page 类，于是我<strong>采用 stream 流将 result 集合转化成Page 类需要的集合，以进行分页操作</strong>，具体如下面这条代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">List&lt;OperationRecordRes&gt; resultList = result.stream()</span><br><span class="line">.skip((pageReq.getCurrent() - <span class="number">1</span>) * pageReq.getSize())</span><br><span class="line">.limit(pageReq.getSize())</span><br><span class="line">.collect(Collectors.toList());</span><br></pre></td></tr></table></figure>
+<p><strong>代码实例：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@description</span>: 手撕堆排序</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span>: Jay</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@create</span>: 2024-05-02 11:48</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">heapSort</span> &#123;</span><br><span class="line">    <span class="comment">//堆的长度大小</span></span><br><span class="line">    <span class="keyword">static</span> <span class="type">int</span> heapLen;</span><br><span class="line">    <span class="comment">//定义 交换数组两元素 的函数</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">swap</span><span class="params">(<span class="type">int</span>[] arr, <span class="type">int</span> a, <span class="type">int</span> b)</span>&#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">temp</span> <span class="operator">=</span> arr[a];</span><br><span class="line">        arr[a] = arr[b];</span><br><span class="line">        arr[b] = temp;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//初始化构建大顶堆</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">buildHeap</span><span class="params">(<span class="type">int</span>[] arr)</span>&#123;</span><br><span class="line">        <span class="comment">//从最后一个非叶子节点开始,对应的索引为 arr.length / 2 - 1</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=arr.length/<span class="number">2</span>-<span class="number">1</span>; i&gt;=<span class="number">0</span>; i--)&#123;</span><br><span class="line">            adjustHeap(arr,i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//调整堆</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">adjustHeap</span><span class="params">(<span class="type">int</span>[] arr, <span class="type">int</span> i)</span>&#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">left</span> <span class="operator">=</span> i * <span class="number">2</span> + <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">right</span> <span class="operator">=</span> i * <span class="number">2</span> + <span class="number">2</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">largest</span> <span class="operator">=</span> i;</span><br><span class="line">        <span class="keyword">if</span>(right &lt; heapLen &amp;&amp; arr[right] &gt; arr[largest])&#123;</span><br><span class="line">            largest = right;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(left &lt; heapLen &amp;&amp; arr[left] &gt; arr[largest])&#123;</span><br><span class="line">            largest = left;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(largest != i)&#123;</span><br><span class="line">            swap(arr,largest,i);</span><br><span class="line">            adjustHeap(arr,largest); <span class="comment">//交换之后，子节点可能不满足堆的性质了，需要重新调整。</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//测试</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">int</span>[] arr = &#123;<span class="number">16</span>,<span class="number">7</span>,<span class="number">3</span>,<span class="number">20</span>,<span class="number">17</span>,<span class="number">8</span>&#125;;</span><br><span class="line">        heapLen = arr.length;</span><br><span class="line">        buildHeap(arr);</span><br><span class="line">        <span class="comment">//交换堆顶和堆尾元素，再重新调整堆。</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=arr.length-<span class="number">1</span>; i&gt;<span class="number">0</span>; i--)&#123;</span><br><span class="line">            swap(arr,i,<span class="number">0</span>);</span><br><span class="line">            heapLen--;</span><br><span class="line">            adjustHeap(arr,<span class="number">0</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(Arrays.toString(arr));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <ul>
-<li>**skip((pageReq.getCurrent() - 1) * pageReq.getSize())**：这部分代码调用了 <strong>skip()</strong> 方法，它的作用是跳过指定数量的元素。在这里，我们要跳过的元素数量是 <strong>(当前页数 - 1) * 每页大小</strong>。这样就实现了将流中的元素移动到当前页的起始位置。</li>
-<li>限制从流中获取的元素数量，确保不超过每页的大小。</li>
-<li>使用 <strong>collect()</strong> 方法，将处理后的元素收集到一个新的列表中，并返回该列表作为结果。</li>
+<li><strong>稳定性</strong>：不稳定</li>
+<li><strong>时间复杂度：</strong> 最佳：O(nlogn) , 最差：O(nlogn)，平均：O(nlogn)</li>
+<li><strong>空间复杂度：</strong> O(1)</li>
 </ul>
-<p><strong>${}和#{}的使用区别：</strong></p>
-<p>一般来说为了保证 sql 注入安全，通常占位符会使用#{}。<br><strong>在 xml 文件中写 sql 语句的时候，使用 order by #{}，无法按照预期的顺序，后换成${}即可。</strong>网上查询原因得知：**#{}会将传入的数据都当成一个字符串，会对自动传入的数据加一个双引号**，而 order by 后的字段不能加双引号，否则会失效。 </p>
-<h2 id="项目复盘及收获（⭐）"><a href="#项目复盘及收获（⭐）" class="headerlink" title="项目复盘及收获（⭐）"></a>项目复盘及收获（⭐）</h2><p><strong>项目介绍：</strong></p>
-<p>本项目是一个b端项目，主要是为用户提供一套关于<strong>光伏项目的解决方案</strong>，后端主要是用 Java 实现的一个<strong>新能源信息化管理系统</strong>，主要管理的就是这些光伏项目。<br>解释一下<strong>光伏</strong>：<br>光伏项目分为两种：<strong>户用光伏</strong>和<strong>工商业光伏</strong>，</p>
-<blockquote>
-<ul>
-<li><strong>户用光伏</strong> ：所谓户用光伏就是安装在居民房子上的光伏，将光伏板安装在老百姓的屋顶上（以农村居民屋顶为主），安装完成之后，电站可以并入国家电网，发的电一部分优先供给家里用，用不完的可以出售给国家电网。</li>
-<li><strong>工商业光伏</strong>： 工商业光伏更多的是将光伏板放在工商业厂房、仓库上面。工商业分布式光伏主要是利用工商企业屋顶，采用多样化的分布式光伏方案，将太阳能转为电能，从而实现电量的自发自用。</li>
-</ul>
-</blockquote>
-<p>整个管理系统大致分为三个大模块：<strong>项目管理、数据展示、系统配置</strong>。<br><strong>① 项目管理模块是该项目的主要模块，主要是跟光伏项目相关的一些功能接口，比如：</strong></p>
-<p>两种光伏项目分别对应<strong>前期阶段</strong>和<strong>建设期阶段</strong>，一个项目只能对应一个阶段，并且只能从前期阶段转为建设期阶段，不能反向转换。</p>
-<blockquote>
-<ul>
-<li><strong>光伏前期阶段：</strong> 表中包括：<strong>项目名称</strong>、<strong>项目编号</strong>、<strong>项目经理</strong>、<strong>所在区域</strong>、<strong>预计投资额</strong> 、<strong>项目计划</strong>（嵌套了一张表,包含项目的各个节点，以及计划开始时间、计划结束时间、实际开始时间、实际结束时间……）等字段。</li>
-<li><strong>光伏建设期阶段：</strong> 表中包括：开工日期、竣工日期、建设进度（包括好几个进度字段，前端是下拉框的形式，因此这些字段是由一个字典表维护的）等字段。</li>
-</ul>
-</blockquote>
-<p>除了俩个阶段之外还有很多其他的功能，比如<strong>故障管理</strong>和<strong>维修管理</strong>等功能，比如<strong>维修管理</strong>又包括<strong>维修计划</strong>和<strong>维修记录</strong>，应该是先有计划，再有记录，添加记录时需要关联计划，并且一条计划是对应多条记录的，这些都是业务上需要理解的。当时这里就由于业务理解不深刻犯了些错误（扯“删除计划时需要判断有无相关联的记录”的事情）。</p>
-<p><strong>② 数据展示模块主要是将数据信息以可视化的形式展示出来，比如电站的发电量数据、售电数据等。</strong><br><strong>③ 系统配置就是一些边角料的一些功能，比如角色管理、用户管理、用户权限管理啊等等…</strong></p>
-<p><strong>我主要负责项目管理这个模块，给项目添加一些新功能、新接口，并维护一些老功能</strong>。功能主要包括：<strong>常规的增删改查、导入导出数据文件excel 、导入模板的下载  等等…</strong></p>
-<p><strong>开发过程中遇到的一些典型错误：</strong></p>
-<ul>
-<li><p><strong>深浅拷贝问题：</strong></p>
-<ul>
-<li>导出 excel 数据的时候，每一个工商业光伏项目对应 m 个项目计划，有 n 个工商业光伏项目记录的话，一共就需要导出 n<em>m 条 excel 记录，所以代码逻辑是需要两层 for 循环的。<strong>最终我需要的是一个 list 集合，里边是一连串的 excelDto 实体类型的对象</strong>，<strong>这个 dto 的字段就是需要导出的数据字段，最后将 list 集合导出即可。</strong>在第一层 for 循环结尾需要将当前的工商业光伏项目拷贝一份，保存副本，防止后面被污染，这里存副本的时候，我是用的直接赋值的方式，这种方式属于<strong>浅拷贝</strong>，<strong>拷贝的只是对象的内存地址，相当于栈中的两个引用指向了堆中的同一个对象</strong>，后面修改的时候就会对原始副本对象造成污染。后续我采用<strong>深拷贝</strong>的方式：mapperFacade.map 拷贝了原始副本，*<em>深拷贝的两个引用对应的就是堆中的两个不同的对象了，只是数据一样而已。</em></em></li>
-</ul>
-</li>
-<li><p><strong>#{} 和 ${} 的区别：</strong></p>
-<ul>
-<li>**一般来说为了保证 sql 注入安全，通常占位符会使用#{}。在 xml 文件中写 sql 语句的时候，使用 order by #{}，无法按照预期的顺序排列，后换成${}即可。网上查询原因得知：#{}会将传入的数据都当成一个字符串，会对自动传入的数据加一个双引号，而 order by 后的字段不能加双引号，否则会失效。 **</li>
-</ul>
-</li>
-<li><p><strong>使用 mybatisplus 的 getOne 查询报错问题：</strong></p>
-<ul>
-<li>使用 getOne 查询数据的时候，如果符合条件的数据有多条，就会报 Expected one result (or null) to be returned by selectOne(), but found: 2 的错误。</li>
-<li>出现这个错误的原因主要是：一般情况下项目和发电站是<strong>一对一</strong>的，但是由于某些原因数据库中出现了<strong>一对多</strong>的情况，此时你使用 getOne 来查询就会出现多条数据。 <strong>解决办法：在 getOne 语句最后加一条“.last(limit 1)”，这样就只会取出最新的那条数据了。</strong></li>
-</ul>
-</li>
-<li><p><strong>空指针问题：</strong></p>
-<ul>
-<li><strong>注意判空。 事前需要基于对业务的理解，这样才知道哪些字段可能为空，哪些字段不可能为空；事后利用 dubug 调试，哪些字段出现了空指针的问题。</strong></li>
-</ul>
-</li>
-</ul>
-<p><strong>将可以复用的代码封装起来：</strong><br><strong>通过用户输入的地址信息转换成对应的邮政编码，如中国-福建省-泉州市-晋江市转换为 350582。</strong></p>
-<h1 id="户用光伏智能设计项目"><a href="#户用光伏智能设计项目" class="headerlink" title="户用光伏智能设计项目"></a>户用光伏智能设计项目</h1><p>这个项目是公司刚接的新项目，我相当于是从头跟着做的。</p>
-<h2 id="基础库建设模块"><a href="#基础库建设模块" class="headerlink" title="基础库建设模块"></a>基础库建设模块</h2><p>“基础库建设”模块较为特殊，该模块其实就是一张表，这张表包含 4 个一级目录，7 个二级目录，这些目录分别对应一个子表，这些子表的结构都不太一样，如图：</p>
-<p><img src="/2024/08/07/%E6%B0%B8%E7%A6%8F%E5%AE%9E%E4%B9%A0/9.png" alt="image.png"></p>
-<p>整个大表可以看做是一颗树，因此我建立了一个总表<strong>basic_classification</strong>来维护所有子目录以及它们之间的层级关系，如图：</p>
-<p><img src="/2024/08/07/%E6%B0%B8%E7%A6%8F%E5%AE%9E%E4%B9%A0/10.png" alt="image.png"></p>
-<p><strong>跟前端沟通之后，需要提前将所有子表的中文字段返回给前端，以供他进行展示</strong>。这是因为这整张大表是只对应一个接口的，而这些小表是没有对应的接口的，相当于一个异步展示的过程，所以在访问大表之后，就需要提前将所有需要展示的中文字段返回给前端。 这里我在总表中添加了一个非数据库字段：List<ChineseDim> chineseDim,该字段是一个ChineseDim 泛型的集合，每一个ChineseDim 对象都对应一个子表的字段信息，ChineseDim 对象的字段包括：<br><img src="/2024/08/07/%E6%B0%B8%E7%A6%8F%E5%AE%9E%E4%B9%A0/11.png" alt="image.png"></ChineseDim></p>
-<ul>
-<li><strong>关键字段：</strong><ul>
-<li><strong>classification_id：</strong> 对应该子表的 id。</li>
-<li><strong>name：</strong> 该表的中文字段名。</li>
-<li><strong>type：</strong> 该字段的类型。（前端需要根据它判断需要输入数据的类型）</li>
-<li><strong>sort：</strong> 排序字段，根据这个决定页面展示各个中文字段的顺序。</li>
-</ul>
-</li>
-</ul>
-<p>当用户访问”基础库建设”模块时，后端会查询总表，返回一个 list 集合，该集合记录了所有子目录的信息，也包括这些目录的中文字段信息。（即刚刚添加的非数据库字段），接着会调用本地的 getTree 方法将集合转换成树结构，供前端显示。</p>
-<p>剩下的子表开发就比较简单了，每个子表建立相对应的数据库表，使用 mybatis-plus 提供的代码生成器生成对应的 controller、service、mapper 以及对应的实体类 Entity，再编写相应的 crud 代码即可。</p>
 
       
     </div>
@@ -416,7 +329,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -493,13 +406,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-count">17</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -541,18 +454,18 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">116k</span>
+    <span title="站点总字数">119k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">1:46</span>
+    <span title="站点阅读时长">1:48</span>
 </div>
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共64k字</span>
+  <span class="post-count">博客全站共64.6k字</span>
 </div>
 
 
